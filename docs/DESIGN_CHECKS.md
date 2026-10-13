@@ -28,3 +28,9 @@ Rendered verification and further screen-specific deviations are recorded below 
 - The original dotted illustration, node placement, display typography, copy and actions are ported from Main.dc.html.
 - Deviations: chosen A-trail logo and lowercase brand wordmark replace the earlier canvas mark; the small goat is included as required by the handoff. Screen can scroll at large text sizes.
 - Pure introductory content has no data dependency; font initialization and the route error boundary cover loading/failure. There is no missing-content condition.
+
+## 02 Sign in
+
+- Matches Auth.dc.html hierarchy, provider button assets, email field, divider and explanatory copy. Includes pending, invalid-email, provider-error and magic-link-sent states.
+- Real Supabase PKCE magic links and browser OAuth; native Apple token sign-in with a hashed nonce. Auth restoration is server-render safe; native sessions use SecureStore.
+- Deviation: legal links are accessible touch targets and report unconfigured public legal URLs rather than linking to `#`. Provider credentials are configured outside the app. An additional callback route handles expired/missing codes.
