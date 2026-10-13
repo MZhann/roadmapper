@@ -40,3 +40,6 @@ Rendered verification and further screen-specific deviations are recorded below 
 - Three slides reproduce the goal card, question bubbles, path illustration, headings and copy from Onboarding.dc.html. Active indicator grows to 24px; Skip and Continue work.
 - Reduced motion disables indicator animation. Pure local slide content uses the root loading/error handling; it cannot have an empty data state.
 - Deviation: illustration scales through the shared component; touch targets may exceed the canvas height when Dynamic Type needs more room.
+# Personalize
+
+Compared the rendered 390 × 844 screen with Personalize.dc.html: input, two-column time cards, reminder card and footer match the canvas structure. Deviations: name is empty until entered or obtained from the account, so Continue is initially disabled; web says reminders are available in the mobile app. Scrollable content accommodates larger system text. Native notifications require device verification.
