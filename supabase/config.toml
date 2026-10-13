@@ -1,0 +1,3 @@
+[functions.milo-planner]
+# The handler validates the bearer token with Supabase Auth before accessing data or AI.
+verify_jwt = false

@@ -5,7 +5,7 @@ export const light = {
   accentSoft: '#E8EBFC', onAccent: '#FFFFFF', lockedNode: '#ECEEEA',
   lockedNodeShadow: '#D9DCD5', lockedIcon: '#8A9097', pathDash: '#C9CDC6',
   motifFaint: '#E2E4DF', streakBg: '#FFF3E6', streakText: '#8A4A0E', streakIcon: '#C2620F',
-  inset: '#F0F1EE', warning: '#D9822B', tipText: '#5C3409', weekBar: '#BFC7F5',
+  inset: '#F0F1EE', warning: '#D9822B', tipText: '#5C3409', weekBar: '#BFC7F5', sportBg: '#E6F2EC', sportText: '#22573F', techBg: '#EEF0F2',
   story: '#15171A', storyTile: '#2A2E33', storyText: '#FFFFFF', storyMuted: '#B9BEC4',
   white: '#FFFFFF', transparent: 'transparent', shadow: 'rgba(0,0,0,0.10)',
 };
@@ -16,7 +16,7 @@ export const dark: Palette = {
   accentSoft: '#1F2547', onAccent: '#0F1113', lockedNode: '#22262B',
   lockedNodeShadow: '#15181B', lockedIcon: '#6C737B', pathDash: '#3A3F45',
   motifFaint: '#262A2F', streakBg: '#2E2216', streakText: '#F0A257', streakIcon: '#F0A257',
-  inset: '#22262B', warning: '#F0A257', tipText: '#F0A257', weekBar: '#5563C9',
+  inset: '#22262B', warning: '#F0A257', tipText: '#F0A257', weekBar: '#5563C9', sportBg: '#1F2547', sportText: '#8C9BFF', techBg: '#22262B',
   story: '#181B1E', storyTile: '#2A2E33', storyText: '#FFFFFF', storyMuted: '#B9BEC4',
   white: '#FFFFFF', transparent: 'transparent', shadow: 'rgba(0,0,0,0.5)',
 };

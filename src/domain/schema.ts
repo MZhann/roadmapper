@@ -18,7 +18,7 @@ export type Plan = z.infer<typeof planSchema>;
 export const questionSchema = z.object({ id: z.string().min(1).max(60), question: z.string().min(1).max(300), why: z.string().max(500), kind: z.enum(['choice', 'date', 'minutes', 'text']), options: z.array(z.object({ label: z.string().min(1).max(150), description: z.string().max(200), value: z.string().min(1).max(200) })).max(6) });
 export const clarificationSchema = z.object({ title: z.string().min(1).max(140), theme_id: themeSchema, questions: z.array(questionSchema).max(5) });
 export type Clarification = z.infer<typeof clarificationSchema>;
-export const realitySchema = z.object({ unrealistic: z.boolean(), title: z.string().max(200), explanation: z.string().max(1000), requested_days: z.number().int().min(1).max(366), recommended_days: z.number().int().min(1).max(366), achievable_scope: z.string().max(500) });
+export const realitySchema = z.object({ unrealistic: z.boolean(), title: z.string().max(200), explanation: z.string().max(1000), requested_days: z.number().int().min(1).max(366), recommended_days: z.number().int().min(1).max(366), daily_minutes: z.number().int().min(5).max(180), achievable_scope: z.string().max(500) });
 export type RealityCheck = z.infer<typeof realitySchema>;
 export type Step = { id: string; unit_id: string; idx: number; title: string; minutes: number; xp: number; content: ContentBlock[]; status: 'pending' | 'done'; unlock_date: string | null; completed_at: string | null };
 export type Unit = { id: string; goal_id: string; idx: number; title: string; steps: Step[] };
@@ -29,9 +29,12 @@ export function validatePlan(plan: unknown): Plan {
   const result = planSchema.parse(plan);
   const steps = result.units.flatMap(unit => unit.steps);
   if (steps.length > 120) throw new Error('The plan is too long. Please use at most 120 steps.');
-  let previousDay = 0;
+  let previousDay = 0; let dailyMinutes = 0;
   for (const step of steps) {
     if (step.day < previousDay || step.day > result.days) throw new Error('The plan has an inconsistent schedule. Please regenerate it.');
+    if (previousDay !== step.day) dailyMinutes = 0;
+    dailyMinutes += step.minutes;
+    if (dailyMinutes > result.daily_minutes) throw new Error('The plan exceeds your daily time budget. Please regenerate it.');
     previousDay = step.day;
     for (const block of step.content) if (block.type === 'quiz' && block.answer >= block.options.length) throw new Error('A quiz has an invalid answer. Please regenerate the plan.');
   }

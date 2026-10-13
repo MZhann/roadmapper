@@ -43,3 +43,6 @@ Rendered verification and further screen-specific deviations are recorded below 
 # Personalize
 
 Compared the rendered 390 × 844 screen with Personalize.dc.html: input, two-column time cards, reminder card and footer match the canvas structure. Deviations: name is empty until entered or obtained from the account, so Continue is initially disabled; web says reminders are available in the mobile app. Scrollable content accommodates larger system text. Native notifications require device verification.
+# HomeEmpty
+
+Compared the rendered 390 × 844 screen with HomeEmpty.dc.html. Matches the prompt card, suggested goals and tab bar. Deviations: sample goal is a placeholder until typed or selected; the greeting follows local time; saved drafts gain a resume action. The microphone shortcut is omitted (the platform keyboard supplies dictation). Prompt content and cards grow with Dynamic Type instead of clipping. The AI endpoints authenticate every request and return actionable errors.
