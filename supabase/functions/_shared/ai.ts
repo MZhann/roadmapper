@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { structuredSchema } from './structured-schema.ts';
 import type { SupabaseClient } from '@supabase/supabase-js';
 export class ServiceError extends Error {
   constructor(
@@ -40,7 +41,7 @@ export async function generate<T>(
       'The AI service needs its server API key. The app owner must set OPENAI_API_KEY before continuing.',
       503,
     );
-  const jsonSchema = z.toJSONSchema(schema, { target: 'draft-7' });
+  const jsonSchema = structuredSchema(z.toJSONSchema(schema, { target: 'draft-7' }));
   const response = await fetch('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },

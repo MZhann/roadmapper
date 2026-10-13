@@ -55,3 +55,6 @@ Checked the rendered layout against RealityCheck.dc.html. The chat bubble, hones
 # Generating
 
 Compared the path artwork, heading and stage list with Generating.dc.html at 390 × 844. Original SVG geometry and 2.4-second drawing animation are retained, with a static path under reduced motion. Deviations: accurate “a minute or two” estimate replaces the unverified 15-second claim; stage checkmarks show only known inputs, not simulated server progress. Users can leave with their draft retained. Generation failures offer retry without losing answers.
+# PlanReview
+
+Compared the mobile review with PlanReview.dc.html. Unit accordions, three summary tiles, suggestion chips, revision field and fixed Start action follow the canvas. Deviations: real generated title/counts/date/summary replace samples, content scrolls, touch targets are at least 44px, and date formatting follows the device locale. Changes regenerate the complete draft; failed revisions preserve it. Starting uses a transaction with a draft UUID to prevent duplicate goals.
