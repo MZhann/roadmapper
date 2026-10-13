@@ -52,3 +52,6 @@ Compared the questions screen with Clarify.dc.html at 390 × 844. Matches progre
 # RealityCheck
 
 Checked the rendered layout against RealityCheck.dc.html. The chat bubble, honest-check card, duration comparison and two paths follow the canvas. Deviations: comparison bars represent relative time, never probability of success; “Fluent” is replaced by “More time” because a duration cannot promise fluency. Text, durations and achievable scope come from the feasibility response; long content scrolls. Draft recovery and persistence errors are covered.
+# Generating
+
+Compared the path artwork, heading and stage list with Generating.dc.html at 390 × 844. Original SVG geometry and 2.4-second drawing animation are retained, with a static path under reduced motion. Deviations: accurate “a minute or two” estimate replaces the unverified 15-second claim; stage checkmarks show only known inputs, not simulated server progress. Users can leave with their draft retained. Generation failures offer retry without losing answers.
