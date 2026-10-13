@@ -13,3 +13,12 @@ Source: `milo-design/DESIGN_HANDOFF.md`, `milo-design/design/canvas.json`, and e
 - The component gallery is a development canvas, so it contains multiple loading/error/empty examples at once.
 
 Rendered verification and further screen-specific deviations are recorded below as each screen is completed.
+
+## Roadmap / RoadmapDark
+
+- Rendered at 390 × 844 in both appearances; compared against renders of the original design markup. Node geometry, Bézier paths, dotted strokes, motifs, ring, solid shadows and tab bar match the source.
+- Uses one shared path for every category, responsive to actual available width. Nodes expose completion/lock state and open a clamped 250px popover.
+- Deviations: path scrolls instead of clipping the final node; additional units are accessible below the current unit. Initial-current nodes receive extra top room for the START tag. Long titles wrap for accessibility.
+- Production data comes from Supabase. Preview data is restricted to development and an explicit `preview` ID.
+- XP is awarded on first completion only; reviewing a step does not grant repeat XP (avoids unlimited reward farming in the canvas's example review button).
+- Native safe-area spacing replaces fixed status-bar space. Remaining-days copy is computed from real calendar dates.
