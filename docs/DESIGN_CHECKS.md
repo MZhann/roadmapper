@@ -22,3 +22,9 @@ Rendered verification and further screen-specific deviations are recorded below 
 - Production data comes from Supabase. Preview data is restricted to development and an explicit `preview` ID.
 - XP is awarded on first completion only; reviewing a step does not grant repeat XP (avoids unlimited reward farming in the canvas's example review button).
 - Native safe-area spacing replaces fixed status-bar space. Remaining-days copy is computed from real calendar dates.
+
+## 01 Welcome
+
+- The original dotted illustration, node placement, display typography, copy and actions are ported from Main.dc.html.
+- Deviations: chosen A-trail logo and lowercase brand wordmark replace the earlier canvas mark; the small goat is included as required by the handoff. Screen can scroll at large text sizes.
+- Pure introductory content has no data dependency; font initialization and the route error boundary cover loading/failure. There is no missing-content condition.
