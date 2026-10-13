@@ -46,3 +46,6 @@ Compared the rendered 390 × 844 screen with Personalize.dc.html: input, two-col
 # HomeEmpty
 
 Compared the rendered 390 × 844 screen with HomeEmpty.dc.html. Matches the prompt card, suggested goals and tab bar. Deviations: sample goal is a placeholder until typed or selected; the greeting follows local time; saved drafts gain a resume action. The microphone shortcut is omitted (the platform keyboard supplies dictation). Prompt content and cards grow with Dynamic Type instead of clipping. The AI endpoints authenticate every request and return actionable errors.
+# Clarify
+
+Compared the questions screen with Clarify.dc.html at 390 × 844. Matches progress, goal summary, question hierarchy and four option cards. Deviations: selected brand logo replaces the older mark; question count and content come from AI; custom answers and back navigation are available. Inputs validate dates and minutes. Empty question sets can continue directly; loading, retry and saved-draft recovery are implemented.
