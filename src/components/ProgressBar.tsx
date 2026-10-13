@@ -4,10 +4,10 @@ import { useTheme } from '@/theme/ThemeProvider';
 import { radius, space } from '@/theme/tokens';
 import { Text } from './Text';
 export const clampProgress = (value: number) => Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
-export function ProgressBar({ value, height = 10, segments, label = 'Progress' }: { value: number; height?: number; segments?: number; label?: string }) {
+export function ProgressBar({ value, height = 10, segments, label = 'Progress', color }: { value: number; height?: number; segments?: number; label?: string; color?: string }) {
   const { colors } = useTheme(); const progress = clampProgress(value);
   return <View accessibilityRole="progressbar" accessibilityLabel={label} accessibilityValue={{ min: 0, max: 100, now: Math.round(progress * 100) }} style={{ flexDirection: 'row', gap: space.xs }}>
-    {segments ? Array.from({ length: segments }, (_, i) => <View key={i} style={{ flex: 1, height, borderRadius: radius.xs, backgroundColor: i < progress * segments ? colors.accent : colors.line }} />) : <View style={{ height, flex: 1, overflow: 'hidden', borderRadius: radius.xs, backgroundColor: colors.line }}><View style={{ height, width: `${progress * 100}%`, borderRadius: radius.xs, backgroundColor: colors.accent }} /></View>}
+    {segments ? Array.from({ length: segments }, (_, i) => <View key={i} style={{ flex: 1, height, borderRadius: radius.xs, backgroundColor: i < progress * segments ? color ?? colors.accent : colors.line }} />) : <View style={{ height, flex: 1, overflow: 'hidden', borderRadius: radius.xs, backgroundColor: colors.line }}><View style={{ height, width: `${progress * 100}%`, borderRadius: radius.xs, backgroundColor: color ?? colors.accent }} /></View>}
   </View>;
 }
 export function ProgressRing({ value }: { value: number }) {

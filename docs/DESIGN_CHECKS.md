@@ -49,3 +49,6 @@ Compared the rendered 390 × 844 screen with HomeEmpty.dc.html. Matches the prom
 # Clarify
 
 Compared the questions screen with Clarify.dc.html at 390 × 844. Matches progress, goal summary, question hierarchy and four option cards. Deviations: selected brand logo replaces the older mark; question count and content come from AI; custom answers and back navigation are available. Inputs validate dates and minutes. Empty question sets can continue directly; loading, retry and saved-draft recovery are implemented.
+# RealityCheck
+
+Checked the rendered layout against RealityCheck.dc.html. The chat bubble, honest-check card, duration comparison and two paths follow the canvas. Deviations: comparison bars represent relative time, never probability of success; “Fluent” is replaced by “More time” because a duration cannot promise fluency. Text, durations and achievable scope come from the feasibility response; long content scrolls. Draft recovery and persistence errors are covered.
