@@ -34,3 +34,9 @@ Rendered verification and further screen-specific deviations are recorded below 
 - Matches Auth.dc.html hierarchy, provider button assets, email field, divider and explanatory copy. Includes pending, invalid-email, provider-error and magic-link-sent states.
 - Real Supabase PKCE magic links and browser OAuth; native Apple token sign-in with a hashed nonce. Auth restoration is server-render safe; native sessions use SecureStore.
 - Deviation: legal links are accessible touch targets and report unconfigured public legal URLs rather than linking to `#`. Provider credentials are configured outside the app. An additional callback route handles expired/missing codes.
+
+## 03 Onboarding
+
+- Three slides reproduce the goal card, question bubbles, path illustration, headings and copy from Onboarding.dc.html. Active indicator grows to 24px; Skip and Continue work.
+- Reduced motion disables indicator animation. Pure local slide content uses the root loading/error handling; it cannot have an empty data state.
+- Deviation: illustration scales through the shared component; touch targets may exceed the canvas height when Dynamic Type needs more room.
