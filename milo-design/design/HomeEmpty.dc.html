@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home — first goal</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+textarea:focus{outline:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="flex: 1; display: flex; flex-direction: column; padding: 64px 24px 0">
+    <div style="font-size: 15px; font-weight: 700; color: #5E646B">Good evening, Mukan</div>
+    <h1 style="margin: 6px 0 24px; font-size: 30px; line-height: 1.12; font-weight: 900; letter-spacing: -0.6px">What do you want to achieve?</h1>
+
+    <div style="background: #FFFFFF; border: 2px solid #3346D3; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 0 #E8EBFC">
+      <label for="goal" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Describe your goal</label>
+      <textarea id="goal" rows="4" style="border: 0; resize: none; font-family: inherit; font-size: 18px; line-height: 1.45; color: #15171A; background: transparent; padding: 0">I'm going to visit Japan next month. I want to speak Japanese well enough to ask and answer simple questions.</textarea>
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <button type="button" aria-label="Dictate goal" style="width: 44px; height: 44px; border-radius: 14px; border: 1.5px solid #E4E6E1; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg>
+        </button>
+        <a href="Clarify.dc.html" style="height: 44px; padding: 0 18px; border-radius: 14px; background: #3346D3; color: #FFFFFF; font-weight: 800; font-size: 16px; display: flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: 0 3px 0 #2535A8">
+          Map my path
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+    </div>
+
+    <div style="font-size: 13px; font-weight: 800; color: #5E646B; text-transform: uppercase; letter-spacing: 0.6px; margin: 28px 0 12px">Or try one of these</div>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{ideas}}" as="it" hint-placeholder-count="4">
+        <button type="button" style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: #FFFFFF; border: 1.5px solid #E4E6E1; font-family: inherit; text-align: left; cursor: pointer; color: #15171A">
+          <span style="{{it.chip}}">{{it.tag}}</span>
+          <span style="font-size: 15px; font-weight: 700">{{it.text}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <nav aria-label="Main" style="height: 84px; background: #FFFFFF; border-top: 1px solid #E4E6E1; display: flex; justify-content: space-around; align-items: flex-start; padding-top: 10px; box-sizing: border-box">
+    <a href="Home.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #3346D3; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20c0-5 12-4 12-9S8 8 8 4"></path><circle cx="8" cy="4" r="1.5"></circle><circle cx="6" cy="20" r="1.5"></circle></svg>Path</a>
+    <a href="Journal.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #5E646B; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M9 9h6M9 13h4"></path></svg>Journal</a>
+    <a href="Profile.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #5E646B; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Profile</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const c = (bg, fg) => 'flex: none; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; padding: 5px 8px; border-radius: 8px; background: ' + bg + '; color: ' + fg;
+    return {
+      ideas: [
+        { tag: 'Sport', text: 'Learn to juggle three balls', chip: c('#E6F2EC', '#22573F') },
+        { tag: 'Money', text: 'Earn $1,000 freelancing this month', chip: c('#FFF3E6', '#8A4A0E') },
+        { tag: 'Learn', text: 'Know every flag in the world', chip: c('#E8EBFC', '#2535A8') },
+        { tag: 'Tech', text: 'Build my first Python script', chip: c('#EEF0F2', '#3A4048') }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

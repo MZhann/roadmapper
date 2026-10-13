@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Roadmap</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div style="{{c.root}}">
+  <div style="padding: 58px 20px 0; display: flex; align-items: center; gap: 10px">
+    <a href="Home.dc.html" aria-label="Back to goals" style="{{c.iconBtn}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+    <div style="flex: 1; min-width: 0">
+      <div style="{{c.eyebrow}}">{{t.label}}</div>
+      <div style="font-size: 18px; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.goal}}</div>
+    </div>
+    <div style="{{c.streak}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-3.5 2-5 1 1.5 2 2 2.5 2.5C12 8 12 5 12 3z"></path></svg>12</div>
+  </div>
+
+  <div style="padding: 14px 20px 0">
+    <div style="{{c.progressTrack}}"><div style="{{c.progressFill}}"></div></div>
+    <div style="{{c.progressText}}"><span>{{t.done}}</span><span>{{t.left}}</span></div>
+  </div>
+
+  <div style="{{c.unit}}">
+    <div style="flex: 1">
+      <div style="{{c.unitEyebrow}}">{{t.unitNo}}</div>
+      <div style="font-size: 19px; font-weight: 900; margin-top: 2px">{{t.unit}}</div>
+    </div>
+    <div style="{{c.motifBox}}">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.motif}}"></path></svg>
+    </div>
+  </div>
+
+  <div style="position: relative; flex: 1; overflow: hidden">
+    <svg width="390" height="520" viewBox="0 0 390 520" fill="none" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+      <path d="{{pathDone}}" stroke="{{c.accent}}" stroke-width="5" stroke-linecap="round" opacity="0.35"></path>
+      <path d="{{pathTodo}}" stroke="{{c.dash}}" stroke-width="4" stroke-dasharray="1 12" stroke-linecap="round"></path>
+    </svg>
+
+    <svg width="84" height="84" viewBox="0 0 24 24" fill="none" stroke="{{c.motifFaint}}" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 34px; top: 120px" aria-hidden="true"><path d="{{t.motif}}"></path></svg>
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="{{c.motifFaint}}" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; right: 30px; top: 330px" aria-hidden="true"><path d="{{t.motif}}"></path></svg>
+
+    <sc-for list="{{nodes}}" as="n" hint-placeholder-count="6">
+      <button type="button" onClick="{{n.pick}}" aria-label="{{n.aria}}" style="{{n.style}}">
+        <sc-if value="{{n.isDone}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+        <sc-if value="{{n.isCurrent}}" hint-placeholder-val="{{ false }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"></path></svg></sc-if>
+        <sc-if value="{{n.isLocked}}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.lockIcon}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></sc-if>
+        <sc-if value="{{n.isGoal}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{c.lockIcon}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg></sc-if>
+      </button>
+    </sc-for>
+
+    <sc-if value="{{showStartTag}}" hint-placeholder-val="{{ true }}">
+      <div style="{{startTag}}">START</div>
+    </sc-if>
+
+    <sc-if value="{{hasSel}}" hint-placeholder-val="{{ false }}">
+      <div style="{{pop.style}}">
+        <div style="{{c.popEyebrow}}">{{pop.meta}}</div>
+        <div style="font-size: 17px; font-weight: 900; line-height: 1.25">{{pop.title}}</div>
+        <sc-if value="{{pop.canStart}}" hint-placeholder-val="{{ true }}">
+          <a href="Lesson.dc.html" style="{{c.popBtn}}">{{pop.cta}}</a>
+        </sc-if>
+        <sc-if value="{{pop.locked}}" hint-placeholder-val="{{ false }}">
+          <div style="{{c.popLocked}}">Finish the steps before this to unlock</div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </div>
+
+  <nav aria-label="Main" style="{{c.nav}}">
+    <a href="Home.dc.html" aria-current="page" style="{{c.navOn}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20c0-5 12-4 12-9S8 8 8 4"></path><circle cx="8" cy="4" r="1.5"></circle><circle cx="6" cy="20" r="1.5"></circle></svg>Path</a>
+    <a href="Journal.dc.html" style="{{c.navOff}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M9 9h6M9 13h4"></path></svg>Journal</a>
+    <a href="Profile.dc.html" style="{{c.navOff}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Profile</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","default":"languages_learning","options":["languages_learning","sports_movement","money_business","art_creativity","technology","life_wellbeing","general_adventure"]},"dark":{"editor":"boolean","default":false},"accent":{"editor":"color","default":"#3346D3","options":["#3346D3","#2F6B4F","#C2572B"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: null }; }
+  renderVals() {
+    const dark = !!this.props.dark;
+    const A = this.props.accent ?? (dark ? '#8C9BFF' : '#3346D3');
+    const accent = dark && !this.props.accent ? '#8C9BFF' : A;
+    const accentDeep = dark ? '#5563C9' : '#2535A8';
+    const P = dark
+      ? { bg: '#0F1113', surf: '#181B1E', line: '#2A2E33', ink: '#F1F2F3', muted: '#9AA1A9', soft: '#1F2547', lockBg: '#22262B', lockSh: '#15181B', lockIc: '#6C737B', dash: '#3A3F45', faint: '#262A2F', amberBg: '#2E2216', amber: '#F0A257', onAccent: '#0F1113' }
+      : { bg: '#F6F7F5', surf: '#FFFFFF', line: '#E4E6E1', ink: '#15171A', muted: '#5E646B', soft: '#E8EBFC', lockBg: '#ECEEEA', lockSh: '#D9DCD5', lockIc: '#8A9097', dash: '#C9CDC6', faint: '#E2E4DF', amberBg: '#FFF3E6', amber: '#8A4A0E', onAccent: '#FFFFFF' };
+
+    const M = {
+      languages_learning: ['Languages & Learning', 'Japanese for your trip', 'Unit 2 · 4 of 6', 'Food & shopping', 'M4 5h10a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM18 9h2a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-3-3h-3',
+        ['Counting yen', 'Asking “how much?”', 'Ordering at a restaurant', 'Allergies & preferences', 'Convenience store run', 'Unit check: café role-play'], '8 of 24 steps', '30 days left'],
+      sports_movement: ['Sports & Movement', 'Juggle three balls', 'Unit 3 · 2 of 3', 'Three-ball cascade', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 7l4 3-1.5 4.5h-5L8 10zM12 7V3M16 10l4.5-1.5M14.5 14.5l2.5 4M9.5 14.5L7 18.5M8 10L3.5 8.5',
+        ['Two-ball exchange', 'Rhythm drill', 'First 3-ball flash', 'Five catches in a row', 'Ten catches in a row', 'Film a 30-second run'], '14 of 20 steps', 'On track'],
+      money_business: ['Money & Business', 'Earn $1,000 freelancing', 'Unit 1 · 1 of 3', 'Pick your offer', 'M3 7a7 3 0 1 0 14 0a7 3 0 1 0-14 0M3 7v5c0 1.66 3.13 3 7 3M17 7v3M9 15a6 2.6 0 1 0 12 0a6 2.6 0 1 0-12 0M9 15v3.5c0 1.4 2.7 2.6 6 2.6s6-1.2 6-2.6V15',
+        ['List your skills', 'Find 3 buyer types', 'Price your service', 'Write a one-line offer', 'Build a simple portfolio', 'Send first 5 pitches'], '3 of 18 steps', '27 days left'],
+      art_creativity: ['Art & Creativity', 'Draw a portrait I am proud of', 'Unit 2 · 2 of 4', 'Proportions', 'M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a4 4 0 0 0 4-4c0-4.4-4-8-9-8zM7.5 11.5h0M10 7.5h0M15 7.5h0',
+        ['Loomis head', 'Eye line', 'Nose and mouth', 'Ears and jaw', 'Light and shadow', 'Full portrait'], '6 of 22 steps', '40 days left'],
+      technology: ['Technology', 'Code in Python', 'Unit 2 · 3 of 4', 'Control flow', 'M8 6l-6 6 6 6M16 6l6 6-6 6M14 4l-4 16',
+        ['If and else', 'Loops', 'Lists', 'Mini project: to-do CLI', 'Functions', 'Unit check'], '9 of 28 steps', '21 days left'],
+      life_wellbeing: ['Life & Wellbeing', 'Wake up at 6:00 every day', 'Unit 1 · 2 of 3', 'Evening reset', 'M5 19c0-8 5-14 15-15-1 10-7 15-15 15zM5 19l8-8',
+        ['Pick a fixed bedtime', 'Screens off at 22:30', 'Wind-down routine', 'Alarm across the room', 'Morning anchor habit', 'Week review'], '4 of 21 steps', 'On track'],
+      general_adventure: ['General Adventure', 'Learn every flag in the world', 'Unit 3 · 1 of 6', 'Africa', 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM15.5 8.5l-2 5-5 2 2-5z',
+        ['North Africa', 'West Africa I', 'West Africa II', 'Central Africa', 'East Africa', 'Southern Africa'], '12 of 30 steps', '18 days left']
+    };
+    const th = M[this.props.theme] || M.languages_learning;
+    const titles = th[5];
+    const current = 2;
+
+    const pts = [];
+    const nodes = titles.map((title, i) => {
+      const isGoal = i === titles.length - 1;
+      const state = i < current ? 'done' : i === current ? 'current' : 'locked';
+      const size = state === 'current' ? 76 : 64;
+      const cx = 195 + Math.round(78 * Math.sin(i * 1.05));
+      const cy = 46 + i * 92;
+      pts.push([cx, cy]);
+      const sel = this.state.sel === i;
+      let bg, sh, border = '';
+      if (state === 'done') { bg = accent; sh = accentDeep; }
+      else if (state === 'current') { bg = accent; sh = accentDeep; border = 'outline: 6px solid ' + P.soft + ';'; }
+      else { bg = P.lockBg; sh = P.lockSh; }
+      return {
+        isDone: state === 'done', isCurrent: state === 'current', isLocked: state === 'locked' && !isGoal, isGoal: state === 'locked' && isGoal,
+        aria: 'Step ' + (i + 7) + ': ' + title + (state === 'locked' ? ' (locked)' : ''),
+        pick: () => this.setState({ sel: sel ? null : i }),
+        style: 'position: absolute; left: ' + (cx - size / 2) + 'px; top: ' + (cy - size / 2) + 'px; width: ' + size + 'px; height: ' + size + 'px; border-radius: 50%; border: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; background: ' + bg + '; box-shadow: 0 6px 0 ' + sh + '; ' + border + (sel ? 'transform: translateY(2px); box-shadow: 0 4px 0 ' + sh + ';' : '') + ' transition: transform 120ms ease',
+        title, state, cx, cy, size
+      };
+    });
+
+    const curve = (a) => a.map((p, i) => {
+      if (i === 0) return 'M' + p[0] + ' ' + p[1];
+      const q = a[i - 1]; const my = (q[1] + p[1]) / 2;
+      return 'C ' + q[0] + ' ' + my + ', ' + p[0] + ' ' + my + ', ' + p[0] + ' ' + p[1];
+    }).join(' ');
+
+    const cur = nodes[current];
+    const s = this.state.sel;
+    let pop = {};
+    if (s !== null) {
+      const n = nodes[s];
+      const left = Math.max(16, Math.min(390 - 16 - 250, n.cx - 125));
+      pop = {
+        meta: 'Step ' + (s + 7) + ' of 24 · 20 min',
+        title: n.title,
+        canStart: n.state !== 'locked', locked: n.state === 'locked',
+        cta: n.state === 'done' ? 'Review (+5 XP)' : 'Start  +20 XP',
+        style: 'position: absolute; left: ' + left + 'px; top: ' + (n.cy + n.size / 2 + 16) + 'px; width: 250px; box-sizing: border-box; padding: 14px; border-radius: 18px; display: flex; flex-direction: column; gap: 8px; z-index: 5; background: ' + (n.state === 'locked' ? P.surf : P.surf) + '; border: 1.5px solid ' + (n.state === 'locked' ? P.line : accent) + '; box-shadow: 0 10px 30px rgba(0,0,0,' + (dark ? '0.5' : '0.10') + '); color: ' + P.ink
+      };
+    }
+
+    return {
+      t: { label: th[0], goal: th[1], unitNo: th[2], unit: th[3], motif: th[4], done: th[6], left: th[7] },
+      nodes, pop, hasSel: s !== null,
+      showStartTag: s === null,
+      startTag: 'position: absolute; left: ' + (cur.cx - 34) + 'px; top: ' + (cur.cy - cur.size / 2 - 40) + 'px; width: 68px; text-align: center; padding: 6px 0; border-radius: 10px; font-size: 13px; font-weight: 900; letter-spacing: 0.8px; background: ' + P.surf + '; color: ' + accent + '; border: 2px solid ' + P.line + '; animation: bob 2.4s ease-in-out infinite',
+      pathDone: curve(pts.slice(0, current + 1)),
+      pathTodo: curve(pts.slice(current)),
+      c: {
+        accent, dash: P.dash, lockIcon: P.lockIc, motifFaint: P.faint,
+        root: 'width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; font-family: Nunito, system-ui, sans-serif; background: ' + P.bg + '; color: ' + P.ink,
+        iconBtn: 'width: 44px; height: 44px; margin-left: -10px; display: flex; align-items: center; justify-content: center; color: ' + P.ink,
+        eyebrow: 'font-size: 12px; font-weight: 800; letter-spacing: 0.4px; color: ' + P.muted,
+        streak: 'display: flex; align-items: center; gap: 5px; padding: 7px 10px; border-radius: 12px; font-weight: 900; font-size: 15px; background: ' + P.amberBg + '; color: ' + P.amber,
+        progressTrack: 'height: 10px; border-radius: 5px; overflow: hidden; background: ' + P.line,
+        progressFill: 'height: 10px; width: 33%; border-radius: 5px; background: ' + accent,
+        progressText: 'display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; font-weight: 800; color: ' + P.muted,
+        unit: 'margin: 16px 20px 0; padding: 14px 16px; border-radius: 20px; display: flex; align-items: center; gap: 12px; background: ' + P.surf + '; border: 1px solid ' + P.line,
+        unitEyebrow: 'font-size: 12px; font-weight: 900; letter-spacing: 0.6px; text-transform: uppercase; color: ' + accent,
+        motifBox: 'flex: none; width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: ' + P.soft + '; color: ' + accent,
+        popEyebrow: 'font-size: 12px; font-weight: 800; color: ' + P.muted,
+        popBtn: 'height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 900; font-size: 15px; background: ' + accent + '; color: ' + P.onAccent + '; box-shadow: 0 3px 0 ' + accentDeep,
+        popLocked: 'font-size: 13px; font-weight: 700; color: ' + P.muted,
+        nav: 'height: 84px; display: flex; justify-content: space-around; align-items: flex-start; padding-top: 10px; box-sizing: border-box; background: ' + P.surf + '; border-top: 1px solid ' + P.line,
+        navOn: 'display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; text-decoration: none; min-width: 64px; color: ' + accent,
+        navOff: 'display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; text-decoration: none; min-width: 64px; color: ' + P.muted
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

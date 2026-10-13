@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Milo",
+    "slug": "milo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/milo-icon.png",
+    "scheme": "milo",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "app.milo.roadmapper",
+      "infoPlist": { "ITSAppUsesNonExemptEncryption": false }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#3346D3",
+        "foregroundImage": "./assets/images/milo-icon.png"
+      },
+      "package": "app.milo.roadmapper"
+    },
+    "web": {
+      "output": "single",
+      "favicon": "./assets/images/milo-icon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F6F7F5",
+          "image": "./assets/images/milo-icon.png",
+          "imageWidth": 76,
+          "dark": { "backgroundColor": "#0F1113" }
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

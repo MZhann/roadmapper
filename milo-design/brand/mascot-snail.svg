@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 200 200" role="img" aria-label="Milo the snail mascot">
+          <ellipse cx="104" cy="174" rx="72" ry="7" fill="#000000" opacity="0.07"></ellipse>
+          <path d="M30 160 C 30 146, 50 142, 70 144 L 150 144 C 168 144, 178 152, 178 162 C 178 168, 172 170, 162 170 L 44 170 C 36 170, 30 166, 30 160 Z" fill="#F2D6B3"></path>
+          <path d="M44 152 C 36 122, 42 98, 58 96 C 76 94, 80 120, 76 150 Z" fill="#F2D6B3"></path>
+          <path d="M54 99 L 46 72 M68 99 L 72 72" stroke="#E4BE93" stroke-width="5" stroke-linecap="round"></path>
+          <circle cx="46" cy="69" r="9" fill="#FFFFFF" stroke="#E4BE93" stroke-width="2"></circle>
+          <circle cx="72" cy="69" r="9" fill="#FFFFFF" stroke="#E4BE93" stroke-width="2"></circle>
+          <circle cx="47.5" cy="70.5" r="4.5" fill="#15171A"></circle>
+          <circle cx="73.5" cy="70.5" r="4.5" fill="#15171A"></circle>
+          <ellipse cx="50" cy="126" rx="5" ry="3" fill="#F0A257" opacity="0.6"></ellipse>
+          <path d="M54 118 Q61 125 68 118" stroke="#8A5A2B" stroke-width="3.2" stroke-linecap="round" fill="none"></path>
+          <circle cx="124" cy="110" r="44" fill="#3346D3"></circle>
+          <circle cx="124" cy="110" r="42" fill="none" stroke="#2535A8" stroke-width="4"></circle>
+          <path d="M124 104 a6 6 0 1 1 -6 6 a12 12 0 1 1 12 12 a20 20 0 1 1 -20 -20 a28 28 0 1 1 28 28" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.9"></path>
+          <circle cx="138" cy="130" r="6" fill="#F0A257" stroke="#FFFFFF" stroke-width="2.5"></circle>
+        </svg>

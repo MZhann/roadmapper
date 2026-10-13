@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Personalize</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+input:focus{outline:none;border-color:#3346D3 !important}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; padding: 64px 24px 36px; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="height: 8px; border-radius: 4px; background: #E4E6E1; overflow: hidden"><div style="width: 80%; height: 8px; background: #3346D3; border-radius: 4px"></div></div>
+
+  <h1 style="margin: 32px 0 8px; font-size: 28px; line-height: 1.15; font-weight: 900; letter-spacing: -0.5px">A little about you</h1>
+  <p style="margin: 0 0 28px; font-size: 16px; line-height: 1.45; color: #5E646B">Used to pace every plan Milo makes for you.</p>
+
+  <label for="name" style="font-size: 14px; font-weight: 800; margin-bottom: 8px">What should we call you?</label>
+  <input id="name" type="text" value="Mukan" style="height: 54px; border-radius: 16px; border: 1.5px solid #E4E6E1; background: #FFFFFF; padding: 0 16px; font-size: 16px; font-family: inherit; color: #15171A; box-sizing: border-box">
+
+  <div style="font-size: 14px; font-weight: 800; margin: 28px 0 10px">Usual time per day</div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+      <button type="button" onClick="{{o.pick}}" style="{{o.style}}">
+        <span style="font-size: 20px; font-weight: 900">{{o.min}}</span>
+        <span style="font-size: 13px; font-weight: 700; color: #5E646B">{{o.label}}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="margin-top: 28px; background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 14px">
+    <div style="width: 40px; height: 40px; border-radius: 12px; background: #E8EBFC; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3346D3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10 21a2 2 0 0 0 4 0"></path></svg></div>
+    <div style="flex: 1">
+      <div style="font-size: 16px; font-weight: 800">Daily reminder</div>
+      <div style="font-size: 14px; color: #5E646B">Every day at 19:00</div>
+    </div>
+    <button type="button" aria-label="Daily reminder on" onClick="{{toggle}}" style="{{switchStyle}}"><span style="{{knobStyle}}"></span></button>
+  </div>
+
+  <div style="flex: 1"></div>
+  <a href="HomeEmpty.dc.html" style="height: 56px; border-radius: 16px; background: #3346D3; color: #FFFFFF; font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 0 #2535A8">Continue</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { pick: 1, on: true }; }
+  renderVals() {
+    const data = [['5 min', 'Light'], ['15 min', 'Steady'], ['30 min', 'Serious'], ['60 min', 'Intense']];
+    const opts = data.map((d, i) => {
+      const sel = i === this.state.pick;
+      return {
+        min: d[0], label: d[1],
+        pick: () => this.setState({ pick: i }),
+        style: 'height: 76px; border-radius: 18px; font-family: inherit; color: #15171A; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 0 16px; gap: 2px; box-sizing: border-box; ' +
+          (sel ? 'background: #E8EBFC; border: 2px solid #3346D3; box-shadow: 0 3px 0 #3346D3' : 'background: #FFFFFF; border: 1.5px solid #E4E6E1; box-shadow: 0 3px 0 #E4E6E1')
+      };
+    });
+    const on = this.state.on;
+    return {
+      opts,
+      toggle: () => this.setState({ on: !on }),
+      switchStyle: 'width: 52px; height: 32px; border-radius: 16px; border: 0; padding: 0; position: relative; cursor: pointer; background: ' + (on ? '#3346D3' : '#D9DCD5'),
+      knobStyle: 'position: absolute; top: 3px; left: ' + (on ? '23px' : '3px') + '; width: 26px; height: 26px; border-radius: 50%; background: #FFFFFF; transition: left 160ms ease'
+    };
+  }
+}
+</script>
+</body>
+</html>

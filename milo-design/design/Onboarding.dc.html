@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Onboarding</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; padding: 64px 24px 36px; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="display: flex; justify-content: space-between; align-items: center; height: 44px">
+    <div style="display: flex; gap: 6px">
+      <sc-for list="{{dots}}" as="d" hint-placeholder-count="3">
+        <div style="{{d.style}}"></div>
+      </sc-for>
+    </div>
+    <a href="Personalize.dc.html" style="font-size: 15px; font-weight: 800; color: #5E646B; text-decoration: none; padding: 10px">Skip</a>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-direction: column; justify-content: center">
+    <sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+        <div style="font-size: 13px; font-weight: 800; color: #5E646B; text-transform: uppercase; letter-spacing: 0.6px">Your goal</div>
+        <div style="font-size: 20px; font-weight: 700; line-height: 1.4">I'm visiting Japan next month and want to ask and answer simple questions in Japanese.</div>
+        <div style="display: flex; justify-content: flex-end"><div style="width: 44px; height: 44px; border-radius: 14px; background: #3346D3; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></div></div>
+      </div>
+      <h1 style="margin: 40px 0 10px; font-size: 30px; line-height: 1.12; font-weight: 900; letter-spacing: -0.6px">Say it in one sentence</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.45; color: #5E646B">Languages, sport, money, art, code, habits — any goal you can describe.</p>
+    </sc-if>
+    <sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div style="align-self: flex-start; max-width: 82%; background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 20px 20px 20px 6px; padding: 14px 16px; font-size: 16px; line-height: 1.4">What's your Japanese level right now?</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <div style="padding: 10px 14px; border-radius: 999px; background: #E8EBFC; color: #2535A8; font-weight: 800; font-size: 15px; border: 2px solid #3346D3">Total beginner</div>
+          <div style="padding: 10px 14px; border-radius: 999px; background: #FFFFFF; font-weight: 700; font-size: 15px; border: 1.5px solid #E4E6E1">Know kana</div>
+          <div style="padding: 10px 14px; border-radius: 999px; background: #FFFFFF; font-weight: 700; font-size: 15px; border: 1.5px solid #E4E6E1">N5+</div>
+        </div>
+        <div style="align-self: flex-start; max-width: 82%; background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 20px 20px 20px 6px; padding: 14px 16px; font-size: 16px; line-height: 1.4; margin-top: 8px">How much time can you give it each day?</div>
+      </div>
+      <h1 style="margin: 40px 0 10px; font-size: 30px; line-height: 1.12; font-weight: 900; letter-spacing: -0.6px">Answer a few questions</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.45; color: #5E646B">Your deadline, level and daily time shape a plan that fits your real life.</p>
+    </sc-if>
+    <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+      <div style="position: relative; height: 240px">
+        <svg width="342" height="240" viewBox="0 0 342 240" fill="none" style="position: absolute; left: 0; top: 0" aria-hidden="true"><path d="M110 30 C 240 50, 250 110, 170 130 S 90 200, 200 220" stroke="#D9DCD5" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"></path></svg>
+        <div style="position: absolute; left: 84px; top: 4px; width: 52px; height: 52px; border-radius: 50%; background: #3346D3; box-shadow: 0 5px 0 #2535A8; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+        <div style="position: absolute; left: 140px; top: 100px; width: 62px; height: 62px; border-radius: 50%; background: #FFFFFF; border: 3px solid #3346D3; box-sizing: border-box; box-shadow: 0 5px 0 #D9DCD5"></div>
+        <div style="position: absolute; left: 176px; top: 190px; width: 52px; height: 52px; border-radius: 50%; background: #ECEEEA; box-shadow: 0 5px 0 #D9DCD5"></div>
+        <div style="position: absolute; right: 0; top: 108px; background: #FFF3E6; color: #8A4A0E; border-radius: 12px; padding: 8px 12px; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C2620F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2.5 1.5-3.5 2-5 1 1.5 2 2 2.5 2.5C12 8 12 5 12 3z"></path></svg>7-day streak</div>
+      </div>
+      <h1 style="margin: 40px 0 10px; font-size: 30px; line-height: 1.12; font-weight: 900; letter-spacing: -0.6px">Walk the path, one step a day</h1>
+      <p style="margin: 0; font-size: 17px; line-height: 1.45; color: #5E646B">Finish short steps, keep your streak, and write notes that become your success story.</p>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{notLast}}" hint-placeholder-val="{{ true }}">
+    <button type="button" onClick="{{next}}" style="height: 56px; width: 100%; border: 0; border-radius: 16px; background: #3346D3; color: #FFFFFF; font-size: 17px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 0 #2535A8; cursor: pointer">Continue</button>
+  </sc-if>
+  <sc-if value="{{last}}" hint-placeholder-val="{{ false }}">
+    <a href="Personalize.dc.html" style="height: 56px; border-radius: 16px; background: #3346D3; color: #FFFFFF; font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 0 #2535A8">Let's begin</a>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { i: 0 }; }
+  renderVals() {
+    const i = this.state.i;
+    const dots = [0, 1, 2].map((k) => ({
+      style: 'height: 8px; border-radius: 4px; width: ' + (k === i ? '24px' : '8px') + '; background: ' + (k === i ? '#3346D3' : '#D9DCD5')
+    }));
+    return {
+      dots, s0: i === 0, s1: i === 1, s2: i === 2,
+      notLast: i < 2, last: i === 2,
+      next: () => this.setState({ i: Math.min(2, i + 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Review and adjust plan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+input:focus{outline:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="flex: 1; overflow: hidden; padding: 60px 20px 0; display: flex; flex-direction: column">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Clarify.dc.html" aria-label="Back" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #15171A; margin-left: -10px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <span style="font-size: 12px; font-weight: 900; letter-spacing: 0.6px; text-transform: uppercase; color: #2535A8; background: #E8EBFC; padding: 6px 10px; border-radius: 8px">Draft plan</span>
+    </div>
+
+    <div style="display: flex; gap: 14px; align-items: center; margin-top: 8px">
+      <div style="flex: none; width: 64px; height: 64px; border-radius: 20px; background: #E8EBFC; display: flex; align-items: center; justify-content: center">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#3346D3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9a3 3 0 0 1 3 3v3H8l-4 3z"></path><path d="M20 10v7l-3-2h-5a2 2 0 0 1-2-2"></path></svg>
+      </div>
+      <div>
+        <h1 style="margin: 0; font-size: 24px; line-height: 1.15; font-weight: 900; letter-spacing: -0.4px">Japanese for your trip</h1>
+        <div style="font-size: 14px; font-weight: 700; color: #5E646B; margin-top: 4px">Languages &amp; Learning</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 18px">
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 14px; padding: 10px 12px"><div style="font-size: 18px; font-weight: 900">24</div><div style="font-size: 12px; font-weight: 700; color: #5E646B">steps</div></div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 14px; padding: 10px 12px"><div style="font-size: 18px; font-weight: 900">20 min</div><div style="font-size: 12px; font-weight: 700; color: #5E646B">per day</div></div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 14px; padding: 10px 12px"><div style="font-size: 18px; font-weight: 900">Nov 12</div><div style="font-size: 12px; font-weight: 700; color: #5E646B">finish by</div></div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 18px">
+      <sc-for list="{{units}}" as="u" hint-placeholder-count="4">
+        <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 18px; overflow: hidden">
+          <button type="button" onClick="{{u.toggle}}" aria-expanded="{{u.open}}" style="width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 0; background: transparent; font-family: inherit; color: #15171A; cursor: pointer; text-align: left">
+            <span style="flex: none; width: 30px; height: 30px; border-radius: 10px; background: #F0F1EE; font-size: 14px; font-weight: 900; display: flex; align-items: center; justify-content: center">{{u.n}}</span>
+            <span style="flex: 1; display: flex; flex-direction: column">
+              <span style="font-size: 16px; font-weight: 800">{{u.title}}</span>
+              <span style="font-size: 13px; font-weight: 700; color: #5E646B">{{u.meta}}</span>
+            </span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5E646B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="{{u.chev}}" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{u.open}}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 0 16px 14px 58px; display: flex; flex-direction: column; gap: 8px">
+              <sc-for list="{{u.steps}}" as="s" hint-placeholder-count="3">
+                <div style="font-size: 14px; font-weight: 600; color: #3A4048; display: flex; gap: 8px"><span style="color: #8A9097">{{s.d}}</span>{{s.t}}</div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background: #FFFFFF; border-top: 1px solid #E4E6E1; padding: 14px 20px 34px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; gap: 8px; overflow: hidden">
+      <button type="button" style="flex: none; padding: 8px 12px; border-radius: 999px; border: 1.5px solid #E4E6E1; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 800; color: #3A4048; cursor: pointer">More food phrases</button>
+      <button type="button" style="flex: none; padding: 8px 12px; border-radius: 999px; border: 1.5px solid #E4E6E1; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 800; color: #3A4048; cursor: pointer">Skip writing</button>
+      <button type="button" style="flex: none; padding: 8px 12px; border-radius: 999px; border: 1.5px solid #E4E6E1; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 800; color: #3A4048; cursor: pointer">Easier start</button>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center; height: 48px; border-radius: 14px; background: #F0F1EE; padding: 0 6px 0 14px">
+      <label for="adj" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Ask for a change</label>
+      <input id="adj" type="text" placeholder="Ask for a change, e.g. “drop unit 4”" style="flex: 1; border: 0; background: transparent; font-family: inherit; font-size: 15px; color: #15171A">
+      <button type="button" aria-label="Send change request" style="width: 36px; height: 36px; border-radius: 10px; border: 0; background: #15171A; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></button>
+    </div>
+    <a href="Roadmap.dc.html" style="height: 54px; border-radius: 16px; background: #3346D3; color: #FFFFFF; font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 0 #2535A8">Start this goal</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { open: 0 }; }
+  renderVals() {
+    const U = [
+      ['Sounds & first words', '6 steps · days 1–7', [['D1', 'Hiragana vowels and greetings'], ['D2', 'Saying please, thanks, sorry'], ['D3', 'Numbers 1–100'], ['D4', 'Asking “how much?”']]],
+      ['Food & shopping', '6 steps · days 8–15', [['D8', 'Ordering at a restaurant'], ['D9', 'Allergies and preferences']]],
+      ['Getting around', '6 steps · days 16–23', [['D16', 'Trains and tickets'], ['D17', 'Asking for directions']]],
+      ['Small talk & final test', '6 steps · days 24–30', [['D24', 'Introducing yourself'], ['D30', 'Mock conversation with AI']]]
+    ];
+    return {
+      units: U.map((u, i) => {
+        const open = this.state.open === i;
+        return {
+          n: i + 1, title: u[0], meta: u[1], open,
+          steps: u[2].map((s) => ({ d: s[0], t: s[1] })),
+          chev: 'flex: none; transition: transform 160ms ease; transform: rotate(' + (open ? '180deg' : '0deg') + ')',
+          toggle: () => this.setState({ open: open ? -1 : i })
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

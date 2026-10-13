@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Generating plan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+@keyframes draw{from{stroke-dashoffset:520}to{stroke-dashoffset:0}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; align-items: center; padding: 120px 32px 48px; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="position: relative; width: 220px; height: 220px">
+    <svg width="220" height="220" viewBox="0 0 220 220" fill="none" style="position: absolute; inset: 0" aria-hidden="true">
+      <path d="M50 190 C 50 130, 170 150, 170 100 S 70 70, 110 24" stroke="#E4E6E1" stroke-width="6" stroke-linecap="round"></path>
+      <path d="M50 190 C 50 130, 170 150, 170 100 S 70 70, 110 24" stroke="#3346D3" stroke-width="6" stroke-linecap="round" stroke-dasharray="520" style="animation: draw 2.4s ease-in-out infinite alternate"></path>
+    </svg>
+    <div style="position: absolute; left: 92px; top: 4px; width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; border: 3px solid #3346D3; box-sizing: border-box; display: flex; align-items: center; justify-content: center; animation: pulse 1.6s ease-in-out infinite">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3346D3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"></path></svg>
+    </div>
+  </div>
+
+  <h1 style="margin: 40px 0 8px; font-size: 26px; font-weight: 900; letter-spacing: -0.4px; text-align: center">Mapping your path</h1>
+  <p style="margin: 0; font-size: 16px; color: #5E646B; text-align: center; line-height: 1.45">About 15 seconds. You can review and change everything next.</p>
+
+  <div style="width: 100%; margin-top: 40px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 700">
+      <span style="width: 26px; height: 26px; border-radius: 50%; background: #3346D3; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+      Understood your goal
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 700">
+      <span style="width: 26px; height: 26px; border-radius: 50%; background: #3346D3; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+      Sized to 30 days × 20 min
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 800; color: #2535A8">
+      <span style="width: 26px; height: 26px; border-radius: 50%; border: 3px solid #3346D3; box-sizing: border-box; animation: pulse 1.2s ease-in-out infinite"></span>
+      Splitting into units and steps
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 700; color: #8A9097">
+      <span style="width: 26px; height: 26px; border-radius: 50%; border: 2px solid #D9DCD5; box-sizing: border-box"></span>
+      Writing your first lessons
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

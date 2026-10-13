@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Profile and stats</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="flex: 1; overflow: hidden; padding: 60px 20px 0; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 14px">
+      <div style="width: 60px; height: 60px; border-radius: 50%; background: #E8EBFC; color: #2535A8; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900">M</div>
+      <div style="flex: 1">
+        <div style="font-size: 22px; font-weight: 900">Mukan</div>
+        <div style="font-size: 14px; font-weight: 700; color: #5E646B">Walking since September</div>
+      </div>
+      <button type="button" aria-label="Settings" style="width: 44px; height: 44px; border-radius: 14px; border: 1.5px solid #E4E6E1; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg></button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 18px; padding: 14px"><div style="font-size: 24px; font-weight: 900; color: #8A4A0E">13</div><div style="font-size: 13px; font-weight: 800; color: #5E646B">Day streak</div></div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 18px; padding: 14px"><div style="font-size: 24px; font-weight: 900; color: #2535A8">860</div><div style="font-size: 13px; font-weight: 800; color: #5E646B">Total XP</div></div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 18px; padding: 14px"><div style="font-size: 24px; font-weight: 900">26</div><div style="font-size: 13px; font-weight: 800; color: #5E646B">Steps done</div></div>
+      <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 18px; padding: 14px"><div style="font-size: 24px; font-weight: 900">1</div><div style="font-size: 13px; font-weight: 800; color: #5E646B">Goals achieved</div></div>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 20px; padding: 16px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><div style="font-size: 16px; font-weight: 900">This week</div><div style="font-size: 13px; font-weight: 800; color: #5E646B">2 h 10 min</div></div>
+      <div style="display: flex; align-items: flex-end; gap: 10px; height: 96px; margin-top: 14px">
+        <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px">
+            <div style="{{d.bar}}"></div>
+            <span style="font-size: 12px; font-weight: 800; color: #5E646B">{{d.l}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 20px; overflow: hidden">
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+        <button type="button" style="width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 52px; border: 0; border-bottom: 1px solid #F0F1EE; background: transparent; font-family: inherit; font-size: 15px; font-weight: 800; color: #15171A; cursor: pointer">
+          <span>{{r.k}}</span><span style="font-weight: 700; color: #5E646B">{{r.v}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <nav aria-label="Main" style="height: 84px; background: #FFFFFF; border-top: 1px solid #E4E6E1; display: flex; justify-content: space-around; align-items: flex-start; padding-top: 10px; box-sizing: border-box">
+    <a href="Home.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #5E646B; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20c0-5 12-4 12-9S8 8 8 4"></path><circle cx="8" cy="4" r="1.5"></circle><circle cx="6" cy="20" r="1.5"></circle></svg>Path</a>
+    <a href="Journal.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #5E646B; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M9 9h6M9 13h4"></path></svg>Journal</a>
+    <a href="Profile.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #3346D3; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Profile</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mins = [20, 25, 0, 30, 15, 22, 18];
+    const L = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    return {
+      week: mins.map((m, i) => ({
+        l: L[i],
+        bar: 'width: 100%; border-radius: 6px; height: ' + Math.max(6, Math.round(m / 30 * 70)) + 'px; background: ' + (m === 0 ? '#ECEEEA' : i === 6 ? '#3346D3' : '#BFC7F5')
+      })),
+      rows: [
+        { k: 'Daily reminder', v: '19:00' },
+        { k: 'Appearance', v: 'System' },
+        { k: 'Milo Plus', v: '[PRICE]/mo' },
+        { k: 'Account & privacy', v: '' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clarifying questions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+input:focus{outline:none;border-color:#3346D3 !important}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; padding: 60px 24px 36px; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="display: flex; align-items: center; gap: 12px">
+    <a href="HomeEmpty.dc.html" aria-label="Close" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #5E646B; margin-left: -10px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </a>
+    <div style="flex: 1; height: 10px; border-radius: 5px; background: #E4E6E1; overflow: hidden"><div style="{{barStyle}}"></div></div>
+    <span style="font-size: 14px; font-weight: 800; color: #5E646B">{{count}}</span>
+  </div>
+
+  <div style="margin-top: 24px; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 14px; padding: 10px 12px">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3346D3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg>
+    <span style="font-size: 14px; font-weight: 700; color: #5E646B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Speak simple Japanese before my Japan trip</span>
+  </div>
+
+  <div style="margin-top: 28px; display: flex; gap: 10px; align-items: flex-start">
+    <div style="flex: none; width: 36px; height: 36px; border-radius: 12px; background: #3346D3; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 20c0-5 12-4 12-9S8 8 8 4"></path></svg></div>
+    <div>
+      <h1 style="margin: 0 0 6px; font-size: 24px; line-height: 1.2; font-weight: 900; letter-spacing: -0.4px">{{q}}</h1>
+      <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #5E646B">{{why}}</p>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 24px">
+    <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+      <button type="button" onClick="{{o.pick}}" style="{{o.style}}">
+        <span style="{{o.radio}}"></span>
+        <span style="display: flex; flex-direction: column; gap: 1px; text-align: left">
+          <span style="font-size: 16px; font-weight: 800">{{o.t}}</span>
+          <span style="font-size: 14px; color: #5E646B; font-weight: 600">{{o.d}}</span>
+        </span>
+      </button>
+    </sc-for>
+  </div>
+
+  <div style="flex: 1"></div>
+  <sc-if value="{{notLast}}" hint-placeholder-val="{{ true }}">
+    <button type="button" onClick="{{next}}" style="height: 56px; width: 100%; border: 0; border-radius: 16px; background: #3346D3; color: #FFFFFF; font-size: 17px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 0 #2535A8; cursor: pointer">Continue</button>
+  </sc-if>
+  <sc-if value="{{last}}" hint-placeholder-val="{{ false }}">
+    <a href="Generating.dc.html" style="height: 56px; border-radius: 16px; background: #3346D3; color: #FFFFFF; font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 0 #2535A8">Build my plan</a>
+  </sc-if>
+  <button type="button" onClick="{{next}}" style="margin-top: 8px; height: 44px; border: 0; background: transparent; color: #5E646B; font-size: 15px; font-weight: 800; font-family: inherit; cursor: pointer">Not sure — you decide</button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { step: 1, sel: [1, 0, 1, 0] }; }
+  renderVals() {
+    const Q = [
+      { q: 'When do you fly?', why: 'Your deadline sets how many steps fit before the trip.', o: [['In 2 weeks', '14 days'], ['In about a month', '30 days'], ['In 2 months', '60 days'], ['Pick a date', 'Open calendar']] },
+      { q: 'How much Japanese do you know?', why: 'So we skip what you already know — or start from zero.', o: [['Nothing yet', 'Start from the very first sound'], ['A few words', 'Hello, thank you, sorry'], ['I can read kana', 'Hiragana and katakana'], ['Basic sentences', 'Around JLPT N5']] },
+      { q: 'How long can you practise daily?', why: 'Each step is sized to fit this time.', o: [['10 minutes', 'Bite-sized'], ['20 minutes', 'Recommended'], ['45 minutes', 'Fast track'], ['It varies', 'Mix short and long days']] },
+      { q: 'What matters most on the trip?', why: 'We weight the plan toward real situations you will face.', o: [['Restaurants & shops', 'Ordering, prices, paying'], ['Getting around', 'Trains, directions, hotels'], ['Small talk', 'Introducing yourself'], ['All of it', 'Balanced plan']] }
+    ];
+    const s = this.state.step;
+    const cur = Q[s];
+    const opts = cur.o.map((x, i) => {
+      const on = this.state.sel[s] === i;
+      return {
+        t: x[0], d: x[1],
+        pick: () => { const sel = this.state.sel.slice(); sel[s] = i; this.setState({ sel }); },
+        style: 'display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px; font-family: inherit; color: #15171A; cursor: pointer; ' + (on ? 'background: #E8EBFC; border: 2px solid #3346D3; box-shadow: 0 3px 0 #3346D3' : 'background: #FFFFFF; border: 1.5px solid #E4E6E1; box-shadow: 0 3px 0 #E4E6E1'),
+        radio: 'flex: none; width: 22px; height: 22px; border-radius: 50%; box-sizing: border-box; ' + (on ? 'border: 7px solid #3346D3; background: #FFFFFF' : 'border: 2px solid #C9CDC6')
+      };
+    });
+    return {
+      q: cur.q, why: cur.why, opts,
+      count: (s + 1) + ' of 4',
+      barStyle: 'height: 10px; border-radius: 5px; background: #3346D3; width: ' + ((s + 1) * 25) + '%; transition: width 240ms ease',
+      notLast: s < 3, last: s === 3,
+      next: () => this.setState({ step: Math.min(3, s + 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

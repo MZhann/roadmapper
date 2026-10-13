@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Milo logo options</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+</style>
+</helmet>
+<div style="width: 1840px; height: 1080px; box-sizing: border-box; background: #FFFFFF; color: #15171A; padding: 48px; display: flex; flex-direction: column; gap: 28px; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="display: flex; align-items: flex-end; justify-content: space-between">
+    <div>
+      <div style="font-size: 13px; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase; color: #5E646B">Logo options</div>
+      <div style="font-size: 40px; font-weight: 900; letter-spacing: -0.8px">Six directions for Milo</div>
+    </div>
+    <div style="font-size: 15px; font-weight: 700; color: #5E646B">Each shown as app icon, small sizes, and wordmark lockup on light and dark.</div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; flex: 1">
+
+    <!-- A -->
+    <div style="border: 1px solid #E4E6E1; border-radius: 28px; padding: 24px; display: flex; gap: 24px; background: #FAFAF9">
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center">
+        <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+          <div style="{{s.box}}"><svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M30 80 C 30 60, 70 64, 70 48 S 38 32, 48 20" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.55"></path><circle cx="30" cy="80" r="7" fill="#FFFFFF"></circle><circle cx="70" cy="48" r="7" fill="#FFFFFF"></circle><circle cx="48" cy="20" r="10" fill="#F0A257" stroke="#FFFFFF" stroke-width="4"></circle></svg></div>
+        </sc-for>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="font-size: 20px; font-weight: 900">A · Trail</div>
+        <div style="font-size: 14px; line-height: 1.45; color: #5E646B; font-weight: 600">The winding path from the app itself, ending in a summit node. Most on-brand.</div>
+        <div style="flex: 1"></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E4E6E1"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M30 80 C 30 60, 70 64, 70 48 S 38 32, 48 20" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.55"></path><circle cx="30" cy="80" r="7" fill="#FFFFFF"></circle><circle cx="70" cy="48" r="7" fill="#FFFFFF"></circle><circle cx="48" cy="20" r="10" fill="#F0A257" stroke="#FFFFFF" stroke-width="4"></circle></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px">milo</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #0F1113"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M30 80 C 30 60, 70 64, 70 48 S 38 32, 48 20" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.55"></path><circle cx="30" cy="80" r="7" fill="#FFFFFF"></circle><circle cx="70" cy="48" r="7" fill="#FFFFFF"></circle><circle cx="48" cy="20" r="10" fill="#F0A257" stroke="#FFFFFF" stroke-width="4"></circle></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #F1F2F3">milo</span></div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div style="border: 1px solid #E4E6E1; border-radius: 28px; padding: 24px; display: flex; gap: 24px; background: #FAFAF9">
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center">
+        <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+          <div style="{{s.box}}"><svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M32 82 V46 a18 18 0 0 1 36 0 V82 Z" fill="#FFFFFF"></path><path d="M20 82 H80" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M41 58 l9 -9 9 9" stroke="#3346D3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M41 71 l9 -9 9 9" stroke="#F0A257" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+        </sc-for>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="font-size: 20px; font-weight: 900">B · Milestone</div>
+        <div style="font-size: 14px; line-height: 1.45; color: #5E646B; font-weight: 600">A literal milestone marker with “level up” chevrons carved in. Ties the name to its origin.</div>
+        <div style="flex: 1"></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E4E6E1"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M32 82 V46 a18 18 0 0 1 36 0 V82 Z" fill="#FFFFFF"></path><path d="M20 82 H80" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M41 58 l9 -9 9 9" stroke="#3346D3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M41 71 l9 -9 9 9" stroke="#F0A257" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px">milo</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #0F1113"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M32 82 V46 a18 18 0 0 1 36 0 V82 Z" fill="#FFFFFF"></path><path d="M20 82 H80" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"></path><path d="M41 58 l9 -9 9 9" stroke="#3346D3" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M41 71 l9 -9 9 9" stroke="#F0A257" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #F1F2F3">milo</span></div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div style="border: 1px solid #E4E6E1; border-radius: 28px; padding: 24px; display: flex; gap: 24px; background: #FAFAF9">
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center">
+        <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+          <div style="{{s.box}}"><svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M20 76 L36 38 L50 60 L64 30 L80 76" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="64" cy="30" r="9" fill="#F0A257" stroke="#FFFFFF" stroke-width="4"></circle></svg></div>
+        </sc-for>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="font-size: 20px; font-weight: 900">C · Peak M</div>
+        <div style="font-size: 14px; line-height: 1.45; color: #5E646B; font-weight: 600">An “M” drawn as a mountain ridge, with the goal sitting on the highest peak.</div>
+        <div style="flex: 1"></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E4E6E1"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M20 76 L36 38 L50 60 L64 30 L80 76" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="64" cy="30" r="9" fill="#F0A257" stroke="#FFFFFF" stroke-width="4"></circle></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px">milo</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #0F1113"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M20 76 L36 38 L50 60 L64 30 L80 76" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="64" cy="30" r="9" fill="#F0A257" stroke="#FFFFFF" stroke-width="4"></circle></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #F1F2F3">milo</span></div>
+      </div>
+    </div>
+
+    <!-- D -->
+    <div style="border: 1px solid #E4E6E1; border-radius: 28px; padding: 24px; display: flex; gap: 24px; background: #FAFAF9">
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center">
+        <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+          <div style="{{s.box}}"><svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="26" stroke="#FFFFFF" stroke-width="10" opacity="0.3"></circle><circle cx="50" cy="50" r="26" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-dasharray="122.5 163.4" transform="rotate(-90 50 50)"></circle><circle cx="24" cy="50" r="9" fill="#F0A257" stroke="#FFFFFF" stroke-width="4"></circle></svg></div>
+        </sc-for>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="font-size: 20px; font-weight: 900">D · Progress O</div>
+        <div style="font-size: 14px; line-height: 1.45; color: #5E646B; font-weight: 600">The “o” of milo as a progress ring, 75% done. Simple, scalable, works in the wordmark too.</div>
+        <div style="flex: 1"></div>
+        <div style="display: flex; align-items: center; gap: 2px; padding: 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E4E6E1"><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px">mil</span><svg width="30" height="30" viewBox="0 0 100 100" fill="none" style="margin-top: 6px" aria-hidden="true"><circle cx="50" cy="50" r="34" stroke="#E4E6E1" stroke-width="16"></circle><circle cx="50" cy="50" r="34" stroke="#3346D3" stroke-width="16" stroke-linecap="round" stroke-dasharray="160 213.6" transform="rotate(-90 50 50)"></circle></svg></div>
+        <div style="display: flex; align-items: center; gap: 2px; padding: 14px; border-radius: 16px; background: #0F1113"><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #F1F2F3">mil</span><svg width="30" height="30" viewBox="0 0 100 100" fill="none" style="margin-top: 6px" aria-hidden="true"><circle cx="50" cy="50" r="34" stroke="#2A2E33" stroke-width="16"></circle><circle cx="50" cy="50" r="34" stroke="#8C9BFF" stroke-width="16" stroke-linecap="round" stroke-dasharray="160 213.6" transform="rotate(-90 50 50)"></circle></svg></div>
+      </div>
+    </div>
+
+    <!-- E -->
+    <div style="border: 1px solid #E4E6E1; border-radius: 28px; padding: 24px; display: flex; gap: 24px; background: #FAFAF9">
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center">
+        <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+          <div style="{{s.box}}"><svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" aria-hidden="true"><ellipse cx="50" cy="74" rx="27" ry="11" fill="#FFFFFF"></ellipse><ellipse cx="50" cy="55" rx="19" ry="9" fill="#FFFFFF" opacity="0.85"></ellipse><ellipse cx="50" cy="39" rx="12" ry="7.5" fill="#FFFFFF" opacity="0.7"></ellipse><circle cx="50" cy="24" r="6.5" fill="#F0A257"></circle></svg></div>
+        </sc-for>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="font-size: 20px; font-weight: 900">E · Cairn</div>
+        <div style="font-size: 14px; line-height: 1.45; color: #5E646B; font-weight: 600">Stacked stones hikers leave to mark the trail — each step builds on the last. Calm, a bit premium.</div>
+        <div style="flex: 1"></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E4E6E1"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><ellipse cx="50" cy="74" rx="27" ry="11" fill="#FFFFFF"></ellipse><ellipse cx="50" cy="55" rx="19" ry="9" fill="#FFFFFF" opacity="0.85"></ellipse><ellipse cx="50" cy="39" rx="12" ry="7.5" fill="#FFFFFF" opacity="0.7"></ellipse><circle cx="50" cy="24" r="6.5" fill="#F0A257"></circle></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px">milo</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #0F1113"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><ellipse cx="50" cy="74" rx="27" ry="11" fill="#FFFFFF"></ellipse><ellipse cx="50" cy="55" rx="19" ry="9" fill="#FFFFFF" opacity="0.85"></ellipse><ellipse cx="50" cy="39" rx="12" ry="7.5" fill="#FFFFFF" opacity="0.7"></ellipse><circle cx="50" cy="24" r="6.5" fill="#F0A257"></circle></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #F1F2F3">milo</span></div>
+      </div>
+    </div>
+
+    <!-- F -->
+    <div style="border: 1px solid #E4E6E1; border-radius: 28px; padding: 24px; display: flex; gap: 24px; background: #FAFAF9">
+      <div style="display: flex; flex-direction: column; gap: 14px; align-items: center">
+        <sc-for list="{{sizes}}" as="s" hint-placeholder-count="3">
+          <div style="{{s.box}}"><svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M12 80 L42 34 L55 52 L66 40 L88 80 Z" fill="#FFFFFF"></path><path d="M30 80 C 38 70, 46 62, 42 42" stroke="#3346D3" stroke-width="4" stroke-dasharray="1 7" stroke-linecap="round"></path><path d="M42 34 V14" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"></path><path d="M42 14 L58 19.5 L42 25 Z" fill="#F0A257"></path></svg></div>
+        </sc-for>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div style="font-size: 20px; font-weight: 900">F · Summit flag</div>
+        <div style="font-size: 14px; line-height: 1.45; color: #5E646B; font-weight: 600">A mountain with a dotted trail up to a flag. Instantly reads as “reach your goal”.</div>
+        <div style="flex: 1"></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E4E6E1"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M12 80 L42 34 L55 52 L66 40 L88 80 Z" fill="#FFFFFF"></path><path d="M42 34 V14" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"></path><path d="M42 14 L58 19.5 L42 25 Z" fill="#F0A257"></path></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px">milo</span></div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 16px; background: #0F1113"><div style="width: 40px; height: 40px; border-radius: 11px; background: #3346D3"><svg width="40" height="40" viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M12 80 L42 34 L55 52 L66 40 L88 80 Z" fill="#FFFFFF"></path><path d="M42 34 V14" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"></path><path d="M42 14 L58 19.5 L42 25 Z" fill="#F0A257"></path></svg></div><span style="font-size: 34px; font-weight: 900; letter-spacing: -1px; color: #F1F2F3">milo</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"iconColor":{"editor":"color","default":"#3346D3","options":["#3346D3","#15171A","#2F6B4F","#C2572B"]},"$preview":{"width":1840,"height":1080}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const bg = this.props.iconColor ?? '#3346D3';
+    const sizes = [[150, 34], [64, 15], [36, 9]].map((s) => ({
+      box: 'width: ' + s[0] + 'px; height: ' + s[0] + 'px; border-radius: ' + s[1] + 'px; background: ' + bg + '; box-shadow: 0 ' + Math.round(s[0] / 30) + 'px 0 rgba(0,0,0,0.12)'
+    }));
+    return { sizes };
+  }
+}
+</script>
+</body>
+</html>

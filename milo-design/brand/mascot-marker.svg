@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 200 200" role="img" aria-label="Milo the milestone marker mascot">
+          <ellipse cx="100" cy="174" rx="58" ry="7" fill="#000000" opacity="0.08"></ellipse>
+          <path d="M142 122 C 154 118, 160 110, 160 100" stroke="#2535A8" stroke-width="10" stroke-linecap="round" fill="none"></path>
+          <path d="M160 114 V58" stroke="#15171A" stroke-width="4" stroke-linecap="round"></path>
+          <path d="M160 58 L186 67 L160 76 Z" fill="#F0A257"></path>
+          <path d="M58 170 V94 a42 42 0 0 1 84 0 V170 Z" fill="#3346D3"></path>
+          <path d="M126 170 V94 a42 42 0 0 0 -12 -30 a42 42 0 0 1 28 30 V170 Z" fill="#2535A8"></path>
+          <ellipse cx="86" cy="104" rx="10" ry="11.5" fill="#FFFFFF"></ellipse>
+          <ellipse cx="114" cy="104" rx="10" ry="11.5" fill="#FFFFFF"></ellipse>
+          <circle cx="88" cy="106" r="5.5" fill="#15171A"></circle>
+          <circle cx="116" cy="106" r="5.5" fill="#15171A"></circle>
+          <ellipse cx="75" cy="124" rx="6.5" ry="3.8" fill="#F0A257" opacity="0.75"></ellipse>
+          <ellipse cx="125" cy="124" rx="6.5" ry="3.8" fill="#F0A257" opacity="0.75"></ellipse>
+          <path d="M90 126 Q100 137 110 126" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" fill="none"></path>
+          <path d="M88 154 l12 -10 12 10" stroke="#8C9BFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+          <path d="M40 170 H160" stroke="#C9CDC6" stroke-width="5" stroke-linecap="round"></path>
+        </svg>

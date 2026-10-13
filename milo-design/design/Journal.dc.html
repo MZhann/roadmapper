@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Journal and story</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="flex: 1; overflow: hidden; padding: 60px 20px 0; display: flex; flex-direction: column">
+    <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: -0.5px">Journal</h1>
+    <p style="margin: 4px 0 16px; font-size: 15px; color: #5E646B">Notes from every step — the raw material of your story.</p>
+
+    <div style="display: flex; gap: 8px">
+      <button type="button" style="padding: 8px 14px; border-radius: 999px; border: 0; background: #15171A; color: #FFFFFF; font-family: inherit; font-weight: 800; font-size: 14px">Japanese</button>
+      <button type="button" style="padding: 8px 14px; border-radius: 999px; border: 1.5px solid #E4E6E1; background: #FFFFFF; color: #3A4048; font-family: inherit; font-weight: 800; font-size: 14px">Juggling</button>
+      <button type="button" style="padding: 8px 14px; border-radius: 999px; border: 1.5px solid #E4E6E1; background: #FFFFFF; color: #3A4048; font-family: inherit; font-weight: 800; font-size: 14px">$1,000</button>
+    </div>
+
+    <div style="margin-top: 16px; padding: 16px; border-radius: 20px; background: #15171A; color: #FFFFFF; display: flex; align-items: center; gap: 14px">
+      <div style="flex: none; width: 46px; height: 46px; border-radius: 14px; background: #2A2E33; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h7v14H4zM13 5h7v14h-7z"></path><path d="M6.5 9h2M15.5 9h2M15.5 12h2"></path></svg></div>
+      <div style="flex: 1">
+        <div style="font-size: 16px; font-weight: 900">Turn it into a story</div>
+        <div style="font-size: 13px; font-weight: 700; color: #B9BEC4">Export to Storia when you finish</div>
+      </div>
+      <span style="font-size: 11px; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase; padding: 5px 8px; border-radius: 8px; background: #2A2E33; color: #D7DADE">Soon</span>
+    </div>
+
+    <div style="margin-top: 18px; display: flex; flex-direction: column">
+      <sc-for list="{{entries}}" as="e" hint-placeholder-count="3">
+        <div style="display: flex; gap: 14px">
+          <div style="display: flex; flex-direction: column; align-items: center; width: 14px">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: #3346D3; margin-top: 4px"></div>
+            <div style="flex: 1; width: 2px; background: #E4E6E1; margin: 4px 0"></div>
+          </div>
+          <div style="flex: 1; padding-bottom: 18px">
+            <div style="font-size: 12px; font-weight: 800; color: #5E646B">{{e.date}} · {{e.step}}</div>
+            <div style="margin-top: 6px; padding: 12px 14px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E4E6E1; font-size: 15px; line-height: 1.45">{{e.text}}</div>
+            <sc-if value="{{e.photo}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 8px; height: 84px; border-radius: 14px; background: #ECEEEA; border: 1.5px dashed #C9CDC6; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #5E646B">[Photo: first ramen order]</div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <nav aria-label="Main" style="height: 84px; background: #FFFFFF; border-top: 1px solid #E4E6E1; display: flex; justify-content: space-around; align-items: flex-start; padding-top: 10px; box-sizing: border-box">
+    <a href="Home.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #5E646B; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20c0-5 12-4 12-9S8 8 8 4"></path><circle cx="8" cy="4" r="1.5"></circle><circle cx="6" cy="20" r="1.5"></circle></svg>Path</a>
+    <a href="Journal.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #3346D3; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M9 9h6M9 13h4"></path></svg>Journal</a>
+    <a href="Profile.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 11px; font-weight: 800; color: #5E646B; text-decoration: none; min-width: 64px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Profile</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      entries: [
+        { date: 'Today', step: 'Step 9', text: 'Ordered ramen at home in Japanese. “Okaikei” keeps slipping — wrote it on a sticky note.', photo: true },
+        { date: 'Yesterday', step: 'Step 8', text: 'Numbers finally stick when I count my steps on walks.', photo: false },
+        { date: 'Oct 10', step: 'Step 7', text: 'Learned the difference between “sumimasen” and “gomen”.', photo: false }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Welcome</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Nunito',system-ui,sans-serif}
+a{color:#3346D3}a:hover{color:#2535A8}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F7F5; color: #15171A; display: flex; flex-direction: column; padding: 72px 24px 40px; font-family: 'Nunito', system-ui, sans-serif">
+  <div style="display: flex; align-items: center; gap: 10px">
+    <div style="width: 36px; height: 36px; border-radius: 11px; background: {{accent}}; display: flex; align-items: center; justify-content: center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 20c0-5 12-4 12-9S8 8 8 4"></path><circle cx="8" cy="4" r="1.6" fill="#FFFFFF"></circle></svg>
+    </div>
+    <span style="font-size: 22px; font-weight: 900; letter-spacing: -0.3px">Milo</span>
+  </div>
+
+  <div style="flex: 1; position: relative; margin-top: 24px">
+    <svg width="342" height="380" viewBox="0 0 342 380" fill="none" style="position: absolute; left: 0; top: 0" aria-hidden="true">
+      <path d="M90 40 C 250 60, 260 130, 200 170 S 70 250, 150 330" stroke="#D9DCD5" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"></path>
+    </svg>
+    <div style="position: absolute; left: 62px; top: 14px; width: 56px; height: 56px; border-radius: 50%; background: {{accent}}; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 0 #2535A8">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+    </div>
+    <div style="position: absolute; left: 172px; top: 138px; width: 68px; height: 68px; border-radius: 50%; background: #FFFFFF; border: 3px solid {{accent}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 0 #D9DCD5">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3346D3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"></path></svg>
+    </div>
+    <div style="position: absolute; left: 122px; top: 302px; width: 56px; height: 56px; border-radius: 50%; background: #ECEEEA; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 0 #D9DCD5">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A9097" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l6-12 4 7 2-3 4 8z"></path></svg>
+    </div>
+    <div style="position: absolute; left: 196px; top: 34px; background: #FFFFFF; border: 1px solid #E4E6E1; border-radius: 12px; padding: 8px 12px; font-size: 13px; font-weight: 700; color: #5E646B">Day 1 · done</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px">
+    <h1 style="margin: 0; font-size: 36px; line-height: 1.08; font-weight: 900; letter-spacing: -0.8px">Any goal.<br>One clear path.</h1>
+    <p style="margin: 0; font-size: 17px; line-height: 1.45; color: #5E646B">Describe what you want to achieve. Milo maps it into small daily steps you can actually finish.</p>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 32px">
+    <a href="Auth.dc.html" style="height: 56px; border-radius: 16px; background: {{accent}}; color: #FFFFFF; font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 0 #2535A8">Get started</a>
+    <a href="Auth.dc.html" style="height: 52px; border-radius: 16px; color: #15171A; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; text-decoration: none">I already have an account</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#3346D3","options":["#3346D3","#2F6B4F","#C2572B","#15171A"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#3346D3' };
+  }
+}
+</script>
+</body>
+</html>
