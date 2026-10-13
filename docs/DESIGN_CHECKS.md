@@ -58,3 +58,6 @@ Compared the path artwork, heading and stage list with Generating.dc.html at 390
 # PlanReview
 
 Compared the mobile review with PlanReview.dc.html. Unit accordions, three summary tiles, suggestion chips, revision field and fixed Start action follow the canvas. Deviations: real generated title/counts/date/summary replace samples, content scrolls, touch targets are at least 44px, and date formatting follows the device locale. Changes regenerate the complete draft; failed revisions preserve it. Starting uses a transaction with a draft UUID to prevent duplicate goals.
+# Home
+
+Checked Home.dc.html against the rendered dashboard. Matches the goal heading, streak/XP pills, indigo current-step card, progress rings and dashed new-goal action. Deviations: real counts and schedules replace example figures; completed goals and “set for today” states are shown when appropriate; a refresh action is added. Loading, empty, failed fetch and saved-draft states are implemented.
