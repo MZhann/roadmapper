@@ -21,7 +21,7 @@ export default function Questions() {
  const questions = clarification.data?.questions ?? []; const question = questions[index]; const selected = value || (question && draft?.answers[question.id]) || '';
  const next = useMutation({ mutationFn: async (skip: boolean) => {
   const answer = skip ? 'Choose a sensible default for me.' : selected.trim();
-  let updated = { ...draft!, clarification: clarification.data!, answers: question ? { ...draft!.answers, [question.id]: answer } : draft!.answers };
+  let updated = { ...draft!, plan: null, revision: draft!.revision+1, clarification: clarification.data!, answers: question ? { ...draft!.answers, [question.id]: answer } : draft!.answers };
   if (question?.kind === 'date' && !skip) { const number = Number(answer); if (Number.isInteger(number) && number >= 1 && number <= 366) updated = { ...updated, days: number }; else { const date = new Date(`${answer}T12:00:00`); const today = new Date(); today.setHours(12,0,0,0); const days = Math.round((date.getTime()-today.getTime())/86400000)+1; if (!/^\d{4}-\d{2}-\d{2}$/.test(answer) || !Number.isFinite(days) || days < 1 || days > 366) throw new Error('Choose a date within the next year (YYYY-MM-DD).'); updated = { ...updated, days }; } }
   if (question?.kind === 'minutes' && !skip) { const minutes = Number(answer); if (!Number.isInteger(minutes) || minutes < 5 || minutes > 180) throw new Error('Choose between 5 and 180 minutes.'); updated = { ...updated, minutes }; }
   await save(updated);

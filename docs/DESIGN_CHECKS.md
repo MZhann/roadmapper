@@ -76,3 +76,6 @@ Compared the journal timeline and Storia card with Journal.dc.html. Deviations: 
 # Profile
 
 Compared Profile.dc.html with the rendered stats, weekly bars and settings rows. Values now reflect completed steps and local calendar dates. Settings open accessible sheets for name/time, reminders, appearance and account actions. Deviations: the unspecified “[PRICE]/mo” is replaced by “Coming soon”; no pretend subscription is offered. Account deletion requires typing DELETE and removes private photos before the account. Legal URLs still need the owner's published policies before release.
+# DesktopRoadmap
+
+Compared the 1440 × 960 app with DesktopRoadmap.dc.html. Sidebar, responsive columns, 520px path with inline labels, current-step card, latest note and adjustment input follow the desktop canvas. The same RoadmapPath renders the desktop geometry (66/80px nodes, 86px interval). Deviations: real content and additional units are scrollable; long labels wrap; adjustments have a preview and explicit Apply action. Completed steps are preserved and stale revisions are rejected by the database.

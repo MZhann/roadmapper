@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocalSearchParams } from 'expo-router';
 import { Pressable, View } from 'react-native';
 import { Screen } from '@/components/Screen';
 import { HomeEmpty } from '@/components/HomeEmpty';
@@ -12,14 +13,15 @@ import { IconButton, TextButton } from '@/components/Buttons';
 import { useTheme } from '@/theme/ThemeProvider';
 import { fonts, radius, size, space } from '@/theme/tokens';
 import { deadlineLabel, progressOf, statsOf } from '@/domain/progress';
-import { go, goalPath, stepPath } from '@/lib/navigation';
+import { go, replace, goalPath, stepPath } from '@/lib/navigation';
 import { errorMessage } from '@/lib/supabase';
 import { useDraft } from '@/providers/DraftProvider';
 export default function Home() {
+ const {create}=useLocalSearchParams<{create?:string}>();
  const { session } = useAuth(); const profile = useProfile(session?.user.id); const goals=useGoals(); const [creating,setCreating]=useState(false); const {colors}=useTheme(); const draft=useDraft();
  if(goals.isPending) return <Screen><StateView kind="loading" title="Loading your goals…"/></Screen>;
  if(goals.isError) return <Screen><StateView kind="error" title="Couldn’t load your goals" message={errorMessage(goals.error)} action="Retry" onAction={()=>void goals.refetch()}/></Screen>;
- if(!goals.data.length||creating) return <Screen>{creating&&<IconButton name="back" label="Back to goals" onPress={()=>setCreating(false)}/>}<HomeEmpty name={profile.data?.name??'friend'} minutes={profile.data?.daily_minutes}/></Screen>;
+ if(!goals.data.length||creating||create==='1') return <Screen>{(creating||create==='1')&&<IconButton name="back" label="Back to goals" onPress={()=>{setCreating(false);replace('/');}}/>}<HomeEmpty name={profile.data?.name??'friend'} minutes={profile.data?.daily_minutes}/></Screen>;
  const stats=statsOf(goals.data); const active=goals.data.filter(g=>g.status==='active'); const completed=goals.data.filter(g=>g.status==='completed'); const today=active.map(goal=>({goal,...progressOf(goal)})).find(g=>g.current);
  return <Screen style={{paddingHorizontal:space.xxl}}>
   <View style={[layout.between,{flexWrap:'wrap'}]}><Text variant="titleSmall">Your goals</Text><View style={{flexDirection:'row',gap:space.s}}><Pill value={stats.streak}/><Pill kind="xp" value={stats.xp}/></View></View>

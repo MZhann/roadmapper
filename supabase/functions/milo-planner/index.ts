@@ -11,7 +11,20 @@ Deno.serve(async request => {
  try {
   const { client } = await authenticate(request);
   const body = await readBody(request);
-  const action = z.enum(['clarify','assess','plan','revise','help']).parse(body.action);
+  const action = z.enum(['clarify','assess','plan','revise','help','adjust']).parse(body.action);
+  const today=z.iso.date().parse(body.today??new Date().toISOString().slice(0,10));
+  if(Math.abs(Date.parse(today)-Date.parse(new Date().toISOString().slice(0,10)))>86400000)throw new ServiceError('Check your device date and try again.',400);
+  if(action==='adjust'){
+   const goalId=z.uuid().parse(body.goalId);const adjustment=z.string().trim().min(3).max(1000).parse(body.adjustment);
+   const {data:goal,error}=await client.from('goals').select('*, units(*, steps(*))').eq('id',goalId).single();if(error||!goal)throw new ServiceError('Goal not found.',404);
+   if(goal.status!=='active')throw new ServiceError('Only active goals can be adjusted.',400);
+   const steps=goal.units.flatMap((u:{steps:{id:string;status:string;title:string;minutes:number;completed_at:string|null}[]})=>u.steps);
+   const completed=steps.filter((s:{status:string})=>s.status==='done');
+   await consumeQuota(client);
+   const plan=validatePlan(await generate(planSchema,'future_roadmap',`${quality} You are revising ONLY FUTURE steps. Completed steps and notes must remain untouched; don't include them in your result. The first future day is ${today}. Preserve the goal's theme and daily budget unless the user explicitly requests a different budget. The existing deadline is ${goal.deadline}; extend only if the request requires it, and explain in summary. Subtract minutes already practiced today from day 1's budget; use day 2 if today is full. Keep the new plan within ${120-completed.length} steps.`,{goal,adjustment,today},24000,130000));
+   if(plan.units.flatMap(u=>u.steps).length+completed.length>120)throw new ServiceError('This revision adds too many steps. Request a shorter adjustment.',502);
+   return reply(request,{plan,revision:goal.revision,completed_ids:completed.map((s:{id:string})=>s.id).sort(),start:today});
+  }
   if (action === 'help') {
    const stepId = z.uuid().parse(body.stepId); const question = z.string().trim().min(1).max(1000).parse(body.question);
    const { data: step, error } = await client.from('steps').select('title, content, units(title, goals(title))').eq('id',stepId).single();
@@ -23,7 +36,7 @@ Deno.serve(async request => {
   if (Object.keys(draft.answers).length > 8) throw new ServiceError('Too many answers.',400);
   await consumeQuota(client);
   if (action === 'clarify') return reply(request, await generate(clarificationSchema,'goal_questions',`Turn the goal into a concise title and choose a theme. Ask up to five short, necessary questions covering deadline, existing experience, daily time and specific desired outcome. Do not re-ask information clearly provided in the prompt. For choice questions offer 2–4 relevant options with short descriptions and meaningful values. Use kind=date for deadline (option values are integer days, e.g. 14/30/60; custom calendar is provided by app); kind=minutes for time (option values integer minutes 5–180); otherwise choice or text. IDs must be unique. If nothing needs clarification return no questions. Default time budget is ${draft.minutes} minutes and date horizon ${draft.days} days, but ask if unclear.`, { prompt: draft.prompt },3500));
-  if (action === 'assess') return reply(request, await generate(realitySchema,'goal_feasibility',`Assess the goal honestly. Resolve requested_days and daily_minutes from the user's explicit prompt and question/answer pairs first, otherwise use defaults. Dates relative to today ${new Date().toISOString().slice(0,10)}. When a deadline is unrealistic, explain achievable reduced scope and a recommended duration without promising success. Mark unrealistic only when a material mismatch exists. A motivated beginner cannot become fluent/master a broad skill in one day. Keep explanation warm and specific, title short.`,draft,2500));
+  if (action === 'assess') return reply(request, await generate(realitySchema,'goal_feasibility',`Assess the goal honestly. Resolve requested_days and daily_minutes from the user's explicit prompt and question/answer pairs first, otherwise use defaults. Dates relative to today ${today}. When a deadline is unrealistic, explain achievable reduced scope and a recommended duration without promising success. Mark unrealistic only when a material mismatch exists. A motivated beginner cannot become fluent/master a broad skill in one day. Keep explanation warm and specific, title short.`,draft,2500));
   const adjustment = z.string().trim().max(1000).optional().parse(body.adjustment);
   const instructions = `${quality} Required days=${draft.days}, daily_minutes=${draft.minutes}. ${draft.acceptStretch ? 'The user chose to keep their short deadline; reduce scope.' : ''}`;
   const deadline = Date.now()+135000;

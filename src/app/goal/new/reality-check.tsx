@@ -13,7 +13,7 @@ import { go } from '@/lib/navigation';
 import { errorMessage } from '@/lib/supabase';
 export default function RealityCheck() {
  const { draft, save } = useDraft(); const reality = draft?.reality; const { colors } = useTheme();
- const choose = useMutation({ mutationFn: async (recommended: boolean) => { if (!draft || !reality) return; await save({ ...draft, days: recommended ? reality.recommended_days : reality.requested_days, acceptStretch: !recommended, plan: null }); go('/goal/new/generating'); } });
+ const choose = useMutation({ mutationFn: async (recommended: boolean) => { if (!draft || !reality) return; await save({ ...draft, days: recommended ? reality.recommended_days : reality.requested_days, acceptStretch: !recommended, plan: null, revision:draft.revision+1 }); go('/goal/new/generating'); } });
  if (!reality) return <Screen><StateView title="Let’s check your goal first" message="A few details help Milo suggest a realistic pace." action="Answer questions" onAction={() => go('/goal/new/questions')} /></Screen>;
  return <Screen footer={<Text variant="small" muted style={{ textAlign: 'center' }}>Either way, we’ll build the best plan for the time you choose.</Text>}>
   <View style={{ marginLeft: -space.m }}><IconButton name="back" label="Back to questions" onPress={() => go('/goal/new/questions')} /></View>
