@@ -24,6 +24,7 @@ import { plan as revisePlan } from "@/lib/planner";
 import { db, errorMessage } from "@/lib/supabase";
 import { go, replace, goalPath } from "@/lib/navigation";
 import { localDate } from "@/domain/progress";
+import { parseDate } from "@/domain/dateTime";
 export default function PlanReview() {
   const { width } = useWindowDimensions();
   const { draft, save } = useDraft();
@@ -71,8 +72,7 @@ export default function PlanReview() {
         />
       </Screen>
     );
-  const deadline = new Date();
-  deadline.setDate(deadline.getDate() + plan.days - 1);
+  const deadline = draft?.targetDate ? parseDate(draft.targetDate) : null;
   const busy = revise.isPending || start.isPending;
   if (width >= size.desktop)
     return (
@@ -226,13 +226,13 @@ export default function PlanReview() {
       >
         {[
           [plan.units.flatMap((u) => u.steps).length, "steps"],
-          [`${plan.daily_minutes} min`, "per day"],
+          [plan.units.length, "units"],
           [
-            deadline.toLocaleDateString(undefined, {
+            deadline?.toLocaleDateString(undefined, {
               month: "short",
               day: "numeric",
-            }),
-            "finish by",
+            }) ?? "Your pace",
+            deadline ? "target" : "timing",
           ],
         ].map(([value, label]) => (
           <Card

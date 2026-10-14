@@ -46,8 +46,7 @@ export function PlanUnits({ plan }: { plan: Plan }) {
             <View style={layout.flex}>
               <Text variant="card">{unit.title}</Text>
               <Text variant="small" muted>
-                {unit.steps.length} steps · days {unit.steps[0].day}–
-                {unit.steps.at(-1)!.day}
+                {unit.steps.length} steps · At your own pace
               </Text>
             </View>
             <Icon
@@ -68,7 +67,7 @@ export function PlanUnits({ plan }: { plan: Plan }) {
               {unit.steps.map((step, i) => (
                 <View key={i} style={{ flexDirection: "row", gap: space.s }}>
                   <Text variant="caption" muted>
-                    D{step.day}
+                    {i + 1}.
                   </Text>
                   <Text variant="caption" style={layout.flex}>
                     {step.title}

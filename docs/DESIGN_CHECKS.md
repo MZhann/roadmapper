@@ -116,3 +116,7 @@ Checked the mobile canvas against RealityCheck.dc.html. Deviation: suggested tar
 ### Generating revision
 Checked against Generating.dc.html at 390 x 844. Deviation: self-paced wording replaces the days-times-minutes stage; artwork, stage list and spacing remain unchanged.
 
+
+### Plan review revision
+Checked mobile review against PlanReview.dc.html at 390 x 844. Deviation: unit counts and optional target date replace a daily budget and automatic finish date; step numbers replace calendar-day labels. Existing expandable cards and controls remain unchanged.
+
