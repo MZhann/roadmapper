@@ -92,3 +92,7 @@ The required small goat is now present on Generating and RealityCheck; these pla
 ### October 14 usability update — shared controls
 Added native calendar/time pickers (browser-native equivalents on web), multi-select cards and smoothly animated progress respecting reduced motion. Compared the light/dark component gallery at 1000px. Deviation: new picker controls and checkbox states requested by the user; existing tokens retained.
 
+
+### Auth revision
+Compared the 390 x 844 code-entry screen with Auth.dc.html tokens and spacing. Deviation: email is primary and a new six-digit code stage replaces the magic-link message, per user request. Invalid/expired code retry, resend cooldown and successful session navigation pass the browser test.
+

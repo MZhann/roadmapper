@@ -70,10 +70,20 @@ export async function signIn(provider: "apple" | "google") {
     await exchangeAuthCode(code);
   }
 }
-export async function sendMagicLink(email: string) {
+export async function sendEmailCode(email: string) {
   const { error } = await db().auth.signInWithOtp({
     email: email.trim().toLowerCase(),
-    options: { emailRedirectTo: authRedirect(), shouldCreateUser: true },
+    options: { shouldCreateUser: true },
   });
   if (error) throw error;
+}
+export async function verifyEmailCode(email: string, token: string) {
+  const { data, error } = await db().auth.verifyOtp({
+    email: email.trim().toLowerCase(),
+    token,
+    type: "email",
+  });
+  if (error) throw error;
+  if (!data.session)
+    throw new Error("Please request a new code and try again.");
 }

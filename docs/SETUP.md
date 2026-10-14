@@ -57,7 +57,7 @@ Keep all provider secrets in the respective provider/Supabase configuration. The
 
 ### Email
 
-Magic-link sending and PKCE callback handling are implemented. Confirm the redirect allowlist, email template and SMTP configuration in Supabase. For reliable delivery to real users, configure your SMTP provider; email delivery and a real inbox round trip were not verified in this workspace. Open a PKCE email link on the device/browser that requested it.
+Email sign-in sends a six-digit code and verifies it inside Milo. In Supabase Authentication → Email Templates, replace both **Magic Link** and **Confirm signup** bodies with `supabase/templates/email-code.html`, and use the subject “Your Milo sign-in code”. The `{{ .Token }}` variable is required; do not use `{{ .ConfirmationURL }}`. The app provides paste/autofill, retry and a 60-second resend cooldown. Keep Supabase's email OTP length at six digits. OAuth still uses the callback allowlist above; email codes do not depend on the Site URL. Configure SMTP for reliable delivery. A real inbox round trip requires the dashboard templates to be saved and checked on the user's device.
 
 ## EAS and App Store
 
