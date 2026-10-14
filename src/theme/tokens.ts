@@ -1,4 +1,4 @@
-/** Values from DESIGN_HANDOFF.md and the inline screen canvases. */
+/** Canvas palette, with stronger path contrast requested during device review. */
 export const light = {
   background: "#F6F7F5",
   surface: "#FFFFFF",
@@ -14,6 +14,9 @@ export const light = {
   lockedNodeShadow: "#D9DCD5",
   lockedIcon: "#8A9097",
   pathDash: "#C9CDC6",
+  // Reuse palette neutrals for visible paths without changing control borders.
+  pathUpcoming: "#8A9097",
+  pathNodeOutline: "#8A9097",
   motifFaint: "#E2E4DF",
   streakBg: "#FFF3E6",
   streakText: "#8A4A0E",
@@ -49,6 +52,8 @@ export const dark: Palette = {
   lockedNodeShadow: "#15181B",
   lockedIcon: "#6C737B",
   pathDash: "#3A3F45",
+  pathUpcoming: "#9AA1A9",
+  pathNodeOutline: "#6C737B",
   motifFaint: "#262A2F",
   streakBg: "#2E2216",
   streakText: "#F0A257",

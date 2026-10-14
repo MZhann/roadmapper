@@ -24,7 +24,7 @@ export function WelcomeArt({ compact = false }: { compact?: boolean }) {
               ? "M110 30 C 240 50, 250 110, 170 130 S 90 200, 200 220"
               : "M90 40 C 250 60, 260 130, 200 170 S 70 250, 150 330"
           }
-          stroke={colors.lockedNodeShadow}
+          stroke={colors.pathUpcoming}
           strokeWidth={3}
           strokeDasharray="2 10"
           strokeLinecap="round"
@@ -68,8 +68,8 @@ export function WelcomeArt({ compact = false }: { compact?: boolean }) {
                   : i === 1
                     ? colors.surface
                     : colors.lockedNode,
-              borderColor: colors.accent,
-              borderWidth: i === 1 ? 3 : 0,
+              borderColor: i === 1 ? colors.accent : colors.pathNodeOutline,
+              borderWidth: i === 1 ? 3 : i === 2 ? 2 : 0,
               transform: [{ translateY: -5 }],
               alignItems: "center",
               justifyContent: "center",
@@ -79,10 +79,10 @@ export function WelcomeArt({ compact = false }: { compact?: boolean }) {
               name={i === 0 ? "check" : i === 1 ? "star" : "mountain"}
               color={
                 i === 0
-                  ? colors.white
+                  ? colors.onAccent
                   : i === 1
                     ? colors.accent
-                    : colors.lockedIcon
+                    : colors.muted
               }
               size={i === 1 ? 26 : 24}
             />

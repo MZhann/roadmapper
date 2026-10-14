@@ -34,7 +34,7 @@ export function MappingArt() {
       <Svg width={220} height={220} viewBox="0 0 220 220" aria-hidden>
         <Path
           d={path}
-          stroke={colors.line}
+          stroke={colors.pathUpcoming}
           strokeWidth={6}
           strokeLinecap="round"
           fill="none"

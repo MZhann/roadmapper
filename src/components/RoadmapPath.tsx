@@ -108,13 +108,12 @@ export function RoadmapPath({
           fill="none"
           stroke={colors.accent}
           strokeWidth={5}
-          opacity={0.35}
           strokeLinecap="round"
         />
         <Path
           d={curve(points.slice(Math.max(0, completedEnd)))}
           fill="none"
-          stroke={colors.pathDash}
+          stroke={colors.pathUpcoming}
           strokeWidth={4}
           strokeDasharray="1 12"
           strokeLinecap="round"
@@ -176,7 +175,7 @@ export function RoadmapPath({
                 <Text
                   variant="caption"
                   style={{
-                    color: locked ? colors.lockedIcon : colors.ink,
+                    color: locked ? colors.muted : colors.ink,
                     textAlign: p.x < width / 2 ? "left" : "right",
                   }}
                 >
@@ -220,6 +219,8 @@ export function RoadmapPath({
                 height: diameter,
                 borderRadius: radius.round,
                 backgroundColor: locked ? colors.lockedNode : colors.accent,
+                borderWidth: locked ? 2 : 0,
+                borderColor: colors.pathNodeOutline,
                 justifyContent: "center",
                 alignItems: "center",
                 transform: [
@@ -238,7 +239,7 @@ export function RoadmapPath({
                         : "lock"
                 }
                 size={state === "current" ? 30 : 26}
-                color={locked ? colors.lockedIcon : colors.white}
+                color={locked ? colors.muted : colors.onAccent}
                 stroke={state === "done" ? 3.2 : 2.2}
                 filled={state === "current"}
               />

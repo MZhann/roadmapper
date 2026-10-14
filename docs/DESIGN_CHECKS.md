@@ -159,3 +159,19 @@ Clarification follow-up: choosing a default after reviewing a plan now invalidat
 ### Updated control samples
 The final browser pass also checked the calendar and reminder controls in dark mode without horizontal overflow. Samples: [code entry](previews/auth-code.png), [multiple answers](previews/questions-multi.png), [calendar](previews/questions-date.png), [dark calendar](previews/questions-date-dark.png), [reminder time](previews/profile-reminder.png), [dark reminder time](previews/profile-reminder-dark.png), [pronunciation playback](previews/lesson-playing.png). Native picker appearance follows the operating system.
 
+### Path visibility revision
+
+Requested after iPhone review: make the paths and task nodes easier to see, especially in dark mode. The shared path components reuse existing palette neutrals through `pathUpcoming` and `pathNodeOutline`; layout, geometry and animations still follow the canvases.
+
+| Canvas / screen | Intentional deviation for visibility |
+| --- | --- |
+| Main / welcome | The dotted path uses the stronger path token instead of the node shadow. The upcoming node has a 2px outline and a clearer icon; the completed check uses `onAccent`. |
+| Onboarding / introduction | The compact shared illustration gets the same connector, outline and icon treatment. |
+| Roadmap / RoadmapDark | Completed connectors use the accent at full opacity instead of 0.35. Upcoming connectors use the stronger path token. Locked nodes have a 2px outline and muted icons; active/completed icons use `onAccent` for contrast against dark mode's light accent. |
+| DesktopRoadmap | The shared path gets the same treatment, and upcoming step labels use the readable muted text color. |
+| Generating | The animated path's underlying track uses the stronger path token instead of the faint separator color. |
+
+Verified all five screens in light and dark: 390 x 844 mobile and 1440 x 900 desktop, with no horizontal overflow or browser runtime errors. Completed, current and locked node popovers remain functional in both appearances. Reduced-motion previews retain a fully drawn generation path. Typecheck, Expo lint and the production web export passed.
+
+Updated samples: [onboarding light](previews/path-intro-light.png), [onboarding dark](previews/path-intro-dark.png), [roadmap light](previews/path-roadmap-light.png), [roadmap dark](previews/path-roadmap-dark.png). These are browser checks; the existing installed iPhone build predates this visual revision.
+
