@@ -9,7 +9,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import type { Step, ThemeId } from "@/domain/schema";
-import { localDate, stepState } from "@/domain/progress";
+import { stepState } from "@/domain/progress";
 import { useTheme } from "@/theme/ThemeProvider";
 import { motion, radius, size, space } from "@/theme/tokens";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -301,10 +301,7 @@ export function RoadmapPath({
           <Text variant="button">{selectedStep.title}</Text>
           {selectedState === "locked" ? (
             <Text variant="small" muted>
-              {selectedStep.unlock_date &&
-              selectedStep.unlock_date > localDate()
-                ? `Available ${selectedStep.unlock_date}, after the earlier steps`
-                : "Finish the steps before this to unlock"}
+              Finish the earlier steps to unlock. No waiting between steps.
             </Text>
           ) : (
             <PrimaryButton

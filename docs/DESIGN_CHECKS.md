@@ -124,3 +124,7 @@ Checked mobile review against PlanReview.dc.html at 390 x 844. Deviation: unit c
 ### Home revision
 Checked at 390 x 844 against Home.dc.html. Deviation: NEXT and At your pace replace TODAY and countdowns; goal creation no longer inherits a daily budget. Existing cards, progress ring and navigation retain canvas styling.
 
+
+### Roadmap revision
+Checked the mobile path against Roadmap.dc.html. Deviation: self-paced header and prerequisite-only lock explanation replace date-based availability. Path geometry, node states and theme tokens remain unchanged; revised-plan details no longer impose daily budgets.
+

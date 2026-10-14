@@ -3,7 +3,7 @@ import { View, useWindowDimensions } from "react-native";
 import { useGoal, useGoals } from "@/data/queries";
 import { previewGoal } from "@/data/preview";
 import { themeSchema } from "@/domain/schema";
-import { deadlineLabel, progressOf, statsOf } from "@/domain/progress";
+import { progressOf, statsOf } from "@/domain/progress";
 import { ThemeProvider, useTheme } from "@/theme/ThemeProvider";
 import { motifs } from "@/theme/motifs";
 import { size, space } from "@/theme/tokens";
@@ -118,7 +118,7 @@ function Roadmap() {
                 : `${progress.done} of ${progress.total} steps`}
             </Text>
             <Text variant="tiny" muted>
-              {deadlineLabel(goal.deadline)}
+              At your own pace
             </Text>
           </View>
         </View>

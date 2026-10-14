@@ -98,9 +98,9 @@ export function AdjustPlan({
               {generate.data.plan.summary}
             </Text>
             <Text variant="caption" muted style={{ marginBottom: space.lg }}>
-              {generate.data.plan.days} days ·{" "}
-              {generate.data.plan.daily_minutes} minutes per day. Completed
-              steps, XP and notes stay saved.
+              {generate.data.plan.units.flatMap((unit) => unit.steps).length}{" "}
+              new steps, at your own pace. Completed steps, XP and notes stay
+              saved.
             </Text>
             <PlanUnits plan={generate.data.plan} />
           </>
