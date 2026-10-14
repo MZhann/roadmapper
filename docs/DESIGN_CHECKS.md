@@ -73,3 +73,6 @@ Compared with StepComplete.dc.html. The 160px badge, 112px check, pop animation,
 # Journal
 
 Compared the journal timeline and Storia card with Journal.dc.html. Deviations: real goal names and dates replace sample chips; “All goals” is available; saved photos replace the canvas placeholder. Tapping a note opens editing, lesson review and explicit deletion confirmation. The Storia card remains labelled Soon as designed. Empty, loading, retry and unavailable-photo states are implemented.
+# Profile
+
+Compared Profile.dc.html with the rendered stats, weekly bars and settings rows. Values now reflect completed steps and local calendar dates. Settings open accessible sheets for name/time, reminders, appearance and account actions. Deviations: the unspecified “[PRICE]/mo” is replaced by “Coming soon”; no pretend subscription is offered. Account deletion requires typing DELETE and removes private photos before the account. Legal URLs still need the owner's published policies before release.
