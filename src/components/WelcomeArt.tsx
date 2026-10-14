@@ -105,7 +105,7 @@ export function WelcomeArt({ compact = false }: { compact?: boolean }) {
             }}
           >
             <Text variant="small" muted>
-              Day 1 · done
+              Step 1 · done
             </Text>
           </View>
           <View style={{ position: "absolute", right: 24, top: 280 }}>

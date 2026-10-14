@@ -148,3 +148,7 @@ Checked at 1440 x 900 against DesktopRoadmap.dc.html. Deviation: self-paced head
 ### Desktop review revision
 Checked at 1440 x 900 against DesktopCreate.dc.html. Deviation: optional target and unlimited sequential steps replace daily-time answers and day labels. Chat/review columns, cards and actions retain canvas styling.
 
+
+### Welcome consistency
+Checked at 390 x 844 against Main.dc.html. Deviation: steps at your own pace replaces daily steps, and the illustration says Step 1. Layout and art remain unchanged.
+

@@ -39,8 +39,8 @@ export default function Welcome() {
       <View style={{ gap: space.md }}>
         <Text variant="display">{"Any goal.\nOne clear path."}</Text>
         <Text variant="bodyLarge" muted>
-          Describe what you want to achieve. Milo maps it into small daily steps
-          you can actually finish.
+          Describe what you want to achieve. Milo maps it into clear steps you
+          can finish at your own pace.
         </Text>
       </View>
     </Screen>
