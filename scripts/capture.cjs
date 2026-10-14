@@ -8,7 +8,7 @@ const fs = require('node:fs');
   page.on('pageerror', error => console.error('PAGE ERROR:', error.message));
   page.on('console', message => { if (['error', 'warning'].includes(message.type())) console.log(message.type(), message.text()); });
   const pending = process.argv.includes('--pending');
-  if (process.argv.includes('--auth')) await require('./mock-session.cjs').mockSession(page, process.argv.includes('--draft') ? { draft: { ...require('./fixtures.cjs').draft, ...(pending ? { plan:null } : {}) } } : process.argv.includes('--goal') ? { goals: [require('./fixtures.cjs').goal] } : {});
+  if (process.argv.includes('--auth')) await require('./mock-session.cjs').mockSession(page, process.argv.includes('--draft') ? { draft: { ...require('./fixtures.cjs').draft, ...(pending ? { plan:null } : {}) } } : process.argv.includes('--goal') ? { goals: [require('./fixtures.cjs').goal], notes: require('./fixtures.cjs').notes } : {});
   if (pending) await page.route('**/functions/v1/milo-planner', () => new Promise(() => {}));
   await page.goto(`http://localhost:8081${process.argv[2] || '/dev/components'}`, { waitUntil: pending ? 'domcontentloaded' : 'networkidle', timeout: 120000 });
   if (pending) await page.getByText('Mapping your path',{exact:true}).waitFor();

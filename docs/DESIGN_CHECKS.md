@@ -70,3 +70,6 @@ Compared the lesson with Lesson.dc.html. Header, segmented progress, phrase card
 # StepComplete
 
 Compared with StepComplete.dc.html. The 160px badge, 112px check, pop animation, three stats and next-step card follow the canvas. Deviations: the selected goat is added as required by the handoff; actual XP/streak/progress and unlock dates replace examples. Photo selection compresses images to JPEG and stores them privately; upload failures retain the completed step. This screen rejects links to unfinished steps.
+# Journal
+
+Compared the journal timeline and Storia card with Journal.dc.html. Deviations: real goal names and dates replace sample chips; “All goals” is available; saved photos replace the canvas placeholder. Tapping a note opens editing, lesson review and explicit deletion confirmation. The Storia card remains labelled Soon as designed. Empty, loading, retry and unavailable-photo states are implemented.
