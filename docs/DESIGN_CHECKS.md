@@ -120,3 +120,7 @@ Checked against Generating.dc.html at 390 x 844. Deviation: self-paced wording r
 ### Plan review revision
 Checked mobile review against PlanReview.dc.html at 390 x 844. Deviation: unit counts and optional target date replace a daily budget and automatic finish date; step numbers replace calendar-day labels. Existing expandable cards and controls remain unchanged.
 
+
+### Home revision
+Checked at 390 x 844 against Home.dc.html. Deviation: NEXT and At your pace replace TODAY and countdowns; goal creation no longer inherits a daily budget. Existing cards, progress ring and navigation retain canvas styling.
+

@@ -12,7 +12,7 @@ import { Card, Pill, StateView, layout } from "@/components/Primitives";
 import { IconButton, TextButton } from "@/components/Buttons";
 import { useTheme } from "@/theme/ThemeProvider";
 import { fonts, radius, size, space } from "@/theme/tokens";
-import { deadlineLabel, progressOf, statsOf } from "@/domain/progress";
+import { progressOf, statsOf } from "@/domain/progress";
 import { go, replace, goalPath, stepPath } from "@/lib/navigation";
 import { errorMessage } from "@/lib/supabase";
 import { useDraft } from "@/providers/DraftProvider";
@@ -55,10 +55,7 @@ export default function Home() {
             }}
           />
         )}
-        <HomeEmpty
-          name={profile.data?.name ?? "friend"}
-          minutes={profile.data?.daily_minutes}
-        />
+        <HomeEmpty name={profile.data?.name ?? "friend"} />
       </Screen>
     );
   const stats = statsOf(goals.data);
@@ -95,7 +92,7 @@ export default function Home() {
               variant="eyebrow"
               style={{ color: colors.onAccent, opacity: 0.85, flex: 1 }}
             >
-              TODAY · STEP {today.done + 1} OF {today.total}
+              NEXT · STEP {today.done + 1} OF {today.total}
             </Text>
             <Text
               variant="small"
@@ -136,12 +133,12 @@ export default function Home() {
         <Card style={{ marginTop: space.xxl, gap: space.s }}>
           <Text variant="card">
             {active.length
-              ? "You’re set for today"
+              ? "Ready for your next goal"
               : "Look how far you’ve come"}
           </Text>
           <Text variant="bodySmall" muted>
             {active.length
-              ? "Your next steps unlock on their scheduled dates. You can revisit any completed lesson."
+              ? "You can revisit completed lessons or create another path."
               : "Your goals are complete. A new path is waiting whenever you are ready."}
           </Text>
         </Card>
@@ -193,7 +190,7 @@ export default function Home() {
                           {p.done} of {p.total} steps ·{" "}
                           {goal.status === "completed"
                             ? "Achieved"
-                            : deadlineLabel(goal.deadline)}
+                            : "At your pace"}
                         </Text>
                       </View>
                       <Icon name="next" size={18} color={colors.lockedIcon} />

@@ -15,19 +15,13 @@ const ideas = [
   ["Learn", "Know every flag in the world"],
   ["Tech", "Build my first Python script"],
 ] as const;
-export function HomeEmpty({
-  name,
-  minutes = 15,
-}: {
-  name: string;
-  minutes?: number;
-}) {
+export function HomeEmpty({ name }: { name: string }) {
   const { colors } = useTheme();
   const draft = useDraft();
   const [prompt, setPrompt] = useState("");
   const create = useMutation({
     mutationFn: async () => {
-      await draft.start(prompt, minutes);
+      await draft.start(prompt);
       go("/goal/new/questions");
     },
   });
