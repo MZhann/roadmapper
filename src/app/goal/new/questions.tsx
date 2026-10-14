@@ -115,6 +115,7 @@ export default function Questions() {
     mutationFn: async (skip: boolean) => {
       let updated = {
         ...latest.current,
+        revision: latest.current.revision + 1,
         clarification: clarification.data!,
         plan: null,
         reality: null,

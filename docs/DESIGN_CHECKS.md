@@ -152,3 +152,6 @@ Checked at 1440 x 900 against DesktopCreate.dc.html. Deviation: optional target 
 ### Welcome consistency
 Checked at 390 x 844 against Main.dc.html. Deviation: steps at your own pace replaces daily steps, and the illustration says Step 1. Layout and art remain unchanged.
 
+
+Clarification follow-up: choosing a default after reviewing a plan now invalidates the previous generation cache. Browser regression verifies the second plan uses the new answer; no visual deviation.
+

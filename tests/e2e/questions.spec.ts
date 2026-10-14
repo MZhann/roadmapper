@@ -148,3 +148,58 @@ test("quick onboarding offers a time picker and no daily time-budget input", asy
   await expect(time).toHaveValue("08:35");
   await page.screenshot({ path: ".artifacts/screens/personalize-time.png" });
 });
+
+test("choosing a default after reviewing a plan regenerates from the new answer", async ({
+  page,
+}) => {
+  const question = {
+    id: "details",
+    kind: "text",
+    question: "Anything else?",
+    why: "",
+    options: [],
+  };
+  await mockSession(page, {
+    draft: {
+      ...draft,
+      plan: null,
+      reality: null,
+      answers: { details: "Travel" },
+      clarification: { ...draft.clarification, questions: [question] },
+    },
+  });
+  const answers: string[] = [];
+  await page.route("**/functions/v1/milo-planner", (route) => {
+    const request = route.request().postDataJSON();
+    if (request.action === "assess")
+      return route.fulfill({
+        json: {
+          ...draft.reality,
+          unrealistic: false,
+          requested_days: 30,
+          recommended_days: 30,
+        },
+      });
+    answers.push(request.draft.answers.details);
+    return route.fulfill({
+      json: { ...draft.plan, title: `Generated plan ${answers.length}` },
+    });
+  });
+  await page.goto("/goal/new/questions");
+  await page
+    .getByRole("button", { name: "Build my plan", exact: true })
+    .click();
+  await expect(
+    page.getByText("Generated plan 1", { exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole("button", { name: "Back to questions", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Not sure — you decide", exact: true })
+    .click();
+  await expect(
+    page.getByText("Generated plan 2", { exact: true }),
+  ).toBeVisible();
+  expect(answers).toEqual(["Travel", "Choose a sensible default for me."]);
+});
