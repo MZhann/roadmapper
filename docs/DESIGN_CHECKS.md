@@ -64,3 +64,6 @@ Checked Home.dc.html against the rendered dashboard. Matches the goal heading, s
 # Roadmap data integration
 
 Rechecked the roadmap with actual-shaped goal records. Unit numbering now uses the database's one-based order; completed counts and streak derive from stored steps; lock messages use local dates. The sports dark preview uses the canvas's 70% progress. Goal routes now require a session, apart from the explicit development preview. Live backend checks passed plan saving, ordered completion, duplicate XP prevention, journal persistence and anonymous isolation.
+# Lesson
+
+Compared the lesson with Lesson.dc.html. Header, segmented progress, phrase cards, pronunciation actions, tip treatment, optional note and fixed completion action use the source tokens. All seven content block types render. Deviations: no fake “[AI illustration]” placeholder is shown; real image blocks have a failure fallback. Practice tasks and quizzes must be self-checked before completion. Long lessons scroll and note/checklist drafts survive reopening. Speech uses the device voice; native audio still needs a device check. AI help has its own loading and retry state.
