@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Platform, Pressable, View } from "react-native";
+import { Platform, View } from "react-native";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Screen } from "@/components/Screen";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -7,6 +7,8 @@ import { Text } from "@/components/Text";
 import { PrimaryButton } from "@/components/Buttons";
 import { Card, Input, InlineError, layout } from "@/components/Primitives";
 import { Icon } from "@/components/Icon";
+import { DateTimeField } from "@/components/DateTimeField";
+import { displayDateTime } from "@/domain/dateTime";
 import { Toggle } from "@/components/Toggle";
 import { useAuth } from "@/providers/AuthProvider";
 import { db, errorMessage } from "@/lib/supabase";
@@ -25,21 +27,20 @@ export default function Personalize() {
       ""
     ).split(" ")[0],
   );
-  const [minutes, setMinutes] = useState(15);
-  const [reminder, setReminder] = useState(Platform.OS !== "web");
+  const [time, setTime] = useState("19:00");
+  const [reminder, setReminder] = useState(false);
   const [notice, setNotice] = useState("");
   const save = useMutation({
     mutationFn: async () => {
       if (!session) throw new Error("Sign in first to save your preferences.");
       const actualReminder =
         reminder && Platform.OS !== "web"
-          ? await setDailyReminder("19:00")
+          ? await setDailyReminder(time)
           : false;
       const profile = {
         id: session.user.id,
         name: name.trim(),
-        daily_minutes: minutes,
-        reminder_time: actualReminder ? "19:00" : null,
+        reminder_time: actualReminder ? time : null,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
         onboarding_complete: true,
       };
@@ -65,7 +66,7 @@ export default function Personalize() {
             message={save.error ? errorMessage(save.error) : notice}
           />
           <PrimaryButton
-            label="Continue"
+            label="Create my first path"
             disabled={!name.trim()}
             loading={save.isPending}
             onPress={() => save.mutate()}
@@ -81,7 +82,7 @@ export default function Personalize() {
         A little about you
       </Text>
       <Text muted style={{ marginBottom: space.section }}>
-        Used to pace every plan Milo makes for you.
+        Just your name and an optional reminder. You choose your own pace.
       </Text>
       <Text
         variant="caption"
@@ -97,55 +98,6 @@ export default function Personalize() {
         onChangeText={setName}
         maxLength={60}
       />
-      <Text
-        variant="caption"
-        style={{
-          fontFamily: fonts.extraBold,
-          marginTop: space.section,
-          marginBottom: space.m,
-        }}
-      >
-        Usual time per day
-      </Text>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: space.m }}>
-        {(
-          [
-            [5, "Light"],
-            [15, "Steady"],
-            [30, "Serious"],
-            [60, "Intense"],
-          ] as const
-        ).map(([value, label]) => (
-          <Pressable
-            key={value}
-            accessibilityRole="radio"
-            accessibilityLabel={`${value} minutes, ${label}`}
-            accessibilityState={{ selected: minutes === value }}
-            onPress={() => setMinutes(value)}
-            style={{
-              width: "48%",
-              flexGrow: 1,
-              minHeight: 76,
-              justifyContent: "center",
-              paddingHorizontal: space.lg,
-              gap: space.xxs,
-              borderRadius: radius.option,
-              borderWidth: minutes === value ? 2 : 1.5,
-              borderColor: minutes === value ? colors.accent : colors.line,
-              backgroundColor:
-                minutes === value ? colors.accentSoft : colors.surface,
-              boxShadow: `0 3px 0 ${minutes === value ? colors.accent : colors.line}`,
-            }}
-          >
-            <Text style={{ fontSize: 20, fontFamily: fonts.black }}>
-              {value} min
-            </Text>
-            <Text variant="small" muted>
-              {label}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
       <Card
         style={[
           layout.row,
@@ -174,7 +126,7 @@ export default function Personalize() {
           <Text variant="caption" muted>
             {Platform.OS === "web"
               ? "Available in the mobile app"
-              : "Every day at 19:00"}
+              : `Every day at ${displayDateTime(time, "time")}`}
           </Text>
         </View>
         <Toggle
@@ -183,6 +135,17 @@ export default function Personalize() {
           onChange={setReminder}
         />
       </Card>
+      {reminder && (
+        <View style={{ marginTop: space.lg }}>
+          <DateTimeField
+            mode="time"
+            label="Reminder time"
+            value={time}
+            onChange={setTime}
+            disabled={save.isPending}
+          />
+        </View>
+      )}
     </Screen>
   );
 }

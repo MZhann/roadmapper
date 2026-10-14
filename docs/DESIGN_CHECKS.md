@@ -100,3 +100,7 @@ Compared the 390 x 844 code-entry screen with Auth.dc.html tokens and spacing. D
 ### Introduction revision
 Checked the revised welcome slide at 390 x 844 against Onboarding.dc.html. Deviation: welcoming quick-setup copy, back navigation between slides, and self-paced learning replace daily-budget and one-step-per-day copy, per user request. Original art, cards and theme tokens retained.
 
+
+### Personalization revision
+Checked at 390 x 844 against Personalize.dc.html. Deviation: removed daily time-budget cards, made reminders opt-in, and added the shared time picker when enabled. This follows the user's request; name input, card treatment and tokens are retained.
+
