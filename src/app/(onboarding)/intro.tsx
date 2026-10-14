@@ -13,16 +13,16 @@ import { WelcomeArt } from "@/components/WelcomeArt";
 import { replace } from "@/lib/navigation";
 const slides = [
   [
-    "Say it in one sentence",
-    "Languages, sport, money, art, code, habits — any goal you can describe.",
+    "Welcome to Milo",
+    "A quick introduction, then your first goal. Answer a few simple questions and we’ll turn it into a clear path.",
   ],
   [
     "Answer a few questions",
-    "Your deadline, level and daily time shape a plan that fits your real life.",
+    "Tell us where you’re starting and what you want to achieve. You can go back and change any answer.",
   ],
   [
-    "Walk the path, one step a day",
-    "Finish short steps, keep your streak, and write notes that become your success story.",
+    "Move at your own pace",
+    "Finish a step and the next one is ready. Keep going as long as you like, and save notes along the way.",
   ],
 ];
 export default function Intro() {
@@ -32,12 +32,21 @@ export default function Intro() {
   return (
     <Screen
       footer={
-        <PrimaryButton
-          label={index === 2 ? "Let's begin" : "Continue"}
-          onPress={() =>
-            index === 2 ? replace("/personalize") : setIndex(index + 1)
-          }
-        />
+        <>
+          <PrimaryButton
+            label={index === 2 ? "Let's begin" : "Continue"}
+            onPress={() =>
+              index === 2 ? replace("/personalize") : setIndex(index + 1)
+            }
+          />
+          {index > 0 && (
+            <TextButton
+              label="Back"
+              muted
+              onPress={() => setIndex(index - 1)}
+            />
+          )}
+        </>
       }
     >
       <View style={layout.between}>
@@ -121,7 +130,7 @@ export default function Intro() {
                 marginTop: space.s,
               }}
             >
-              <Text>How much time can you give it each day?</Text>
+              <Text>What would you like to use Japanese for?</Text>
             </Card>
           </View>
         ) : (

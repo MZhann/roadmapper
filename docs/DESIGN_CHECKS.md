@@ -96,3 +96,7 @@ Added native calendar/time pickers (browser-native equivalents on web), multi-se
 ### Auth revision
 Compared the 390 x 844 code-entry screen with Auth.dc.html tokens and spacing. Deviation: email is primary and a new six-digit code stage replaces the magic-link message, per user request. Invalid/expired code retry, resend cooldown and successful session navigation pass the browser test.
 
+
+### Introduction revision
+Checked the revised welcome slide at 390 x 844 against Onboarding.dc.html. Deviation: welcoming quick-setup copy, back navigation between slides, and self-paced learning replace daily-budget and one-step-per-day copy, per user request. Original art, cards and theme tokens retained.
+
