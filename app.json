@@ -36,7 +36,9 @@
           "dark": { "backgroundColor": "#0F1113" }
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      "expo-notifications",
+      ["expo-image-picker", { "photosPermission": "Allow Milo to add photos you choose to your private journal.", "cameraPermission": false, "microphonePermission": false }]
     ],
     "experiments": {
       "typedRoutes": true,

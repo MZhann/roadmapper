@@ -67,3 +67,6 @@ Rechecked the roadmap with actual-shaped goal records. Unit numbering now uses t
 # Lesson
 
 Compared the lesson with Lesson.dc.html. Header, segmented progress, phrase cards, pronunciation actions, tip treatment, optional note and fixed completion action use the source tokens. All seven content block types render. Deviations: no fake “[AI illustration]” placeholder is shown; real image blocks have a failure fallback. Practice tasks and quizzes must be self-checked before completion. Long lessons scroll and note/checklist drafts survive reopening. Speech uses the device voice; native audio still needs a device check. AI help has its own loading and retry state.
+# StepComplete
+
+Compared with StepComplete.dc.html. The 160px badge, 112px check, pop animation, three stats and next-step card follow the canvas. Deviations: the selected goat is added as required by the handoff; actual XP/streak/progress and unlock dates replace examples. Photo selection compresses images to JPEG and stores them privately; upload failures retain the completed step. This screen rejects links to unfinished steps.
