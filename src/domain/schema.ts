@@ -158,17 +158,10 @@ export function validatePlan(plan: unknown): Plan {
   if (steps.length > 120)
     throw new Error("The plan is too long. Please use at most 120 steps.");
   let previousDay = 0;
-  let dailyMinutes = 0;
   for (const step of steps) {
     if (step.day < previousDay || step.day > result.days)
       throw new Error(
         "The plan has an inconsistent schedule. Please regenerate it.",
-      );
-    if (previousDay !== step.day) dailyMinutes = 0;
-    dailyMinutes += step.minutes;
-    if (dailyMinutes > result.daily_minutes)
-      throw new Error(
-        "The plan exceeds your daily time budget. Please regenerate it.",
       );
     previousDay = step.day;
     for (const block of step.content)

@@ -36,10 +36,10 @@ const plan: Plan = {
 const copy = () => structuredClone(plan);
 test("validates an actionable plan", () =>
   assert.equal(validatePlan(plan).units[0].steps.length, 2));
-test("rejects daily overload even across unit boundaries", () => {
+test("accepts multiple steps beyond the legacy daily budget", () => {
   const p = copy();
   p.units.push({ title: "More", steps: [{ ...step, day: 2, minutes: 10 }] });
-  assert.throws(() => validatePlan(p), /daily time budget/);
+  assert.equal(validatePlan(p).units.length, 2);
 });
 test("rejects nonmonotonic and out-of-range schedules", () => {
   const p = copy();
@@ -130,14 +130,16 @@ function goal(): Goal {
     ],
   };
 }
-test("unlocks only the first unfinished eligible step", () => {
+test("unlocks the next unfinished step immediately, regardless of its old date", () => {
   const steps = stepsOf(goal());
   assert.deepEqual(
-    steps.map((s) => stepState(s, steps, "2026-10-14")),
+    steps.map((s) => stepState(s, steps)),
     ["done", "current", "locked"],
   );
   steps[1].unlock_date = "2026-10-15";
-  assert.equal(stepState(steps[1], steps, "2026-10-14"), "locked");
+  assert.equal(stepState(steps[1], steps), "current");
+  steps[1].status = "done";
+  assert.equal(stepState(steps[2], steps), "current");
 });
 test("sorts database relations without mutating them", () => {
   const g = goal();

@@ -10,10 +10,8 @@ export function localDate(date = new Date()): string {
 export function stepState(
   step: Step,
   steps: Step[],
-  today = localDate(),
 ): "done" | "current" | "locked" {
   if (step.status === "done") return "done";
-  if (step.unlock_date && step.unlock_date > today) return "locked";
   return steps.find((s) => s.status !== "done")?.id === step.id
     ? "current"
     : "locked";
