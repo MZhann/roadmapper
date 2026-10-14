@@ -88,7 +88,7 @@ export default function Generating() {
       >
         {[
           "Understood your goal",
-          `Sized to ${draft!.days} days × ${draft!.minutes} min`,
+          "Designed for your own pace",
           "Splitting into units and steps",
           "Writing your lessons",
         ].map((label, i) => (

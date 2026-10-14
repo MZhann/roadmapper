@@ -112,3 +112,7 @@ Compared multi-select/custom-answer and calendar screens at 390 x 844 with Clari
 ### Reality check revision
 Checked the mobile canvas against RealityCheck.dc.html. Deviation: suggested targets no longer prescribe minutes per day; choosing a suggested target also updates the stored calendar date. Existing card styling is unchanged.
 
+
+### Generating revision
+Checked against Generating.dc.html at 390 x 844. Deviation: self-paced wording replaces the days-times-minutes stage; artwork, stage list and spacing remain unchanged.
+
