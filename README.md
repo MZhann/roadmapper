@@ -23,11 +23,22 @@ Apple/Google provider credentials, public legal pages, and an EAS/Apple signing 
 
 ## Phone development
 
-The native integrations require a development build. `eas.json` includes development, simulator, preview and production profiles.
+EAS cloud builds can be started from Windows or macOS; a Mac is not required to install Milo on an iPhone. The project is linked to [@zhanbo04/milo](https://expo.dev/accounts/zhanbo04/projects/milo). `eas.json` includes development, simulator, preview and production profiles.
+
+For a standalone iPhone test, register the device and create a preview build. This requires a paid Apple Developer membership. The two public Supabase values are configured in the project's EAS **preview** environment.
 
 ```sh
 npx eas-cli@latest login
-npx eas-cli@latest init
+npx eas-cli@latest device:create
+npx eas-cli@latest build --platform ios --profile preview
+```
+
+Open the registration link in Safari on the iPhone and follow the profile instructions before building. Let EAS manage Apple signing, select the registered iPhone, then open the completed build's installation link on that phone. Enable Settings → Privacy & Security → Developer Mode and restart when prompted. The preview app runs without a development server. Use email sign-in until the Apple/Google providers are configured, and allow `milo://auth/callback` in Supabase Authentication → URL Configuration.
+
+For live code changes, use a development build instead:
+
+```sh
+npx eas-cli@latest login
 # Add the EXPO_PUBLIC_* values to the EAS development environment first.
 npx eas-cli@latest build --platform ios --profile development
 npx expo start --dev-client

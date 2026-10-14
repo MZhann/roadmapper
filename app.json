@@ -11,7 +11,9 @@
       "supportsTablet": true,
       "usesAppleSignIn": true,
       "bundleIdentifier": "app.milo.roadmapper",
-      "infoPlist": { "ITSAppUsesNonExemptEncryption": false }
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -33,16 +35,32 @@
           "backgroundColor": "#F6F7F5",
           "image": "./assets/images/milo-icon.png",
           "imageWidth": 76,
-          "dark": { "backgroundColor": "#0F1113" }
+          "dark": {
+            "backgroundColor": "#0F1113"
+          }
         }
       ],
       "expo-secure-store",
       "expo-notifications",
-      ["expo-image-picker", { "photosPermission": "Allow Milo to add photos you choose to your private journal.", "cameraPermission": false, "microphonePermission": false }]
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Milo to add photos you choose to your private journal.",
+          "cameraPermission": false,
+          "microphonePermission": false
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "216f5ee1-bb99-40a6-89e2-a6bcf795f6f4"
+      }
+    },
+    "owner": "zhanbo04"
   }
 }

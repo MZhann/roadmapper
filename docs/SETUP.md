@@ -61,7 +61,20 @@ Magic-link sending and PKCE callback handling are implemented. Confirm the redir
 
 ## EAS and App Store
 
-Run `npx eas-cli@latest login` and `npx eas-cli@latest init` on the Mac. Add public environment variables for development, preview and production. EAS will manage signing after you authenticate your Apple Developer account; this workspace did not have that signing session.
+Cloud builds work from Windows or macOS. The repository is linked to [@zhanbo04/milo](https://expo.dev/accounts/zhanbo04/projects/milo), project ID `216f5ee1-bb99-40a6-89e2-a6bcf795f6f4`. Run `npx eas-cli@latest login` with an account that has access; you do not need to initialize a new project.
+
+The two public Supabase values are configured in EAS's **preview** environment. Add them separately to development/production before using those profiles. EAS will manage signing after you authenticate your Apple Developer account. For an installed iPhone preview:
+
+```sh
+npx eas-cli@latest device:create
+npx eas-cli@latest build --platform ios --profile preview
+```
+
+Choose website registration and open the link in Safari on the iPhone. Follow the profile installation instructions, select that device when building, and install from the finished build's link. A paid Apple Developer membership and iPhone Developer Mode are required. The preview build runs independently of Metro. See [internal distribution](https://docs.expo.dev/build/internal-distribution/) and [Developer Mode](https://docs.expo.dev/guides/ios-developer-mode/).
+
+`.easignore` keeps local environment files, signing material, editor/agent settings, QA artifacts and reference canvases out of the upload. It preserves the brand SVG files imported by the app. When changing `.gitignore`, keep its exclusions synchronized with `.easignore`.
+
+For a store build, after native testing:
 
 ```sh
 npx eas-cli@latest build --platform ios --profile production

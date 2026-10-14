@@ -1,0 +1,41 @@
+# Keep the exclusions in .gitignore when updating this file.
+node_modules/
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+.metro-health-check*
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.DS_Store
+*.pem
+.env*.local
+.env
+.env.*
+!.env.example
+!supabase/.env.example
+test-results/
+playwright-report/
+.artifacts/
+*.tsbuildinfo
+example
+/ios
+/android
+
+# Local editor/agent settings and signing credentials must stay on this machine.
+/.claude
+/.vscode
+/credentials.json
+
+# Reference canvases and documentation are not needed by the native build.
+# Keep milo-design/brand: the Logo and Mascot components import its SVG files.
+/milo-design/design
+/docs
