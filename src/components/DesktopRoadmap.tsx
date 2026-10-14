@@ -75,11 +75,7 @@ export function DesktopRoadmap({
               </MotifBox>
               <View style={{ flex: 1, minWidth: 200 }}>
                 <Text variant="small" muted>
-                  {motifs[goal.theme_id].label} · finish by{" "}
-                  {new Date(`${goal.deadline}T12:00:00`).toLocaleDateString(
-                    undefined,
-                    { month: "short", day: "numeric" },
-                  )}
+                  {motifs[goal.theme_id].label} · At your own pace
                 </Text>
                 <Text variant="title" style={{ marginTop: space.xxs }}>
                   {goal.title}
@@ -167,7 +163,7 @@ export function DesktopRoadmap({
                 {progress.current?.content.find((b) => b.type === "text")
                   ?.text ??
                   (progress.next
-                    ? `Available ${progress.next.unlock_date}`
+                    ? "Ready as soon as you finish the earlier steps."
                     : "Take a moment to look back at your progress.")}
               </Text>
               {progress.current && (

@@ -140,3 +140,7 @@ Checked at 390 x 844 against StepComplete.dc.html. Deviation: Ready now and a di
 ### Profile revision
 Checked reminder sheet at 390 x 844 against Profile.dc.html styling. Deviation: the shared time picker replaces HH:mm text entry, the time remains selected when toggled off/on, and settings no longer request daily minutes. Browser regression passes; phone notification scheduling remains a native-device check.
 
+
+### Desktop roadmap revision
+Checked at 1440 x 900 against DesktopRoadmap.dc.html. Deviation: self-paced header and prerequisite wording replace finish-by and availability dates. Sidebar, path and right-hand panels retain their original layout.
+
