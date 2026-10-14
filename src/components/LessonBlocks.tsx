@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Pressable, View } from "react-native";
+import { useState } from "react";
+import { ActivityIndicator, Pressable, View } from "react-native";
 import { Image } from "expo-image";
-import * as Speech from "expo-speech";
+import { usePronunciation } from "@/hooks/usePronunciation";
 import type { ContentBlock } from "@/domain/schema";
 import type { LessonDraft } from "@/hooks/useLessonDraft";
 import { useTheme } from "@/theme/ThemeProvider";
@@ -53,33 +53,12 @@ export function LessonBlocks({
   readOnly?: boolean;
 }) {
   const { colors } = useTheme();
-  const [speechError, setSpeechError] = useState("");
-  useEffect(
-    () => () => {
-      void Speech.stop();
-    },
-    [],
-  );
-  const speak = async (block: Extract<ContentBlock, { type: "phrase" }>) => {
-    try {
-      setSpeechError("");
-      await Speech.stop();
-      Speech.speak(block.text, {
-        language: block.language,
-        rate: 0.85,
-        onError: () =>
-          setSpeechError(
-            "Pronunciation is unavailable. Check your volume, silent mode and installed voices.",
-          ),
-      });
-    } catch {
-      setSpeechError("Pronunciation is unavailable on this device.");
-    }
-  };
+  const speech = usePronunciation();
   const check = (key: string, label: string) => (
     <Pressable
       key={key}
       accessibilityRole="checkbox"
+      aria-checked={readOnly || !!value.checks[key]}
       accessibilityState={{ checked: readOnly || !!value.checks[key] }}
       onPress={() => {
         if (!readOnly)
@@ -139,8 +118,9 @@ export function LessonBlocks({
             >
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel={`Play pronunciation: ${block.romanization || block.text}`}
-                onPress={() => void speak(block)}
+                accessibilityLabel={`${speech.playing === i || speech.loading === i ? "Stop" : "Play"} pronunciation: ${block.romanization || block.text}`}
+                aria-busy={speech.loading === i}
+                onPress={() => void speech.speak(block, i)}
                 style={{
                   width: 44,
                   height: 44,
@@ -150,12 +130,20 @@ export function LessonBlocks({
                   justifyContent: "center",
                 }}
               >
-                <Icon name="sound" size={20} color={colors.accent} />
+                {speech.loading === i ? (
+                  <ActivityIndicator color={colors.accent} />
+                ) : (
+                  <Icon
+                    name={speech.playing === i ? "stop" : "sound"}
+                    size={20}
+                    color={colors.accent}
+                  />
+                )}
               </Pressable>
               <View style={layout.flex}>
                 <Text
                   style={{
-                    fontFamily: block.language.startsWith("ja")
+                    fontFamily: /^(ja|jp|japanese|日本語)/i.test(block.language)
                       ? fonts.japanese
                       : fonts.bold,
                     fontSize: 17,
@@ -166,6 +154,15 @@ export function LessonBlocks({
                 <Text variant="caption" muted>
                   {block.romanization} — {block.translation}
                 </Text>
+                {speech.playing === i && (
+                  <Text
+                    variant="tiny"
+                    style={{ color: colors.accent }}
+                    accessibilityLiveRegion="polite"
+                  >
+                    Playing pronunciation
+                  </Text>
+                )}
               </View>
             </Card>
           );
@@ -245,7 +242,7 @@ export function LessonBlocks({
           </Card>
         );
       })}
-      <InlineError message={speechError} />
+      <InlineError message={speech.error} />
     </View>
   );
 }

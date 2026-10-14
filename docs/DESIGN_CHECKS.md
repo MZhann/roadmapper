@@ -128,3 +128,7 @@ Checked at 390 x 844 against Home.dc.html. Deviation: NEXT and At your pace repl
 ### Roadmap revision
 Checked the mobile path against Roadmap.dc.html. Deviation: self-paced header and prerequisite-only lock explanation replace date-based availability. Path geometry, node states and theme tokens remain unchanged; revised-plan details no longer impose daily budgets.
 
+
+### Lesson revision
+Checked lesson and playing-pronunciation states at 390 x 844 against Lesson.dc.html. Deviation: sound controls now show loading, stop and playback status; Japanese language aliases resolve to ja-JP. iOS uses a playback session with silent-mode support. Browser tests cover language/voice selection, stop and failure feedback; actual iPhone sound remains a device check. Date-lock messaging is removed.
+

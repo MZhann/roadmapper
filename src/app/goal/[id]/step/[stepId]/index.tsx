@@ -80,7 +80,7 @@ export default function Lesson() {
       <Screen>
         <StateView
           title="One step at a time"
-          message={`Finish earlier steps first. This lesson is scheduled for ${step.unlock_date ?? "later"}.`}
+          message="Finish the earlier steps first. Each next step is ready immediately."
           action="Back to your path"
           onAction={() => replace(goalPath(id))}
         />
