@@ -132,3 +132,7 @@ Checked the mobile path against Roadmap.dc.html. Deviation: self-paced header an
 ### Lesson revision
 Checked lesson and playing-pronunciation states at 390 x 844 against Lesson.dc.html. Deviation: sound controls now show loading, stop and playback status; Japanese language aliases resolve to ja-JP. iOS uses a playback session with silent-mode support. Browser tests cover language/voice selection, stop and failure feedback; actual iPhone sound remains a device check. Date-lock messaging is removed.
 
+
+### Step completion revision
+Checked at 390 x 844 against StepComplete.dc.html. Deviation: Ready now and a direct Continue learning action replace the tomorrow lock. The completion badge and statistics retain the canvas styling. Browser regression completed two future-dated steps consecutively and opened the third.
+

@@ -10,7 +10,7 @@ import { Icon } from "@/components/Icon";
 import { useGoal, useGoals } from "@/data/queries";
 import { useAuth } from "@/providers/AuthProvider";
 import { progressOf, statsOf } from "@/domain/progress";
-import { goalPath, replace, go } from "@/lib/navigation";
+import { goalPath, stepPath, replace, go } from "@/lib/navigation";
 import { addStoryPhoto } from "@/lib/photos";
 import { errorMessage } from "@/lib/supabase";
 import { useTheme } from "@/theme/ThemeProvider";
@@ -78,8 +78,16 @@ export default function StepComplete() {
             message={photo.error ? errorMessage(photo.error) : null}
           />
           <PrimaryButton
-            label="Continue"
-            onPress={() => replace(goalPath(id))}
+            label={
+              progress?.current ? "Continue learning" : "Back to your path"
+            }
+            onPress={() =>
+              replace(
+                progress?.current
+                  ? stepPath(id, progress.current.id)
+                  : goalPath(id),
+              )
+            }
           />
           <SecondaryButton
             icon="camera"
@@ -159,22 +167,16 @@ export default function StepComplete() {
               width: 40,
               height: 40,
               borderRadius: radius.round,
-              backgroundColor: colors.lockedNode,
+              backgroundColor: colors.accentSoft,
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <Icon
-              name={progress!.current ? "star" : "lock"}
-              size={18}
-              color={colors.lockedIcon}
-            />
+            <Icon name="star" size={18} color={colors.accent} />
           </View>
           <View style={layout.flex}>
             <Text variant="tiny" muted>
-              {progress!.current
-                ? "Ready when you are"
-                : `Unlocks ${progress!.next.unlock_date}`}
+              Ready now · Keep going whenever you like
             </Text>
             <Text variant="bodySmall" style={{ fontFamily: fonts.extraBold }}>
               {progress!.next.title}
