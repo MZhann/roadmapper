@@ -1,6 +1,6 @@
 # Milo
 
-An iOS-first Expo app that turns a goal into an AI-generated path, daily practice, and a private progress journal. Built from the Quiet Ambition canvases in `milo-design/`.
+An iOS-first Expo app that turns a goal into an AI-generated path, self-paced practice, and a private progress journal. Built from the Quiet Ambition canvases in `milo-design/`.
 
 ## Continue on your Mac
 
@@ -25,7 +25,7 @@ Apple/Google provider credentials and public legal pages are still needed before
 
 EAS cloud builds can be started from Windows or macOS; a Mac is not required to install Milo on an iPhone. The project is linked to [@zhanbo04/milo](https://expo.dev/accounts/zhanbo04/projects/milo). `eas.json` includes development, simulator, preview and production profiles.
 
-The first signed iPhone preview, **1.0.0 (1)**, is [ready to install](https://expo.dev/accounts/zhanbo04/projects/milo/builds/25b7fe68-67f1-4352-9c4d-822d5eb4c87a) on the registered iPhone. Open that page in Safari and tap Install. Newly registered devices require a new build or re-signing before they can install it.
+The updated signed iPhone preview, **1.0.0 (2)**, is [ready to install](https://expo.dev/accounts/zhanbo04/projects/milo/builds/88a5b018-5ede-43b3-ab2e-d78c869e869b) on the registered iPhone. Open that page in Safari and tap Install. Newly registered devices require a new build or re-signing before they can install it.
 
 For a standalone iPhone test, register the device and create a preview build. This requires a paid Apple Developer membership. The two public Supabase values are configured in the project's EAS **preview** environment.
 
@@ -35,7 +35,7 @@ npx eas-cli@latest device:create
 npx eas-cli@latest build --platform ios --profile preview
 ```
 
-Open the registration link in Safari on the iPhone and follow the profile instructions before building. Let EAS manage Apple signing, select the registered iPhone, then open the completed build's installation link on that phone. Enable Settings → Privacy & Security → Developer Mode and restart when prompted. The preview app runs without a development server. Use email sign-in until the Apple/Google providers are configured, and allow `milo://auth/callback` in Supabase Authentication → URL Configuration.
+Open the registration link in Safari on the iPhone and follow the profile instructions before building. Let EAS manage Apple signing, select the registered iPhone, then open the completed build's installation link on that phone. Enable Settings → Privacy & Security → Developer Mode and restart when prompted. The preview app runs without a development server. Use email-code sign-in after applying the [email templates](docs/SETUP.md#email). Apple/Google OAuth still needs provider configuration and the `milo://auth/callback` redirect allowlist.
 
 For live code changes, use a development build instead:
 
@@ -66,7 +66,7 @@ Browser tests mock Supabase and AI and do not incur API charges. GitHub Actions 
 - `src/app/`: Expo Router screens, in handoff screen order.
 - `src/theme/`: exact light/dark tokens, seven category motifs, and the single brand selection.
 - `src/components/`: shared controls, winding roadmap, lesson blocks, desktop layouts.
-- `src/domain/`: validated AI schema, schedules, progress and streak calculations.
+- `src/domain/`: validated AI schema, date/time helpers, progress and streak calculations.
 - `supabase/`: additive migrations, authenticated AI and account-deletion Edge Functions.
 - `tests/`: plan/progress regressions and browser flows.
 - [Design checks](docs/DESIGN_CHECKS.md): per-screen comparisons and explicit deviations.

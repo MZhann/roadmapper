@@ -155,3 +155,7 @@ Checked at 390 x 844 against Main.dc.html. Deviation: steps at your own pace rep
 
 Clarification follow-up: choosing a default after reviewing a plan now invalidates the previous generation cache. Browser regression verifies the second plan uses the new answer; no visual deviation.
 
+
+### Updated control samples
+The final browser pass also checked the calendar and reminder controls in dark mode without horizontal overflow. Samples: [code entry](previews/auth-code.png), [multiple answers](previews/questions-multi.png), [calendar](previews/questions-date.png), [dark calendar](previews/questions-date-dark.png), [reminder time](previews/profile-reminder.png), [dark reminder time](previews/profile-reminder-dark.png), [pronunciation playback](previews/lesson-playing.png). Native picker appearance follows the operating system.
+
