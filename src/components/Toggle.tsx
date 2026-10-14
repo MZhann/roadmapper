@@ -15,6 +15,7 @@ export function Toggle({
   return (
     <Pressable
       accessibilityRole="switch"
+      aria-checked={value}
       accessibilityLabel={label}
       accessibilityState={{ checked: value }}
       onPress={() => {

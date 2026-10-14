@@ -2,7 +2,7 @@
 const userId = "11111111-1111-4111-8111-111111111111";
 async function mockSession(
   page,
-  { goals = [], notes = [], draft = null } = {},
+  { goals = [], notes = [], draft = null, profile = {} } = {},
 ) {
   try {
     process.loadEnvFile(".env.local");
@@ -32,7 +32,7 @@ async function mockSession(
           user,
         }),
       );
-      if (draft)
+      if (draft && !localStorage.getItem(`milo.draft.${userId}`))
         localStorage.setItem(`milo.draft.${userId}`, JSON.stringify(draft));
     },
     { ref, userId, draft },
@@ -48,6 +48,7 @@ async function mockSession(
           timezone: "UTC",
           onboarding_complete: true,
           created_at: "2026-10-01T00:00:00Z",
+          ...profile,
         }
       : path.endsWith("/goals")
         ? new URL(route.request().url()).searchParams.has("id")

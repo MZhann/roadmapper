@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
   type PropsWithChildren,
 } from "react";
@@ -16,12 +17,13 @@ type State = {
   loading: boolean;
   error: string | null;
   save: (draft: Draft | null) => Promise<void>;
-  start: (prompt: string, minutes: number) => Promise<void>;
+  start: (prompt: string, minutes?: number) => Promise<void>;
 };
 const Context = createContext<State | null>(null);
 export function DraftProvider({ children }: PropsWithChildren) {
   const { session } = useAuth();
   const key = `milo.draft.${session?.user.id ?? "guest"}`;
+  const writes = useRef(Promise.resolve());
   const [record, setRecord] = useState<{
     key: string;
     draft: Draft | null;
@@ -52,24 +54,30 @@ export function DraftProvider({ children }: PropsWithChildren) {
   }, [key]);
   const save = useCallback(
     async (draft: Draft | null) => {
-      if (draft)
-        await AsyncStorage.setItem(
-          key,
-          JSON.stringify(draftSchema.parse(draft)),
-        );
-      else await AsyncStorage.removeItem(key);
-      setRecord({ key, draft, error: null });
+      const parsed = draft ? draftSchema.parse(draft) : null;
+      setRecord({ key, draft: parsed, error: null });
+      // Serialize writes so quick taps/typing cannot restore an older answer.
+      const write = writes.current.then(() =>
+        parsed
+          ? AsyncStorage.setItem(key, JSON.stringify(parsed))
+          : AsyncStorage.removeItem(key),
+      );
+      writes.current = write.catch(() => {});
+      await write;
     },
     [key],
   );
   const start = useCallback(
-    (prompt: string, minutes: number) =>
+    (prompt: string, minutes = 15) =>
       save({
         id: randomUUID(),
         prompt: prompt.trim(),
         minutes,
         days: 30,
         answers: {},
+        questionAnswers: {},
+        questionIndex: 0,
+        targetDate: null,
         clarification: null,
         reality: null,
         plan: null,

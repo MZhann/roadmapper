@@ -42,7 +42,7 @@ const fs = require("node:fs");
         () => new Promise(() => {}),
       );
     await page.goto(
-      `http://localhost:8081${process.argv[2] || "/dev/components"}`,
+      `${process.env.MILO_TEST_URL || "http://localhost:8081"}${process.argv[2] || "/dev/components"}`,
       {
         waitUntil: pending ? "domcontentloaded" : "networkidle",
         timeout: 120000,

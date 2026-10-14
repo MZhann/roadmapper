@@ -3,6 +3,7 @@ import { useTheme } from "@/theme/ThemeProvider";
 import { radius, size, space } from "@/theme/tokens";
 import { haptic } from "@/lib/haptics";
 import { Text } from "./Text";
+import { Icon } from "./Icon";
 export function OptionCard({
   title,
   description,
@@ -37,6 +38,7 @@ export function OptionCard({
     >
       <Pressable
         accessibilityRole={multiple ? "checkbox" : radio ? "radio" : "button"}
+        aria-checked={radio || multiple ? selected : undefined}
         accessibilityState={{
           checked: radio || multiple ? selected : undefined,
           disabled,
@@ -65,12 +67,22 @@ export function OptionCard({
               width: size.radio,
               height: size.radio,
               borderRadius: multiple ? radius.xs : radius.round,
-              borderWidth: selected ? 7 : 2,
+              borderWidth: multiple ? 2 : selected ? 7 : 2,
               borderColor: selected ? colors.accent : colors.pathDash,
-              backgroundColor: selected ? colors.white : colors.transparent,
+              backgroundColor: selected
+                ? multiple
+                  ? colors.accent
+                  : colors.white
+                : colors.transparent,
               alignSelf: "center",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          />
+          >
+            {multiple && selected && (
+              <Icon name="check" size={16} color={colors.onAccent} />
+            )}
+          </View>
         )}
         <View style={{ flex: 1, gap: space.xxs }}>
           <Text variant={radio ? "card" : "unit"}>{title}</Text>
