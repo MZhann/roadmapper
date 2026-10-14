@@ -1,4 +1,5 @@
 import { ScrollView, View } from "react-native";
+import { parseDate } from "@/domain/dateTime";
 import type { Draft } from "@/domain/draft";
 import { useTheme } from "@/theme/ThemeProvider";
 import { motifs } from "@/theme/motifs";
@@ -32,12 +33,12 @@ export function DesktopCreate({
   const { colors } = useTheme();
   const plan = draft.plan!;
   const count = plan.units.flatMap((u) => u.steps).length;
-  const date = new Date();
-  date.setDate(date.getDate() + plan.days - 1);
-  const deadline = date.toLocaleDateString(undefined, {
-    month: "short",
-    day: "numeric",
-  });
+  const deadline = draft.targetDate
+    ? parseDate(draft.targetDate)?.toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+      })
+    : null;
   const bubble = (text: string, user = false, key?: string) => (
     <View
       key={key}
@@ -65,8 +66,8 @@ export function DesktopCreate({
     </View>
   );
   const answers = [
-    ["Deadline", `${deadline} · ${plan.days} days`],
-    ["Daily time", `${plan.daily_minutes} minutes`],
+    ["Target", deadline ?? "No deadline"],
+    ["Pace", "As many steps as you like"],
     ...(draft.clarification?.questions ?? [])
       .filter(
         (q) => !["date", "minutes"].includes(q.kind) && draft.answers[q.id],
@@ -252,8 +253,8 @@ export function DesktopCreate({
             <View style={{ flexDirection: "row", gap: space.m }}>
               {[
                 [count, "steps"],
-                [`${plan.daily_minutes} min`, "per day"],
-                [deadline, "finish by"],
+                [plan.units.length, "units"],
+                [deadline ?? "Your pace", deadline ? "target" : "timing"],
               ].map(([value, label]) => (
                 <View
                   key={label}
@@ -307,7 +308,6 @@ export function DesktopCreate({
                       muted
                       style={{ marginTop: space.xxs }}
                     >
-                      Days {unit.steps[0].day}–{unit.steps.at(-1)!.day} ·{" "}
                       {unit.steps.length} steps
                     </Text>
                     <Text variant="caption" muted>
