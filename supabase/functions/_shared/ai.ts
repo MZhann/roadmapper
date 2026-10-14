@@ -63,12 +63,13 @@ export async function generate<T>(
         event: 'ai_request_failed',
         status: response.status,
         code,
+        ...(code === 'invalid_json_schema' ? { schemaError: error.error.message } : {}),
         requestId: response.headers.get('x-request-id'),
       }),
     );
     if (response.status === 401)
       throw new ServiceError(
-        'The serverвЂ™s AI key was rejected. The app owner needs to update it.',
+        'The server AI key was rejected. The app owner needs to update it.',
         503,
       );
     if (code === 'insufficient_quota')

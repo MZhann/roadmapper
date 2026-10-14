@@ -5,7 +5,7 @@ export type ThemeId = z.infer<typeof themeSchema>;
 export const blockSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('text'), text: z.string().min(1).max(6000) }),
   z.object({ type: z.literal('phrase'), text: z.string().min(1).max(1000), romanization: z.string().max(1000), translation: z.string().max(1000), language: z.string().max(20) }),
-  z.object({ type: z.literal('image'), url: z.url().startsWith('https://'), alt: z.string().min(1).max(500) }),
+  z.object({ type: z.literal('image'), url: z.string().regex(/^https:\/\/[^\s]+$/).max(2048), alt: z.string().min(1).max(500) }),
   z.object({ type: z.literal('tip'), text: z.string().min(1).max(3000) }),
   z.object({ type: z.literal('task'), text: z.string().min(1).max(3000) }),
   z.object({ type: z.literal('checklist'), items: z.array(z.string().min(1).max(500)).min(1).max(12) }),

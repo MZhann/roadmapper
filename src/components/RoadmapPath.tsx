@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import Animated, { cancelAnimation, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 import type { Step, ThemeId } from '@/domain/schema';
-import { stepState } from '@/domain/progress';
+import { localDate, stepState } from '@/domain/progress';
 import { useTheme } from '@/theme/ThemeProvider';
 import { motion, radius, size, space } from '@/theme/tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -42,7 +42,7 @@ export function RoadmapPath({ steps, allSteps = steps, theme, onStart }: { steps
     {current >= 0 && !selected && <Animated.View pointerEvents="none" style={[{ position: 'absolute', left: points[current].x - 34, top: points[current].y - size.currentNode / 2 - 40, width: 68, paddingVertical: space.sm, backgroundColor: colors.surface, borderWidth: 2, borderColor: colors.line, borderRadius: radius.tag, alignItems: 'center' }, animation]}><Text variant="small" style={{ color: colors.accent, letterSpacing: 0.8 }}>START</Text></Animated.View>}
     {selectedStep && <View style={{ position: 'absolute', zIndex: 5, left: Math.max(space.lg, Math.min(width - space.lg - 250, selectedPoint.x - 125)), top: selectedPoint.y + nodeSize / 2 + space.lg, width: 250, padding: space.ml, borderRadius: radius.option, borderWidth: 1.5, borderColor: selectedState === 'locked' ? colors.line : colors.accent, backgroundColor: colors.surface, gap: space.s, boxShadow: `0px 10px 30px ${colors.shadow}` }}>
       <Text variant="tiny" muted>Step {allSteps.findIndex(s => s.id === selectedStep.id) + 1} of {allSteps.length} · {selectedStep.minutes} min</Text><Text variant="button">{selectedStep.title}</Text>
-      {selectedState === 'locked' ? <Text variant="small" muted>{selectedStep.unlock_date && selectedStep.unlock_date > new Date().toISOString().slice(0, 10) ? `Available ${selectedStep.unlock_date}, after the earlier steps` : 'Finish the steps before this to unlock'}</Text> : <PrimaryButton compact label={selectedState === 'done' ? 'Review step' : `Start  +${selectedStep.xp} XP`} onPress={() => onStart(selectedStep)} />}
+      {selectedState === 'locked' ? <Text variant="small" muted>{selectedStep.unlock_date && selectedStep.unlock_date > localDate() ? `Available ${selectedStep.unlock_date}, after the earlier steps` : 'Finish the steps before this to unlock'}</Text> : <PrimaryButton compact label={selectedState === 'done' ? 'Review step' : `Start  +${selectedStep.xp} XP`} onPress={() => onStart(selectedStep)} />}
     </View>}
   </View>;
 }

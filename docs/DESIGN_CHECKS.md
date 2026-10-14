@@ -61,3 +61,6 @@ Compared the mobile review with PlanReview.dc.html. Unit accordions, three summa
 # Home
 
 Checked Home.dc.html against the rendered dashboard. Matches the goal heading, streak/XP pills, indigo current-step card, progress rings and dashed new-goal action. Deviations: real counts and schedules replace example figures; completed goals and “set for today” states are shown when appropriate; a refresh action is added. Loading, empty, failed fetch and saved-draft states are implemented.
+# Roadmap data integration
+
+Rechecked the roadmap with actual-shaped goal records. Unit numbering now uses the database's one-based order; completed counts and streak derive from stored steps; lock messages use local dates. The sports dark preview uses the canvas's 70% progress. Goal routes now require a session, apart from the explicit development preview. Live backend checks passed plan saving, ordered completion, duplicate XP prevention, journal persistence and anonymous isolation.

@@ -26,9 +26,10 @@ Deno.serve(async request => {
   if (action === 'assess') return reply(request, await generate(realitySchema,'goal_feasibility',`Assess the goal honestly. Resolve requested_days and daily_minutes from the user's explicit prompt and question/answer pairs first, otherwise use defaults. Dates relative to today ${new Date().toISOString().slice(0,10)}. When a deadline is unrealistic, explain achievable reduced scope and a recommended duration without promising success. Mark unrealistic only when a material mismatch exists. A motivated beginner cannot become fluent/master a broad skill in one day. Keep explanation warm and specific, title short.`,draft,2500));
   const adjustment = z.string().trim().max(1000).optional().parse(body.adjustment);
   const instructions = `${quality} Required days=${draft.days}, daily_minutes=${draft.minutes}. ${draft.acceptStretch ? 'The user chose to keep their short deadline; reduce scope.' : ''}`;
-  let result = await generate(planSchema,'roadmap',instructions,{ draft, adjustment },24000);
+  const deadline = Date.now()+135000;
+  let result = await generate(planSchema,'roadmap',instructions,{ draft, adjustment },24000,130000);
   try { validatePlan(result); if(result.days!==draft.days||result.daily_minutes!==draft.minutes) throw new Error('Use the exact requested schedule.'); }
-  catch(error) { result = await generate(planSchema,'roadmap',instructions,{ draft, adjustment, invalidPlan: result, correction: error instanceof Error ? error.message : 'Fix the schedule.' },24000,100000); }
+  catch(error) { const remaining=deadline-Date.now(); if(remaining<20000) throw new ServiceError('The planner needs more time to check this plan. Please retry.',504); result = await generate(planSchema,'roadmap',instructions,{ draft, adjustment, invalidPlan: result, correction: error instanceof Error ? error.message : 'Fix the schedule.' },24000,remaining); }
   validatePlan(result);
   if(result.days!==draft.days||result.daily_minutes!==draft.minutes) throw new ServiceError('The plan did not fit your schedule. Please retry.',502);
   return reply(request,result);
