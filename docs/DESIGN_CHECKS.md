@@ -79,3 +79,6 @@ Compared Profile.dc.html with the rendered stats, weekly bars and settings rows.
 # DesktopRoadmap
 
 Compared the 1440 × 960 app with DesktopRoadmap.dc.html. Sidebar, responsive columns, 520px path with inline labels, current-step card, latest note and adjustment input follow the desktop canvas. The same RoadmapPath renders the desktop geometry (66/80px nodes, 86px interval). Deviations: real content and additional units are scrollable; long labels wrap; adjustments have a preview and explicit Apply action. Completed steps are preserved and stale revisions are rejected by the database.
+# DesktopCreate
+
+Compared the 1440 × 960 review layout with DesktopCreate.dc.html: 68px header, 1240px content area, conversation/details column and draft-plan column. Real questions, answers, revisions and units replace the example conversation. Revision history is persisted with the draft. No “updated” badge is fabricated for a unit; successful revisions are acknowledged after server validation. Error states preserve the previous plan.
