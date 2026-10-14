@@ -19,6 +19,8 @@ import {
   layout,
 } from "@/components/Primitives";
 import { OptionCard } from "@/components/OptionCard";
+import { DateTimeField } from "@/components/DateTimeField";
+import { displayDateTime, parseTime } from "@/domain/dateTime";
 import { Toggle } from "@/components/Toggle";
 import { useAuth } from "@/providers/AuthProvider";
 import { useProfile, useGoals } from "@/data/queries";
@@ -37,7 +39,6 @@ export default function Profile() {
   const queries = useQueryClient();
   const [panel, setPanel] = useState<Panel>(null);
   const [name, setName] = useState("");
-  const [minutes, setMinutes] = useState("15");
   const [reminder, setReminder] = useState(false);
   const [time, setTime] = useState("19:00");
   const [confirmation, setConfirmation] = useState("");
@@ -45,29 +46,19 @@ export default function Profile() {
   const update = useMutation({
     mutationFn: async () => {
       if (panel === "settings") {
-        const budget = Number(minutes);
-        if (
-          !name.trim() ||
-          !Number.isInteger(budget) ||
-          budget < 5 ||
-          budget > 180
-        )
-          throw new Error(
-            "Enter your name and a daily budget between 5 and 180 minutes.",
-          );
+        if (!name.trim()) throw new Error("Enter your name.");
         const { error } = await db()
           .from("profiles")
           .update({
             name: name.trim(),
-            daily_minutes: budget,
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           })
           .eq("id", session!.user.id);
         if (error) throw error;
       }
       if (panel === "reminder") {
-        if (reminder && !/^([01]\d|2[0-3]):[0-5]\d$/.test(time))
-          throw new Error("Enter a time such as 19:00.");
+        if (reminder && !parseTime(time))
+          throw new Error("Choose a reminder time.");
         if (reminder && Platform.OS === "web")
           throw new Error(
             "Open Milo on your phone to schedule a daily reminder.",
@@ -105,7 +96,6 @@ export default function Profile() {
     setNotice("");
     setConfirmation("");
     setName(profile.data?.name ?? "");
-    setMinutes(String(profile.data?.daily_minutes ?? 15));
     setReminder(!!profile.data?.reminder_time);
     setTime(profile.data?.reminder_time?.slice(0, 5) ?? "19:00");
     setPanel(next);
@@ -279,7 +269,9 @@ export default function Profile() {
         <Card style={{ padding: 0, overflow: "hidden" }}>
           {row(
             "Daily reminder",
-            profile.data.reminder_time?.slice(0, 5) ?? "Off",
+            profile.data.reminder_time
+              ? displayDateTime(profile.data.reminder_time.slice(0, 5), "time")
+              : "Off",
             "reminder",
           )}
           {row(
@@ -331,18 +323,6 @@ export default function Profile() {
               onChangeText={setName}
               maxLength={60}
             />
-            <Text variant="caption">Usual minutes per day</Text>
-            <Input
-              accessibilityLabel="Daily minutes"
-              value={minutes}
-              onChangeText={setMinutes}
-              keyboardType="number-pad"
-              maxLength={3}
-            />
-            <Text variant="small" muted>
-              New plans use this pace. Your existing goals keep their own
-              schedules.
-            </Text>
           </View>
         )}
         {panel === "reminder" && (
@@ -355,12 +335,12 @@ export default function Profile() {
                 onChange={setReminder}
               />
             </View>
-            <Input
-              accessibilityLabel="Reminder time"
+            <DateTimeField
+              mode="time"
+              label="Reminder time"
               value={time}
-              onChangeText={setTime}
-              placeholder="19:00"
-              maxLength={5}
+              onChange={setTime}
+              disabled={!reminder || update.isPending}
             />
             <Text muted>
               {Platform.OS === "web"

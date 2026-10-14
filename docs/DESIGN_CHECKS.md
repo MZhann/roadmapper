@@ -136,3 +136,7 @@ Checked lesson and playing-pronunciation states at 390 x 844 against Lesson.dc.h
 ### Step completion revision
 Checked at 390 x 844 against StepComplete.dc.html. Deviation: Ready now and a direct Continue learning action replace the tomorrow lock. The completion badge and statistics retain the canvas styling. Browser regression completed two future-dated steps consecutively and opened the third.
 
+
+### Profile revision
+Checked reminder sheet at 390 x 844 against Profile.dc.html styling. Deviation: the shared time picker replaces HH:mm text entry, the time remains selected when toggled off/on, and settings no longer request daily minutes. Browser regression passes; phone notification scheduling remains a native-device check.
+
