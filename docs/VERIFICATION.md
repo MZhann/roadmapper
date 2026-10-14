@@ -11,6 +11,7 @@ All 16 mobile screens and the two desktop layouts from the design handoff are im
 - 14 automated domain tests: schema rejection, time budgets, ordered schedules, quiz answers, step locks, streak/calendar boundaries, draft compatibility and patched URL decoding.
 - Eight browser regressions against the production web bundle: sign-in entry, failed revision recovery, persisted lesson drafts, direct-link locks, theme persistence, journal, desktop overflow and fetch errors.
 - Web production export and iOS Hermes bundle export. This verifies JS/assets, not native signing or device behavior.
+- Signed EAS iPhone preview build: Milo 1.0.0 (1), completed 14 October 2026 from commit `8b52d26`. [Build and installation](https://expo.dev/accounts/zhanbo04/projects/milo/builds/25b7fe68-67f1-4352-9c4d-822d5eb4c87a). Native compilation, signing and IPA upload succeeded; the ad hoc provisioning profile includes the registered iPhone. This confirms the native build, not an on-device runtime pass.
 - Fourteen rendered category/appearance combinations, plus a 320px long-title / enlarged-web-text check, without horizontal page overflow. This is additional web layout coverage, not a substitute for iOS Dynamic Type testing.
 - Server functions pass Deno type checking.
 - All eight migration versions and SQL match the connected project's history.
@@ -36,7 +37,7 @@ No user's existing account or data was used for destructive testing. Local test 
 ## Remaining setup and unverified behavior
 
 - Apple and Google providers are still disabled. Their developer-account credentials and allowed redirect configuration must be supplied as described in [SETUP.md](SETUP.md). Email is enabled, but an actual magic-link email delivery/return was not tested.
-- No signed iOS/Android build, TestFlight upload or App Store submission was performed. Native Apple sign-in, keyboard/safe-area behavior, VoiceOver/Dynamic Type, speech, haptics, photo permissions and scheduled reminders require a real-device pass.
+- The signed iPhone preview is ready to install. No signed Android build, TestFlight upload or App Store submission was performed. Native Apple sign-in, keyboard/safe-area behavior, VoiceOver/Dynamic Type, speech, haptics, photo permissions and scheduled reminders still require a real-device pass.
 - Published privacy and terms URLs are still missing. Storia and Plus intentionally remain Soon.
 - Web hosting is not provisioned; add its origin to the server CORS allowlist when deploying.
 

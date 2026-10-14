@@ -19,11 +19,13 @@ Open `http://localhost:8081`. `/dev/components` compares the shared components i
 
 The connected Supabase project is `lvtynjnpvnpqsrjvgwhl`. Its schema and `milo-planner` / `milo-account` functions have been deployed. The OpenAI secret is already on the server. **The ignored Windows `.env.local` is not in Git**: recreate it from the project dashboard on your Mac. No OpenAI key belongs in the mobile app or EAS public variables.
 
-Apple/Google provider credentials, public legal pages, and an EAS/Apple signing session are still needed before a store release. See [setup and account credentials](docs/SETUP.md) and [verification report](docs/VERIFICATION.md).
+Apple/Google provider credentials and public legal pages are still needed before a store release. See [setup and account credentials](docs/SETUP.md) and [verification report](docs/VERIFICATION.md).
 
 ## Phone development
 
 EAS cloud builds can be started from Windows or macOS; a Mac is not required to install Milo on an iPhone. The project is linked to [@zhanbo04/milo](https://expo.dev/accounts/zhanbo04/projects/milo). `eas.json` includes development, simulator, preview and production profiles.
+
+The first signed iPhone preview, **1.0.0 (1)**, is [ready to install](https://expo.dev/accounts/zhanbo04/projects/milo/builds/25b7fe68-67f1-4352-9c4d-822d5eb4c87a) on the registered iPhone. Open that page in Safari and tap Install. Newly registered devices require a new build or re-signing before they can install it.
 
 For a standalone iPhone test, register the device and create a preview build. This requires a paid Apple Developer membership. The two public Supabase values are configured in the project's EAS **preview** environment.
 
