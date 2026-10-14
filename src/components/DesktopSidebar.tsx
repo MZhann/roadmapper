@@ -1,11 +1,131 @@
-import { Pressable,ScrollView,View } from 'react-native';
-import type { Goal } from '@/domain/schema';
-import { progressOf } from '@/domain/progress';
-import { useTheme } from '@/theme/ThemeProvider';
-import { fonts,radius,space } from '@/theme/tokens';
-import { go,goalPath } from '@/lib/navigation';
-import { Logo } from './Logo';
-import { Text } from './Text';
-import { Icon } from './Icon';
-import { layout } from './Primitives';
-export function DesktopSidebar({goals,selected,active='path'}:{goals:Goal[];selected?:string;active?:'path'|'journal'|'profile'}) {const {colors}=useTheme();return <ScrollView style={{width:240,flexGrow:0,borderRightWidth:1,borderColor:colors.line,backgroundColor:colors.surface}} contentContainerStyle={{paddingVertical:space.section,paddingHorizontal:space.xxl,gap:space.page}}><View style={{paddingHorizontal:space.s}}><Logo size={34} wordmark/></View><View style={{gap:space.xs}}>{(['path','journal','profile'] as const).map(tab=><Pressable key={tab} accessibilityRole="link" onPress={()=>go(tab==='path'?'/':`/${tab}`)} style={[layout.row,{minHeight:46,paddingHorizontal:space.md,borderRadius:radius.control,backgroundColor:active===tab?colors.accentSoft:colors.transparent}]}><Icon name={tab} size={22} color={active===tab?colors.accent:colors.inkSecondary}/><Text variant="bodySmall" style={{fontFamily:fonts.extraBold,color:active===tab?colors.accent:colors.inkSecondary}}>{tab==='path'?'Path':tab==='journal'?'Journal':'Profile'}</Text></Pressable>)}</View><View style={{gap:space.sm}}><Text variant="eyebrow" muted style={{paddingHorizontal:space.md,paddingBottom:space.sm}}>GOALS</Text>{goals.map(goal=><Pressable accessibilityRole="link" key={goal.id} onPress={()=>go(goalPath(goal.id))} style={[layout.between,{paddingVertical:space.m,paddingHorizontal:space.md,borderRadius:radius.small,backgroundColor:selected===goal.id?colors.background:colors.transparent}]}><Text variant="caption" style={layout.flex}>{goal.title}</Text><Text variant="caption" muted>{Math.round(progressOf(goal).ratio*100)}%</Text></Pressable>)}<Pressable accessibilityRole="link" onPress={()=>go('/?create=1')} style={[layout.row,{justifyContent:'center',minHeight:44,borderWidth:2,borderStyle:'dashed',borderColor:colors.pathDash,borderRadius:radius.control,marginTop:space.sm}]}><Icon name="plus" size={16}/><Text variant="caption">New goal</Text></Pressable></View></ScrollView>;}
+import { Pressable, ScrollView, View } from "react-native";
+import type { Goal } from "@/domain/schema";
+import { progressOf } from "@/domain/progress";
+import { useTheme } from "@/theme/ThemeProvider";
+import { fonts, radius, space } from "@/theme/tokens";
+import { go, goalPath } from "@/lib/navigation";
+import { Logo } from "./Logo";
+import { Text } from "./Text";
+import { Icon } from "./Icon";
+import { layout } from "./Primitives";
+export function DesktopSidebar({
+  goals,
+  selected,
+  active = "path",
+}: {
+  goals: Goal[];
+  selected?: string;
+  active?: "path" | "journal" | "profile";
+}) {
+  const { colors } = useTheme();
+  return (
+    <ScrollView
+      style={{
+        width: 240,
+        flexGrow: 0,
+        borderRightWidth: 1,
+        borderColor: colors.line,
+        backgroundColor: colors.surface,
+      }}
+      contentContainerStyle={{
+        paddingVertical: space.section,
+        paddingHorizontal: space.xxl,
+        gap: space.page,
+      }}
+    >
+      <View style={{ paddingHorizontal: space.s }}>
+        <Logo size={34} wordmark />
+      </View>
+      <View style={{ gap: space.xs }}>
+        {(["path", "journal", "profile"] as const).map((tab) => (
+          <Pressable
+            key={tab}
+            accessibilityRole="link"
+            onPress={() => go(tab === "path" ? "/" : `/${tab}`)}
+            style={[
+              layout.row,
+              {
+                minHeight: 46,
+                paddingHorizontal: space.md,
+                borderRadius: radius.control,
+                backgroundColor:
+                  active === tab ? colors.accentSoft : colors.transparent,
+              },
+            ]}
+          >
+            <Icon
+              name={tab}
+              size={22}
+              color={active === tab ? colors.accent : colors.inkSecondary}
+            />
+            <Text
+              variant="bodySmall"
+              style={{
+                fontFamily: fonts.extraBold,
+                color: active === tab ? colors.accent : colors.inkSecondary,
+              }}
+            >
+              {tab === "path"
+                ? "Path"
+                : tab === "journal"
+                  ? "Journal"
+                  : "Profile"}
+            </Text>
+          </Pressable>
+        ))}
+      </View>
+      <View style={{ gap: space.sm }}>
+        <Text
+          variant="eyebrow"
+          muted
+          style={{ paddingHorizontal: space.md, paddingBottom: space.sm }}
+        >
+          GOALS
+        </Text>
+        {goals.map((goal) => (
+          <Pressable
+            accessibilityRole="link"
+            key={goal.id}
+            onPress={() => go(goalPath(goal.id))}
+            style={[
+              layout.between,
+              {
+                paddingVertical: space.m,
+                paddingHorizontal: space.md,
+                borderRadius: radius.small,
+                backgroundColor:
+                  selected === goal.id ? colors.background : colors.transparent,
+              },
+            ]}
+          >
+            <Text variant="caption" style={layout.flex}>
+              {goal.title}
+            </Text>
+            <Text variant="caption" muted>
+              {Math.round(progressOf(goal).ratio * 100)}%
+            </Text>
+          </Pressable>
+        ))}
+        <Pressable
+          accessibilityRole="link"
+          onPress={() => go("/?create=1")}
+          style={[
+            layout.row,
+            {
+              justifyContent: "center",
+              minHeight: 44,
+              borderWidth: 2,
+              borderStyle: "dashed",
+              borderColor: colors.pathDash,
+              borderRadius: radius.control,
+              marginTop: space.sm,
+            },
+          ]}
+        >
+          <Icon name="plus" size={16} />
+          <Text variant="caption">New goal</Text>
+        </Pressable>
+      </View>
+    </ScrollView>
+  );
+}

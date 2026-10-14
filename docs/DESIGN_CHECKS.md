@@ -82,3 +82,9 @@ Compared the 1440 × 960 app with DesktopRoadmap.dc.html. Sidebar, responsive co
 # DesktopCreate
 
 Compared the 1440 × 960 review layout with DesktopCreate.dc.html: 68px header, 1240px content area, conversation/details column and draft-plan column. Real questions, answers, revisions and units replace the example conversation. Revision history is persisted with the draft. No “updated” badge is fabricated for a unit; successful revisions are acknowledged after server validation. Error states preserve the previous plan.
+
+# Final comparison pass
+
+Rechecked all seven category motifs in light and dark, the 1024px desktop breakpoint, and a 320px long-title/enlarged-text stress layout. No horizontal page overflow was observed. At 1024px the right panel moves below the path; at 1440px it is beside it. Native Dynamic Type and device safe areas still need an iPhone pass.
+
+The required small goat is now present on Generating and RealityCheck; these placements follow handoff §7 where the older screen canvases omit it. The mobile revision send control now matches the dark square from PlanReview. Reminder notifications use the platform presentation rather than a custom mascot attachment. Auth state no longer clears an active plan when the same account regains browser focus. Runtime loading/error/retry states and local persistence were exercised in automated and live checks.

@@ -1,56 +1,63 @@
-# Welcome to your Expo app 👋
+# Milo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+An iOS-first Expo app that turns a goal into an AI-generated path, daily practice, and a private progress journal. Built from the Quiet Ambition canvases in `milo-design/`.
 
-## Get started
+## Continue on your Mac
 
-1. Install dependencies
+Use Node 22.13+ (Node 22 LTS recommended) and npm.
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```sh
+git clone https://github.com/MZhann/roadmapper.git
+cd roadmapper
+npm ci
+cp .env.example .env.local
+# Fill the two Supabase public values, then:
+npm run web
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Open `http://localhost:8081`. `/dev/components` compares the shared components in both appearances. The app requires a Supabase session; preview fixtures are only used by test scripts, never as a fallback for real accounts.
 
-### Other setup steps
+The connected Supabase project is `lvtynjnpvnpqsrjvgwhl`. Its schema and `milo-planner` / `milo-account` functions have been deployed. The OpenAI secret is already on the server. **The ignored Windows `.env.local` is not in Git**: recreate it from the project dashboard on your Mac. No OpenAI key belongs in the mobile app or EAS public variables.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Apple/Google provider credentials, public legal pages, and an EAS/Apple signing session are still needed before a store release. See [setup and account credentials](docs/SETUP.md) and [verification report](docs/VERIFICATION.md).
 
-## Learn more
+## Phone development
 
-To learn more about developing your project with Expo, look at the following resources:
+The native integrations require a development build. `eas.json` includes development, simulator, preview and production profiles.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```sh
+npx eas-cli@latest login
+npx eas-cli@latest init
+# Add the EXPO_PUBLIC_* values to the EAS development environment first.
+npx eas-cli@latest build --platform ios --profile development
+npx expo start --dev-client
+```
 
-## Join the community
+For an iOS simulator build, use `--profile simulator`. The configured bundle identifier is `app.milo.roadmapper`; confirm its ownership in your Apple Developer account before signing. Native projects use Expo Continuous Native Generation; do not hand-edit `ios/` or `android/`.
 
-Join our community of developers creating universal apps.
+## Checks
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```sh
+npm run typecheck
+npm run lint
+npm test
+npx playwright install chromium
+npm run test:e2e
+npx expo-doctor
+```
+
+Browser tests mock Supabase and AI and do not incur API charges. GitHub Actions runs these checks and a web export. `npm run check:backend` reports connectivity and enabled auth providers without printing keys.
+
+## Project map
+
+- `src/app/`: Expo Router screens, in handoff screen order.
+- `src/theme/`: exact light/dark tokens, seven category motifs, and the single brand selection.
+- `src/components/`: shared controls, winding roadmap, lesson blocks, desktop layouts.
+- `src/domain/`: validated AI schema, schedules, progress and streak calculations.
+- `supabase/`: additive migrations, authenticated AI and account-deletion Edge Functions.
+- `tests/`: plan/progress regressions and browser flows.
+- [Design checks](docs/DESIGN_CHECKS.md): per-screen comparisons and explicit deviations.
+
+The backend keeps lesson completion atomic, awards XP once, checks step ordering and ownership, and preserves completed work during revisions. Photos use private storage and expiring signed URLs. Storia export and Milo Plus remain **Soon**, as specified in the design; no purchase or export is simulated.
+
+Use `npx expo install <package>` for dependency changes. The decoder and UUID overrides address transitive advisories; the small `postinstall` compatibility patch is covered by tests. Remaining upstream tooling advisories are recorded in the verification report.

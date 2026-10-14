@@ -1,21 +1,337 @@
-import { ScrollView,View } from 'react-native';
-import type { Draft } from '@/domain/draft';
-import { useTheme } from '@/theme/ThemeProvider';
-import { motifs } from '@/theme/motifs';
-import { fonts,radius,space } from '@/theme/tokens';
-import { go } from '@/lib/navigation';
-import { Text } from './Text';
-import { Card,Input,InlineError,layout } from './Primitives';
-import { IconButton,PrimaryButton,TextButton } from './Buttons';
-import { MotifIcon } from './MotifIcon';
-import { Icon } from './Icon';
-import { SendButton } from './SendButton';
-export function DesktopCreate({draft,adjustment,onChange,onRevise,onStart,revising,saving,error}:{draft:Draft;adjustment:string;onChange:(value:string)=>void;onRevise:()=>void;onStart:()=>void;revising:boolean;saving:boolean;error?:string}) {
- const {colors}=useTheme();const plan=draft.plan!;const count=plan.units.flatMap(u=>u.steps).length;const date=new Date();date.setDate(date.getDate()+plan.days-1);const deadline=date.toLocaleDateString(undefined,{month:'short',day:'numeric'});
- const bubble=(text:string,user=false,key?:string)=><View key={key} style={{alignSelf:user?'flex-end':'flex-start',maxWidth:'85%',backgroundColor:user?colors.accent:colors.surface,borderWidth:user?0:1,borderColor:colors.line,borderRadius:radius.card,borderBottomRightRadius:user?space.sm:radius.card,borderBottomLeftRadius:user?radius.card:space.sm,paddingVertical:space.ml,paddingHorizontal:space.xl}}><Text style={{color:user?colors.onAccent:colors.ink,fontFamily:user?fonts.bold:fonts.semibold}}>{text}</Text></View>;
- const answers=[['Deadline',`${deadline} · ${plan.days} days`],['Daily time',`${plan.daily_minutes} minutes`],...(draft.clarification?.questions??[]).filter(q=>!['date','minutes'].includes(q.kind)&&draft.answers[q.id]).map(q=>[q.question,q.options.find(o=>o.value===draft.answers[q.id])?.label??draft.answers[q.id]])];
- return <View style={{flex:1,backgroundColor:colors.background}}><View style={[layout.between,{height:68,paddingHorizontal:space.hero,borderBottomWidth:1,borderColor:colors.line,backgroundColor:colors.surface}]}><View style={layout.row}><IconButton name="back" label="Back to goals" onPress={()=>go('/')}/><TextButton label="Back to goals" onPress={()=>go('/')}/></View><Text variant="card">New goal</Text><Text variant="small" muted>Step 3 of 3 · Review</Text></View><ScrollView contentContainerStyle={{width:'100%',maxWidth:1240,alignSelf:'center',paddingVertical:space.block,paddingHorizontal:space.hero}}><View style={{flexDirection:'row',gap:space.block,alignItems:'flex-start'}}>
-  <View style={{flex:1,gap:space.ml}}><Text variant="title" style={{fontSize:32,marginBottom:space.sm}}>Let’s shape your plan</Text>{bubble(draft.prompt,true)}{bubble('A few details help the plan fit you.')}<View style={{flexDirection:'row',flexWrap:'wrap',gap:space.m}}>{answers.map(([label,value],i)=><Card key={i} style={{width:'48%',flexGrow:1,borderRadius:radius.button,paddingVertical:space.md,paddingHorizontal:space.ml}}><Text variant="tiny" muted>{label}</Text><Text variant="bodySmall" style={{fontFamily:fonts.black}}>{value}</Text></Card>)}</View>{bubble(`Here’s a ${count}-step plan. Want to change anything before you start?`)}{draft.history.map((entry,i)=><View key={i} style={{gap:space.ml}}>{bubble(entry.request,true)}<View style={[layout.row,{alignSelf:'flex-start',paddingVertical:space.m,paddingHorizontal:space.ml,borderRadius:radius.control,backgroundColor:colors.accentSoft,gap:space.s}]}><Icon name="check" size={16} color={colors.accent}/><Text variant="caption" style={{color:colors.accent}}>Your plan has been updated</Text></View></View>)}<View style={[layout.row,{alignItems:'flex-end',marginTop:space.s,padding:space.md,paddingLeft:space.xl,borderRadius:radius.card,borderWidth:2,borderColor:colors.accent,backgroundColor:colors.surface}]}><Input accessibilityLabel="Ask for another change" placeholder="Ask for another change…" multiline value={adjustment} onChangeText={onChange} maxLength={1000} editable={!revising&&!saving} style={{flex:1,borderWidth:0,paddingHorizontal:0,paddingVertical:0}}/><SendButton disabled={!adjustment.trim()||saving} loading={revising} onPress={onRevise}/></View><InlineError message={error}/>{revising&&<Text variant="small" muted>Updating your draft. Your current plan is safe.</Text>}</View>
-  <Card style={{flex:1,padding:space.page,borderRadius:28,gap:space.xl}}><View style={[layout.row,{gap:space.ml}]}><View style={{width:60,height:60,borderRadius:radius.option,backgroundColor:colors.accentSoft,alignItems:'center',justifyContent:'center'}}><MotifIcon theme={plan.theme_id} size={32}/></View><View style={layout.flex}><Text variant="small" muted>Draft plan · {motifs[plan.theme_id].label}</Text><Text variant="heading">{plan.title}</Text></View></View><View style={{flexDirection:'row',gap:space.m}}>{[[count,'steps'],[`${plan.daily_minutes} min`,'per day'],[deadline,'finish by']].map(([value,label])=><View key={label} style={{flex:1,borderRadius:radius.control,padding:space.md,backgroundColor:colors.background}}><Text style={{fontSize:20,fontFamily:fonts.black}}>{value}</Text><Text variant="tiny" muted>{label}</Text></View>)}</View><View style={{gap:space.m}}>{plan.units.map((unit,i)=><Card key={i} style={[layout.row,{alignItems:'flex-start',paddingVertical:space.ml,paddingHorizontal:space.lg,gap:space.ml,borderRadius:radius.option}]}><View style={{width:32,height:32,borderRadius:radius.tag,backgroundColor:colors.inset,alignItems:'center',justifyContent:'center'}}><Text variant="card">{i+1}</Text></View><View style={layout.flex}><Text variant="card">{unit.title}</Text><Text variant="caption" muted style={{marginTop:space.xxs}}>Days {unit.steps[0].day}–{unit.steps.at(-1)!.day} · {unit.steps.length} steps</Text><Text variant="caption" muted>{unit.steps.slice(0,3).map(s=>s.title).join(', ')}</Text></View></Card>)}</View><Text variant="bodySmall" muted>{plan.summary}</Text><PrimaryButton label="Start this goal" loading={saving} disabled={revising} onPress={onStart}/></Card>
- </View></ScrollView></View>;
+import { ScrollView, View } from "react-native";
+import type { Draft } from "@/domain/draft";
+import { useTheme } from "@/theme/ThemeProvider";
+import { motifs } from "@/theme/motifs";
+import { fonts, radius, space } from "@/theme/tokens";
+import { go } from "@/lib/navigation";
+import { Text } from "./Text";
+import { Card, Input, InlineError, layout } from "./Primitives";
+import { IconButton, PrimaryButton, TextButton } from "./Buttons";
+import { MotifIcon } from "./MotifIcon";
+import { Icon } from "./Icon";
+import { SendButton } from "./SendButton";
+export function DesktopCreate({
+  draft,
+  adjustment,
+  onChange,
+  onRevise,
+  onStart,
+  revising,
+  saving,
+  error,
+}: {
+  draft: Draft;
+  adjustment: string;
+  onChange: (value: string) => void;
+  onRevise: () => void;
+  onStart: () => void;
+  revising: boolean;
+  saving: boolean;
+  error?: string;
+}) {
+  const { colors } = useTheme();
+  const plan = draft.plan!;
+  const count = plan.units.flatMap((u) => u.steps).length;
+  const date = new Date();
+  date.setDate(date.getDate() + plan.days - 1);
+  const deadline = date.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+  });
+  const bubble = (text: string, user = false, key?: string) => (
+    <View
+      key={key}
+      style={{
+        alignSelf: user ? "flex-end" : "flex-start",
+        maxWidth: "85%",
+        backgroundColor: user ? colors.accent : colors.surface,
+        borderWidth: user ? 0 : 1,
+        borderColor: colors.line,
+        borderRadius: radius.card,
+        borderBottomRightRadius: user ? space.sm : radius.card,
+        borderBottomLeftRadius: user ? radius.card : space.sm,
+        paddingVertical: space.ml,
+        paddingHorizontal: space.xl,
+      }}
+    >
+      <Text
+        style={{
+          color: user ? colors.onAccent : colors.ink,
+          fontFamily: user ? fonts.bold : fonts.semibold,
+        }}
+      >
+        {text}
+      </Text>
+    </View>
+  );
+  const answers = [
+    ["Deadline", `${deadline} · ${plan.days} days`],
+    ["Daily time", `${plan.daily_minutes} minutes`],
+    ...(draft.clarification?.questions ?? [])
+      .filter(
+        (q) => !["date", "minutes"].includes(q.kind) && draft.answers[q.id],
+      )
+      .map((q) => [
+        q.question,
+        q.options.find((o) => o.value === draft.answers[q.id])?.label ??
+          draft.answers[q.id],
+      ]),
+  ];
+  return (
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
+      <View
+        style={[
+          layout.between,
+          {
+            height: 68,
+            paddingHorizontal: space.hero,
+            borderBottomWidth: 1,
+            borderColor: colors.line,
+            backgroundColor: colors.surface,
+          },
+        ]}
+      >
+        <View style={layout.row}>
+          <IconButton
+            name="back"
+            label="Back to goals"
+            onPress={() => go("/")}
+          />
+          <TextButton label="Back to goals" onPress={() => go("/")} />
+        </View>
+        <Text variant="card">New goal</Text>
+        <Text variant="small" muted>
+          Step 3 of 3 · Review
+        </Text>
+      </View>
+      <ScrollView
+        contentContainerStyle={{
+          width: "100%",
+          maxWidth: 1240,
+          alignSelf: "center",
+          paddingVertical: space.block,
+          paddingHorizontal: space.hero,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            gap: space.block,
+            alignItems: "flex-start",
+          }}
+        >
+          <View style={{ flex: 1, gap: space.ml }}>
+            <Text
+              variant="title"
+              style={{ fontSize: 32, marginBottom: space.sm }}
+            >
+              Let’s shape your plan
+            </Text>
+            {bubble(draft.prompt, true)}
+            {bubble("A few details help the plan fit you.")}
+            <View
+              style={{ flexDirection: "row", flexWrap: "wrap", gap: space.m }}
+            >
+              {answers.map(([label, value], i) => (
+                <Card
+                  key={i}
+                  style={{
+                    width: "48%",
+                    flexGrow: 1,
+                    borderRadius: radius.button,
+                    paddingVertical: space.md,
+                    paddingHorizontal: space.ml,
+                  }}
+                >
+                  <Text variant="tiny" muted>
+                    {label}
+                  </Text>
+                  <Text variant="bodySmall" style={{ fontFamily: fonts.black }}>
+                    {value}
+                  </Text>
+                </Card>
+              ))}
+            </View>
+            {bubble(
+              `Here’s a ${count}-step plan. Want to change anything before you start?`,
+            )}
+            {draft.history.map((entry, i) => (
+              <View key={i} style={{ gap: space.ml }}>
+                {bubble(entry.request, true)}
+                <View
+                  style={[
+                    layout.row,
+                    {
+                      alignSelf: "flex-start",
+                      paddingVertical: space.m,
+                      paddingHorizontal: space.ml,
+                      borderRadius: radius.control,
+                      backgroundColor: colors.accentSoft,
+                      gap: space.s,
+                    },
+                  ]}
+                >
+                  <Icon name="check" size={16} color={colors.accent} />
+                  <Text variant="caption" style={{ color: colors.accent }}>
+                    Your plan has been updated
+                  </Text>
+                </View>
+              </View>
+            ))}
+            <View
+              style={[
+                layout.row,
+                {
+                  alignItems: "flex-end",
+                  marginTop: space.s,
+                  padding: space.md,
+                  paddingLeft: space.xl,
+                  borderRadius: radius.card,
+                  borderWidth: 2,
+                  borderColor: colors.accent,
+                  backgroundColor: colors.surface,
+                },
+              ]}
+            >
+              <Input
+                accessibilityLabel="Ask for another change"
+                placeholder="Ask for another change…"
+                multiline
+                value={adjustment}
+                onChangeText={onChange}
+                maxLength={1000}
+                editable={!revising && !saving}
+                style={{
+                  flex: 1,
+                  borderWidth: 0,
+                  paddingHorizontal: 0,
+                  paddingVertical: 0,
+                }}
+              />
+              <SendButton
+                disabled={!adjustment.trim() || saving}
+                loading={revising}
+                onPress={onRevise}
+              />
+            </View>
+            <InlineError message={error} />
+            {revising && (
+              <Text variant="small" muted>
+                Updating your draft. Your current plan is safe.
+              </Text>
+            )}
+          </View>
+          <Card
+            style={{
+              flex: 1,
+              padding: space.page,
+              borderRadius: 28,
+              gap: space.xl,
+            }}
+          >
+            <View style={[layout.row, { gap: space.ml }]}>
+              <View
+                style={{
+                  width: 60,
+                  height: 60,
+                  borderRadius: radius.option,
+                  backgroundColor: colors.accentSoft,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <MotifIcon theme={plan.theme_id} size={32} />
+              </View>
+              <View style={layout.flex}>
+                <Text variant="small" muted>
+                  Draft plan · {motifs[plan.theme_id].label}
+                </Text>
+                <Text variant="heading">{plan.title}</Text>
+              </View>
+            </View>
+            <View style={{ flexDirection: "row", gap: space.m }}>
+              {[
+                [count, "steps"],
+                [`${plan.daily_minutes} min`, "per day"],
+                [deadline, "finish by"],
+              ].map(([value, label]) => (
+                <View
+                  key={label}
+                  style={{
+                    flex: 1,
+                    borderRadius: radius.control,
+                    padding: space.md,
+                    backgroundColor: colors.background,
+                  }}
+                >
+                  <Text style={{ fontSize: 20, fontFamily: fonts.black }}>
+                    {value}
+                  </Text>
+                  <Text variant="tiny" muted>
+                    {label}
+                  </Text>
+                </View>
+              ))}
+            </View>
+            <View style={{ gap: space.m }}>
+              {plan.units.map((unit, i) => (
+                <Card
+                  key={i}
+                  style={[
+                    layout.row,
+                    {
+                      alignItems: "flex-start",
+                      paddingVertical: space.ml,
+                      paddingHorizontal: space.lg,
+                      gap: space.ml,
+                      borderRadius: radius.option,
+                    },
+                  ]}
+                >
+                  <View
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: radius.tag,
+                      backgroundColor: colors.inset,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Text variant="card">{i + 1}</Text>
+                  </View>
+                  <View style={layout.flex}>
+                    <Text variant="card">{unit.title}</Text>
+                    <Text
+                      variant="caption"
+                      muted
+                      style={{ marginTop: space.xxs }}
+                    >
+                      Days {unit.steps[0].day}–{unit.steps.at(-1)!.day} ·{" "}
+                      {unit.steps.length} steps
+                    </Text>
+                    <Text variant="caption" muted>
+                      {unit.steps
+                        .slice(0, 3)
+                        .map((s) => s.title)
+                        .join(", ")}
+                    </Text>
+                  </View>
+                </Card>
+              ))}
+            </View>
+            <Text variant="bodySmall" muted>
+              {plan.summary}
+            </Text>
+            <PrimaryButton
+              label="Start this goal"
+              loading={saving}
+              disabled={revising}
+              onPress={onStart}
+            />
+          </Card>
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
