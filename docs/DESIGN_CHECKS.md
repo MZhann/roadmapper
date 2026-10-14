@@ -108,3 +108,7 @@ Checked at 390 x 844 against Personalize.dc.html. Deviation: removed daily time-
 ### Clarification revision
 Compared multi-select/custom-answer and calendar screens at 390 x 844 with Clarify.dc.html. Deviation: checkbox selection/deselection, optional calendar target, saved custom text, resumable question index and smoothly animated progress replace exclusive choices and typed dates. Daily-time questions are omitted. Production-browser tests pass for back/forward, closing and reload; colors/spacing remain token based.
 
+
+### Reality check revision
+Checked the mobile canvas against RealityCheck.dc.html. Deviation: suggested targets no longer prescribe minutes per day; choosing a suggested target also updates the stored calendar date. Existing card styling is unchanged.
+

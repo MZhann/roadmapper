@@ -12,6 +12,7 @@ import { useTheme } from "@/theme/ThemeProvider";
 import { fonts, radius, space } from "@/theme/tokens";
 import { go } from "@/lib/navigation";
 import { errorMessage } from "@/lib/supabase";
+import { addDays, dateValue } from "@/domain/dateTime";
 export default function RealityCheck() {
   const { draft, save } = useDraft();
   const reality = draft?.reality;
@@ -22,6 +23,10 @@ export default function RealityCheck() {
       await save({
         ...draft,
         days: recommended ? reality.recommended_days : reality.requested_days,
+        targetDate: addDays(
+          dateValue(new Date()),
+          (recommended ? reality.recommended_days : reality.requested_days) - 1,
+        ),
         acceptStretch: !recommended,
         plan: null,
         revision: draft.revision + 1,
@@ -148,7 +153,7 @@ export default function RealityCheck() {
           radio={false}
           selected
           title={`Make it ${reality.recommended_days} days`}
-          description={`${reality.daily_minutes} min a day · Recommended`}
+          description="Suggested target · Continue at your own pace"
           onPress={() => {
             if (!choose.isPending) choose.mutate(true);
           }}
