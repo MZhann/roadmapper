@@ -1,6 +1,8 @@
 import Svg, { Circle, Path, Rect } from "react-native-svg";
 import { useTheme } from "@/theme/ThemeProvider";
 export const iconPaths = {
+  calendar: "M4 5h16v16H4zM4 10h16M8 3v4M16 3v4",
+  clock: "M12 8v4l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0",
   back: "M15 5l-7 7 7 7",
   next: "M9 5l7 7-7 7",
   down: "M6 9l6 6 6-6",

@@ -9,6 +9,8 @@ export function OptionCard({
   selected,
   onPress,
   radio = true,
+  multiple = false,
+  disabled = false,
   style,
 }: {
   title: string;
@@ -16,6 +18,8 @@ export function OptionCard({
   selected: boolean;
   onPress: () => void;
   radio?: boolean;
+  multiple?: boolean;
+  disabled?: boolean;
   style?: StyleProp<ViewStyle>;
 }) {
   const { colors } = useTheme();
@@ -32,8 +36,12 @@ export function OptionCard({
       ]}
     >
       <Pressable
-        accessibilityRole={radio ? "radio" : "button"}
-        accessibilityState={radio ? { checked: selected } : undefined}
+        accessibilityRole={multiple ? "checkbox" : radio ? "radio" : "button"}
+        accessibilityState={{
+          checked: radio || multiple ? selected : undefined,
+          disabled,
+        }}
+        disabled={disabled}
         onPress={() => {
           haptic("selection");
           onPress();
@@ -56,7 +64,7 @@ export function OptionCard({
             style={{
               width: size.radio,
               height: size.radio,
-              borderRadius: radius.round,
+              borderRadius: multiple ? radius.xs : radius.round,
               borderWidth: selected ? 7 : 2,
               borderColor: selected ? colors.accent : colors.pathDash,
               backgroundColor: selected ? colors.white : colors.transparent,

@@ -1,10 +1,45 @@
 import { View } from "react-native";
+import { useEffect } from "react";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import Svg, { Circle } from "react-native-svg";
 import { useTheme } from "@/theme/ThemeProvider";
-import { radius, space } from "@/theme/tokens";
+import { motion, radius, space } from "@/theme/tokens";
 import { Text } from "./Text";
 export const clampProgress = (value: number) =>
   Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
+function Fill({
+  value,
+  height,
+  color,
+}: {
+  value: number;
+  height: number;
+  color: string;
+}) {
+  const reduced = useReducedMotion();
+  const width = useSharedValue(value);
+  useEffect(() => {
+    width.set(
+      reduced ? value : withTiming(value, { duration: motion.transition }),
+    );
+  }, [value, reduced, width]);
+  const animated = useAnimatedStyle(() => ({
+    width: `${width.get() * 100}%` as `${number}%`,
+  }));
+  return (
+    <Animated.View
+      style={[
+        { height, borderRadius: radius.xs, backgroundColor: color },
+        animated,
+      ]}
+    />
+  );
+}
 export function ProgressBar({
   value,
   height = 10,
@@ -35,12 +70,16 @@ export function ProgressBar({
               flex: 1,
               height,
               borderRadius: radius.xs,
-              backgroundColor:
-                i < progress * segments
-                  ? (color ?? colors.accent)
-                  : colors.line,
+              overflow: "hidden",
+              backgroundColor: colors.line,
             }}
-          />
+          >
+            <Fill
+              value={clampProgress(progress * segments - i)}
+              height={height}
+              color={color ?? colors.accent}
+            />
+          </View>
         ))
       ) : (
         <View
@@ -52,13 +91,10 @@ export function ProgressBar({
             backgroundColor: colors.line,
           }}
         >
-          <View
-            style={{
-              height,
-              width: `${progress * 100}%`,
-              borderRadius: radius.xs,
-              backgroundColor: color ?? colors.accent,
-            }}
+          <Fill
+            value={progress}
+            height={height}
+            color={color ?? colors.accent}
           />
         </View>
       )}

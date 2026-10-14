@@ -88,3 +88,7 @@ Compared the 1440 × 960 review layout with DesktopCreate.dc.html: 68px header, 
 Rechecked all seven category motifs in light and dark, the 1024px desktop breakpoint, and a 320px long-title/enlarged-text stress layout. No horizontal page overflow was observed. At 1024px the right panel moves below the path; at 1440px it is beside it. Native Dynamic Type and device safe areas still need an iPhone pass.
 
 The required small goat is now present on Generating and RealityCheck; these placements follow handoff §7 where the older screen canvases omit it. The mobile revision send control now matches the dark square from PlanReview. Reminder notifications use the platform presentation rather than a custom mascot attachment. Auth state no longer clears an active plan when the same account regains browser focus. Runtime loading/error/retry states and local persistence were exercised in automated and live checks.
+
+### October 14 usability update — shared controls
+Added native calendar/time pickers (browser-native equivalents on web), multi-select cards and smoothly animated progress respecting reduced motion. Compared the light/dark component gallery at 1000px. Deviation: new picker controls and checkbox states requested by the user; existing tokens retained.
+

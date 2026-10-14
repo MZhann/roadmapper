@@ -7,6 +7,7 @@ import { Logo } from "@/components/Logo";
 import { Mascot } from "@/components/Mascot";
 import { PrimaryButton, SecondaryButton } from "@/components/Buttons";
 import { OptionCard } from "@/components/OptionCard";
+import { DateTimeField } from "@/components/DateTimeField";
 import { ProgressBar, ProgressRing } from "@/components/ProgressBar";
 import { TabBar, type Tab } from "@/components/TabBar";
 import {
@@ -23,6 +24,9 @@ function Gallery() {
   const [selection, setSelection] = useState(0);
   const [tab, setTab] = useState<Tab>("path");
   const [clicks, setClicks] = useState(0);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("19:00");
+  const [choices, setChoices] = useState<number[]>([]);
   return (
     <View
       style={{
@@ -56,13 +60,40 @@ function Gallery() {
         <OptionCard
           key={i}
           title={i ? "Another option" : "Steady progress"}
-          description="15 minutes, every day"
+          description="Learn at your own pace"
           selected={selection === i}
           onPress={() => setSelection(i)}
         />
       ))}
+      {[0, 1].map((i) => (
+        <OptionCard
+          key={`multi-${i}`}
+          multiple
+          title={i ? "Travel" : "Conversation"}
+          selected={choices.includes(i)}
+          onPress={() =>
+            setChoices(
+              choices.includes(i)
+                ? choices.filter((choice) => choice !== i)
+                : [...choices, i],
+            )
+          }
+        />
+      ))}
+      <DateTimeField
+        mode="date"
+        label="Target date"
+        value={date}
+        onChange={setDate}
+      />
+      <DateTimeField
+        mode="time"
+        label="Reminder time"
+        value={time}
+        onChange={setTime}
+      />
       <Text variant="eyebrow">PROGRESS</Text>
-      <ProgressBar value={0.33} />
+      <ProgressBar value={(clicks % 5) / 4} />
       <ProgressBar value={0.5} segments={4} height={8} />
       <View style={layout.row}>
         <ProgressRing value={0.7} />
